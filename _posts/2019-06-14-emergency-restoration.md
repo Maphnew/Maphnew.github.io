@@ -1,3 +1,16 @@
+---
+title: "[Linux] 응급 복구"
+date: 2019-05-19 20:37:00
+
+categories:
+  - Linux
+tags:
+  - [Linux, Emergency, Restoration]
+
+toc: true
+toc_sticky: true
+---
+
 ## 4.9 응급 복구
 
 root 사용자 비밀번호 변경
@@ -14,5 +27,3 @@ root 사용자 비밀번호 변경
 10. mount 로 다시 확인
 11. passwd 명령어로 root 비밀번호 변경
 12. 시스템 재시작
-
-

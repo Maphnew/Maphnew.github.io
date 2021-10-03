@@ -1,3 +1,16 @@
+---
+title: "[AI] AI & Architecture"
+date: 2019-06-23 20:37:00
+
+categories:
+  - AI
+tags:
+  - [AI, Architecture]
+
+toc: true
+toc_sticky: true
+---
+
 ref
 
 https://towardsdatascience.com/ai-architecture-f9d78c6958e0
@@ -5,7 +18,6 @@ https://towardsdatascience.com/ai-architecture-f9d78c6958e0
 # AI & Architecture
 
 #### 실험적 관점
-
 
 ![GAN-Generated Masterplan](./image/GAN-Generated_Masterplan.jpeg)
 <GAN-Generated Masterplan>
@@ -53,7 +65,6 @@ II. 일으키다
 
 Generative Adversarial Neural Networks 또는 GANs가 우리의 선택의 무기입니다. 인공 지능 분야에서 뉴럴 네트워크는 주요 조사 분야입니다. 그러한 모델의 창의력은 Generative Adversarial Neural Networks의 출현을 통해 최근에 입증되었습니다. 어떤 기계 학습 모델처럼 GAN은 제시된 데이터 중에서 통계적으로 중요한 현상을 학습합니다. 그러나 GAN은 Generator와 Discriminator의 두 가지 핵심 모델로 구성되어있어 두 모델간에 피드백 루프를 활용하여 관련 이미지를 생성하는 기능을 개선합니다. Discriminator는 일련의 데이터에서 이미지를 인식하도록 훈련되었습니다. 제대로 훈련 된이 모델은 데이터 세트에서 가져온 실제 예제와 외부의 "가짜"이미지를 구분할 수 있습니다. 그러나 Generator는 동일한 데이터 세트의 이미지와 유사한 이미지를 생성하도록 교육되었습니다. Generator가 이미지를 생성 할 때 Discriminator는 출력물의 품질에 대한 피드백을 제공합니다. 이에 따라 Generator는 더욱 사실적인 이미지를 생성하기 위해 적응합니다. 이 피드백 루프를 통해 GAN은 관찰 된 데이터에서 발견되는 현상을 고려하여 관련 합성 이미지를 만드는 능력을 천천히 구축합니다.
 
-
 ![Generative_Adversarial_Neural_Network’s_Architecture](./image/Generative_Adversarial_Neural_Network’s_Architecture.jpeg)
 <Generative_Adversarial_Neural_Network’s_Architecture>
 
@@ -78,6 +89,7 @@ GAN이 우리에게 엄청난 기회를 제공한다면, 무엇을 보여줄지 
 우리의 연구는 이러한 전례를 확장하고 각 단계에서 결과 품질을 향상시키면서 완전한 "세대 스택"을 만들기 위해 3 가지 모델 (풋 프린트, 프로그램 및 가구)을 중첩하도록 제안합니다. 멀티 유닛 프로세싱을 자동화함으로써 우리의 작업은 전체 건물 세대 및 마스터 플랜 레이아웃으로 확장됩니다. 우리는 스타일 전송을 다루는 일련의 모델을 제공합니다. 마지막으로, 우리의 공헌은 생성 된 결과를 구문 분석하고 분류하는 엄격한 프레임 워크를 추가하여 사용자가 생성 된 옵션을 통해 일관되게 "탐색"할 수 있도록합니다.
 
 ## A. Style Transfer
+
 A. 스타일 전송
 
 ![Modern-to-Baroque_Floor_Plan_Translation](./image/Modern-to-Baroque_Floor_Plan_Translation.jpeg)
@@ -91,15 +103,13 @@ A. 스타일 전송
 <Style_Transfer_Results--Apartment_Units_Modern-to-Baroque_Style_Transfer>
 
 ![Layout_Assistant-_a_Step_by_Step_Pipeline](./image/Layout_Assistant-_a_Step_by_Step_Pipeline.png)
-<Layout_Assistant-_a_Step_by_Step_Pipeline>
+<Layout_Assistant-\_a_Step_by_Step_Pipeline>
 
 이 섹션에서는 다중 단계 파이프 라인을 제공하여 평면도를 그리는 데 필요한 모든 단계를 통합합니다. 스케일을 뛰어 넘어서, 아키텍트가 취한 프로세스를 에뮬레이션하고 각 단계를 하나의 특정 모델로 캡슐화하고 주어진 작업을 수행하도록 교육합니다. 소포에서 건물 풋 프린트 (I)까지, 발자국에서부터 벽 및 창 (II)으로 분할 된 방, 창성한 바닥 계획에서 가구 한 (III)까지 각 단계가 신중하게 설계되고, 훈련되고 테스트되었습니다.
 
-![Generation Pipeline (Models I to III)](./image/Generation_Pipeline_(Models_I_to_III).png)
+![Generation Pipeline (Models I to III)](<./image/Generation_Pipeline_(Models_I_to_III).png>)
 <Generation Pipeline (Models I to III)>
-
 
 동시에 파이프 라인을 개별 단계로 나누어 사용자가 각 모델을 조정할 수 있습니다. 모델의 출력을 선택하고 편집하여 다음 모델에 제공하기 전에 사용자는 설계 프로세스를 제어합니다. 그 입력은 모델에 의해 내려진 결정을 형성하여 인간과 기계의 상호 작용을 기대합니다.
 
 ## 1. Footprint
-

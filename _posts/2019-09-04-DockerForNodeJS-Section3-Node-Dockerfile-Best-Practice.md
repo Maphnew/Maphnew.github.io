@@ -1,7 +1,13 @@
 ---
-title: "DockerCompose Basics"
+title: "[Docker] DockerCompose Basics - Dockerfile"
 date: 2019-09-04 20:11:00
-categories: docker
+categories:
+  - Docker
+tags:
+  - [Docker, Dockerfile]
+
+toc: true
+toc_sticky: true
 ---
 
 # Section3: Node Dockerfile Best Practice
@@ -51,25 +57,25 @@ Enterprises may require CentOS or Ubuntu/Debian
 ## Running Non-root Container Users
 
     FROM node:10-slim
-    
+
     EXPOSE 3000
-    
+
     WORKDIR /node
-    
+
     COPY package*.json ./
-    
+
     # here
     RUN mkdir app && chown -R node:node .
-    
+
     USER node
-    
+
     RUN npm install && npm cache clean --force
-    
+
     WORKDIR /node/app
-    
+
     # here
     COPY --chown node:node . .
-    
+
     CMD ["node", "app.js"]
 
 docker-compose exec -u root
@@ -80,7 +86,7 @@ Pick proper FROM
 
 Line order matters
 
-COPY twice : package.json* then . .
+COPY twice : package.json\* then . .
 
 1. copy only the package and lock files
 2. run npm install

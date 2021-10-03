@@ -1,8 +1,15 @@
 ---
-title: "DockerCompose Basics"
+title: "[Docker] DockerCompose Basics Section2 - Compose File Format"
 date: 2019-09-04 20:11:00
-categories: docker
+categories:
+  - Docker
+tags:
+  - [Docker, DockerCompose]
+
+toc: true
+toc_sticky: true
 ---
+
 ## Why Compose?
 
 CLI and YAML files

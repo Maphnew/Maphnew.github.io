@@ -1,11 +1,20 @@
 ---
-title: "python date and time"
+title: "Python date and time"
 date: 2019-02-02 14:20:30
-categories: python
+
+categories:
+  - Python
+tags:
+  - [Python, datetime]
+
+toc: true
+toc_sticky: true
 ---
 
 ### 날짜와 시간
+
 #### datetime module
+
 - date: 년, 월, 일
 - time: 시, 분, 초, 마이크로초
 - datetime: 날짜와 시간
@@ -27,7 +36,7 @@ print(now+17*one_day)
 yesterday = now - one_day
 print(yesterday)
 
-from datetime import time 
+from datetime import time
 noon = time(12,0,0)
 print(noon)
 print(noon.hour)
