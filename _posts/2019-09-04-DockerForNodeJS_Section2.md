@@ -1,7 +1,7 @@
 ---
 title: "DockerCompose Basics"
 date: 2019-09-04 20:11:00
-categories: Docker
+categories: docker
 ---
 ## Why Compose?
 
