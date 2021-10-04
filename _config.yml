@@ -19,7 +19,7 @@ locale                   : "en-US"
 title                    : "Maphanew's Today I Learned 👨‍💻"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "Sungchan Maphanew Kim"
+name                     : "Maphanew"
 description              : "A Developer's blog"
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
@@ -101,9 +101,9 @@ analytics:
 
 # Site Author
 author:
-  name             : "Sungchan Mpahanew Kim"
+  name             : "Mpahanew 👦"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "A **Front-end** developer."
+  bio              : "BJJ **Blue belt** Developer 🥋"
   location         : "South Korea"
   email            :
   links:
