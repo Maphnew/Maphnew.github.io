@@ -2,6 +2,8 @@
 main:
     - title: "Github"
       url: https://github.com/Maphnew/
+    - title: "Category"
+      url: https://maphnew.github.io/categories/
   # - title: "Quick-Start Guide"
   #   url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
   # - title: "About"
