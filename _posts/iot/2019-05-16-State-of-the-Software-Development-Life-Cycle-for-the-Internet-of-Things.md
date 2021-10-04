@@ -1,11 +1,11 @@
 ---
-title: "[IOT] State of the Software Development Life-Cycle for the Internet-of-Things"
+title: "[IoT] State of the Software Development Life-Cycle for the Internet-of-Things"
 date: 2019-05-16 20:37:00
 
 categories:
-  - IOT
+  - IoT
 tags:
-  - [IOT, Software-Development-Life-Cycle]
+  - [IoT, Software-Development-Life-Cycle]
 
 toc: true
 toc_sticky: true

@@ -3,9 +3,9 @@ title: "[Prisma] Prisma란?"
 date: 2019-05-10 20:37:00
 
 categories:
-  - Prisma
+  - GraphQL
 tags:
-  - [Prisma, ORM]
+  - [GraphQL, Prisma, ORM]
 
 toc: true
 toc_sticky: true

@@ -1,11 +1,26 @@
+---
+title: "Postgre Install"
+date: 2019-02-16 09:01:30
+
+categories:
+  - Database
+tags:
+  - [Database, Postgre, Install]
+
+toc: true
+toc_sticky: true
+---
+
 ### postgre 설치
 
 #### 출처: https://orashelter.tistory.com/56 [둥지]
 
 1. 설치 가능한 postgresql의 버전을 확인합니다.
+
 ```
 # yum list | grep ^postgresql
 ```
+
 ```
 postgresql.i686                             9.2.24-1.el7_5             base
 postgresql.x86_64                           9.2.24-1.el7_5             base
@@ -27,11 +42,14 @@ postgresql-static.x86_64                    9.2.24-1.el7_5             base
 postgresql-test.x86_64                      9.2.24-1.el7_5             base
 postgresql-upgrade.x86_64                   9.2.24-1.el7_5             base
 ```
+
 2. 저장소를 업데이트 합니다. ( postgresql 11 버전 설치 할것 )
+
 ```
 # yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-7-x86_64/pgdg-centos11-11-2.noarch.rpm
 
 ```
+
 ```
 Loaded plugins: fastestmirror
 pgdg-centos11-11-2.noarch.rpm                                                                    | 5.6 kB  00:00:00
@@ -68,9 +86,11 @@ Complete!
 ```
 
 3. postgresql 설치 합니다.
+
 ```
 # yum install -y postgresql11-server postgresql11
 ```
+
 ```
 Loaded plugins: fastestmirror
 Loading mirror speeds from cached hostfile
@@ -118,18 +138,21 @@ Trying other mirror.
 failure: repodata/repomd.xml from pgdg10: [Errno 256] No more mirrors to try.
 https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/repodata/repomd.xml: [Errno 14] curl#6 - "Could not resolve host: download.postgresql.org; 알 수 없는 오류"
 ```
-- /etc/sysconfig/network-scripts/ifcfg-enp3s0 의 network 정보 수정(staic ip, DNS, NETMASK ..) 
+
+- /etc/sysconfig/network-scripts/ifcfg-enp3s0 의 network 정보 수정(staic ip, DNS, NETMASK ..)
+
 ```
 # yum update
 
 # yum install -y postgresql11-server postgresql11
 ```
 
-
 4. 패키지가 제대로 설치되었는지 확인합니다.
+
 ```
 # rpm -qa|grep postgresql
 ```
+
 ```
 postgresql11-libs-11.2-2PGDG.rhel7.x86_64
 postgresql11-server-11.2-2PGDG.rhel7.x86_64
@@ -137,34 +160,40 @@ postgresql11-11.2-2PGDG.rhel7.x86_64
 ```
 
 5. postgres 계정이 있는지 확인합니다.
+
 ```
 cat /etc/passwd | grep postgres
 ```
+
 ```
 postgres:x:26:26:PostgreSQL Server:/var/lib/pgsql:/bin/bash
 ```
 
 6. postgresql 초기화 합니다.
+
 ```
 /usr/pgsql-11/bin/postgresql-11-setup initdb
 ```
+
 ```
 Initializing database ...
 OK
 ```
 
 7. 서비스 활성화 및 재시작 합니다.
+
 ```
 # systemctl enable postgresql-11
 
 # systemctl start postgresql-11
 ```
 
-
 8. postgresql 패스워드를 변경합니다.
+
 ```
 # sudo passwd postgres
 ```
+
 ```
 postgres 사용자의 비밀 번호 변경 중
 새  암호:
@@ -174,24 +203,30 @@ passwd: 모든 인증 토큰이 성공적으로 업데이트 되었습니다.
 ```
 
 9. postgresql 접속 및 설치된 버전 확인 합니다.
+
 ```
 # su - postgres
 ```
+
 ```
 -bash-4.2$
 ```
+
 ```
 # psql
 ```
+
 ```
 psql (11.2)
 도움말을 보려면 "help"를 입력하십시오.
 
 postgres=#
 ```
+
 ```
 # select version();
 ```
+
 ```
                                                  version
 ---------------------------------------------------------------------------------------------------------
@@ -200,6 +235,7 @@ postgres=#
 ```
 
 10. postgresql 설정 변경 합니다.
+
 ```
 # vi /var/lib/pgsql/11/data/postgresql.conf
 ```
@@ -210,8 +246,8 @@ postgres=#
 #password_encryption = md5  ->  password_encryption = md5
 ```
 
-
 11. Centos7용 PGDG를 다운로드 합니다.
+
 ```
 # yum install -y https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-7-x86_64/pgdg-centos11-11-2.noarch.rpm
 ```
@@ -223,6 +259,7 @@ Examining /var/tmp/yum-root-PXjl9y/pgdg-centos11-11-2.noarch.rpm: pgdg-redhat-re
 /var/tmp/yum-root-PXjl9y/pgdg-centos11-11-2.noarch.rpm: does not update installed package.
 Error: Nothing to do
 ```
+
 12. timescaledb를 다운로드 합니다.
 
 ```
@@ -251,9 +288,11 @@ metadata_expire=300
 
 EOL
 ```
+
 ```
 # sudo yum update -y
 ```
+
 ```
 Loaded plugins: fastestmirror
 Loading mirror speeds from cached hostfile
@@ -275,6 +314,7 @@ No packages marked for update
 ```
 #yum install -y timescaledb-postgresql-11
 ```
+
 ```
 Loaded plugins: fastestmirror
 Loading mirror speeds from cached hostfile
@@ -351,11 +391,13 @@ Complete!
 ```
 
 13. 데이터베이스를 설정합니다. ( timescaledb-tune으로 손쉽게 설정 가능, 모두 yes )
+
 ```
 # timescaledb-tune
 or
 # timescaledb-tune --pg-config=/usr/pgsql-11/bin/pg_config
 ```
+
 ```
 Using postgresql.conf at this path:
 /var/lib/pgsql/11/data/postgresql.conf
@@ -434,19 +476,20 @@ success: miscellaneous settings will be updated
 Saving changes to: /var/lib/pgsql/11/data/postgresql.conf
 ```
 
-14. 만약 위의 timescaledb-tune이 아래와 같은 에러 발생시 직접 설정해야 합니다. ( 해결법을 찾지 못했음.. ) -> 13번의 두번째 명령어로 
+14. 만약 위의 timescaledb-tune이 아래와 같은 에러 발생시 직접 설정해야 합니다. ( 해결법을 찾지 못했음.. ) -> 13번의 두번째 명령어로
+
 ```
 exit: could not execute `pg_config --version`: exec: "pg_config": executable file not found in $PATH
 ```
 
+아래와 같이 치면 postgresql.conf의 위치를 찾을 수 있음.
 
-아래와 같이 치면 postgresql.conf의 위치를 찾을 수 있음. 
 ```
 find / -name postgresql.conf
 ```
 
-
 아래의 모습은 timescaledb-tune으로 설정시 나오는 화면인데 직접 찾아서 하나하나 수정하면 됨. ( 수정 전 미리 기존 설정 파일을 복사 두는것을 추천 )
+
 ```
 Using postgresql.conf at this path:
 
@@ -510,19 +553,21 @@ Is this okay? [(y)es/(s)kip/(q)uit]:
 ```
 
 15. 외부에서도 접속 가능하게 셋팅합니다. ( postgresql.conf 수정 )
+
 ```
 #listen_addresses = 'localhost'  ->  listen_addresses = '*'
 ```
 
 16. 마찬가지로 외부에서 접속 가능하도록 셋팅합니다. ( pg_hba.conf 수정 )
+
 ```
 # find / -name pg_hba.conf로 위치를 찾아서 수정합니다.
 
 host all all 0.0.0.0/0 trust
 ```
 
-
 16. postgresql을 재시작합니다.
+
 ```
 systemctl restart postgresql-11
 ```
@@ -533,15 +578,10 @@ postgresql이 외부에서 접속이 가능한지를 확인하기 위해서는 p
 
 만약 접속이 안될경우 방화벽을 해제 해보시길 바랍니다.
 
-
-
-
 참고
 
 http://pseg.or.kr/pseg/infoinstall/7917
 
 https://docs.timescale.com/v1.2/getting-started/installation/rhel-centos/installation-yum
-
-
 
 출처: https://orashelter.tistory.com/56 [둥지]

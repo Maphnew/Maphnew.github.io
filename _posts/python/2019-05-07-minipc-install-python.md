@@ -1,15 +1,31 @@
+---
+title: "Install Python"
+date: 2019-02-02 14:20:30
+
+categories:
+  - Python
+tags:
+  - [Python, Install]
+
+toc: true
+toc_sticky: true
+---
+
 2. Python3 설치
 
 ```
 # yum update -y
 # yum groupinstall "Development Tools"
 ```
+
 - http://snowdeer.github.io/python/2018/02/20/install-python3-on-centos/ 참고 (아래 내용)
 
 - Repository를 yum에 추가
+
 ```
 # yum install -y https://centos7.iuscommunity.org/ius-release.rpm
 ```
+
 ```
 Loaded plugins: fastestmirror
 ius-release.rpm                                                                                  | 8.1 kB  00:00:00
@@ -65,11 +81,14 @@ Dependency Installed:
 
 Complete!
 ```
+
 - yum search로 python 3.x 버전 확인
-아래 명령어를 수행하면 python3으로 시작하는 라이브러리들을 확인할 수 있습니다.
+  아래 명령어를 수행하면 python3으로 시작하는 라이브러리들을 확인할 수 있습니다.
+
 ```
 # yum search python3
 ```
+
 ```
 ...
 python36u-psycopg2.x86_64 : A PostgreSQL database adapter for Python
@@ -95,9 +114,11 @@ znc-modpython.x86_64 : Python3 module for ZNC
 ```
 
 - 필요 라이브러리들 설치
+
 ```
 # yum install -y python36u python36u-libs python36u-devel python36u-pip
 ```
+
 ```
 ...
 Installed:
@@ -111,13 +132,13 @@ Complete!
 ```
 
 - Python 설치 및 버전 확인
+
 ```
 # python3.6 -V
 ```
+
 ```
 Python 3.6.7
 ```
 
 - Alias 수정 금지 - yum 사용에 에러가 뜸
-
-

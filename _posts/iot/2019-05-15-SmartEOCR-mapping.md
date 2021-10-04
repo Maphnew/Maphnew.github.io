@@ -1,14 +1,28 @@
+---
+title: "[IoT] Smart EOCR"
+date: 2019-05-16 20:37:00
+
+categories:
+  - IoT
+tags:
+  - [IoT, Smart EOCR]
+
+toc: true
+toc_sticky: true
+---
+
 ## Smart EOCR
 
 ### EOCR(Electronic OverCurrent Relay)
+
 - 일반적으로 모터 보호용으로 사용되는 전자 과부하 계전기
 - 기존에는 열동형 계전기(Thermal Relay)가 사용 되었는데 EOCR로 대체되는 추세
 
 ![EOCR](./image/EOCR.jpg)
 
 - LOAD, D-TIME, O-TIME 3가지 기능
-> LOAD: 회로의 과전류 보호를 위해 설정하는 것으로 모터의 전격전류 혹은 정상운전전류를 기준으로 하여 과전류를 설정한다. 
-> 일반적으로 정격전류의 125~150%정도에 설정한다. 설정된 전류치 이상으로 흐르게 되면 일정시간 후(O-TIME의 설정시간 후) 트립되어 회로를 보호한다.
+  > LOAD: 회로의 과전류 보호를 위해 설정하는 것으로 모터의 전격전류 혹은 정상운전전류를 기준으로 하여 과전류를 설정한다.
+  > 일반적으로 정격전류의 125~150%정도에 설정한다. 설정된 전류치 이상으로 흐르게 되면 일정시간 후(O-TIME의 설정시간 후) 트립되어 회로를 보호한다.
 
 > O-TIME: EOCR이 과전류를 감지해서 트립될 때까지의 시간을 의미한다. 일반적으로 4~6초 정도로 설정한다.
 
@@ -22,6 +36,7 @@
 ![Smart EOCR](./image/smart-eocr.JPG)
 
 > 계측요소
+>
 > - 선간 전압(LV1, LV2, LV3)
 > - 부하 전류(L1, L2, L3)
 > - 전류 선간 전압(Varg), 평균 상전류(lavg)
@@ -31,9 +46,11 @@
 > - 4 ~ 20mA 아날로그 입력
 
 #### 수집 가능 데이터
+
 > Register Map File 자료 참조
 
 #### Remap 분석
+
 > 1. Remap 정리 자료 20170320 : 0~40, 41 word
 > 2. Remap 정리 자료 20180912 : 0~30, 31 word
 
@@ -46,9 +63,10 @@
 ![31 word list](./image/remap20180912.JPG)
 
 - 제외된 10word
-+ 무효전력 (Reactive Power) : 2word
-+ 사용시간 (Running Hour) : 2word
-+ 과전류 R,S,T (IL1, IL2, IL3 Current) : 6word
+
+* 무효전력 (Reactive Power) : 2word
+* 사용시간 (Running Hour) : 2word
+* 과전류 R,S,T (IL1, IL2, IL3 Current) : 6word
 
 > 1. Current, R(IL1), S(IL2), T(IL3), MSB, LSB
-> 전류
+>    전류
