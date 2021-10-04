@@ -10,9 +10,9 @@ toc: true
 toc_sticky: true
 ---
 
-# 이기적 유전자
+# 이기적 유전자 The Selfish Gene
 
-- 리처드 도킨스
+<cite>Clinton Richard Dawkins<cite>
 
 ## Chapter1 사람은 왜 존재하는가?
 
