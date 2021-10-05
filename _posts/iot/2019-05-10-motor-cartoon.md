@@ -1,3 +1,16 @@
+---
+title: "[IoT] Motor"
+date: 2019-05-16 20:37:00
+
+categories:
+  - IoT
+tags:
+  - [IoT, Motor]
+
+toc: true
+toc_sticky: true
+---
+
 ## 모터
 ### 1. 여러 종류의 모터
 #### 1.1 모터는 어디에 사용될까?
