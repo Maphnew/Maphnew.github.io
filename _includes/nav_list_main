@@ -56,6 +56,13 @@
             </ul>
             <ul>
                 {% for category in site.categories %}
+                    {% if category[0] == "CSS" %}
+                        <li><a href="/categories/css" class="">CSS ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
                     {% if category[0] == "Javascript" %}
                         <li><a href="/categories/javascript" class="">Javascript ({{category[1].size}})</a></li>
                     {% endif %}
