@@ -11,7 +11,7 @@ toc: true
 toc_sticky: true
 ---
 # 23 실행 컨텍스트 `Execution context`
-<cite>Ref: Modern JS Deep Dive: 23장 실행 컨텍스트</cite>
+<small><cite>Ref: Modern JS Deep Dive: 23장 실행 컨텍스트</cite></small>
 
 - 실행 컨텍스트를 바르게 이해하면 스코프 기반으로 식별자와 식별자에 바인딩된 값을 관리하는 방식과 호이스팅이 발생하는 이유, 클로저의 동작 방식, 그리고 태스크 큐와 함께 동작하는 이벤트 핸들러와 비동기 처리의 동작 방식을 이해할 수 있다.
 
