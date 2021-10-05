@@ -1,5 +1,5 @@
 ---
-title: "VanillaJS"
+title: "[Javascript] VanillaJS"
 date: 2019-03-03 18:08:30
 
 categories:
