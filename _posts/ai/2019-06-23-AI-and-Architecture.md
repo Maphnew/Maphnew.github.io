@@ -19,7 +19,7 @@ https://towardsdatascience.com/ai-architecture-f9d78c6958e0
 
 #### 실험적 관점
 
-![GAN-Generated Masterplan](./image/GAN-Generated_Masterplan.jpeg)
+![GAN-Generated Masterplan](../image/GAN-Generated_Masterplan.jpeg)
 <GAN-Generated Masterplan>
 
 인공 지능은 한 분야로서 수많은 분야에 이미 침투 해 왔으며 산업 전반에 걸쳐 이전에 해결되지 않은 과제에 대한 수단과 방법을 제시했습니다. 이전 기사에서 설명한 AI의 출현은 아직 초기 단계지만 유망한 결과를 제공합니다. 단순한 기회 이상으로, 그러한 잠재력은 건축 분야를 재 형성하려는 주요 단계입니다.
@@ -42,7 +42,7 @@ https://towardsdatascience.com/ai-architecture-f9d78c6958e0
 
 우선, 우리는 Generation이라는 주제로 뛰어 들어갈 것입니다. GAN을 사용하여 우리는 AI 시스템을 건축 설계 교육을 제공합니다. 우리는 그 활용이 건축 분야의 관행을 향상시킬 수 있다고 가정합니다. 이 필드는 실험적이며 최근의 놀라운 결과에 달하는만큼 최근의 것입니다. 우리의 희망은 실제 건물 평면도를 그릴 수 있도록 훈련시키는 것입니다.
 
-![Framework Matrix | Source: Author](./image/framework_matrix.png)
+![Framework Matrix | Source: Author](../image/framework_matrix.png)
 <Framework Matrix | Source: Author>
 
 그런 다음 생성 된 평면도를 검증하고 분류하기위한 견고한 분석 프레임 워크를 마련 할 것입니다. 궁극적으로 우리의 목표는 GAN의 결과를 구성하여 사용자가 다양한 디자인 옵션을 원활하게 탐색 할 수있는 가능성을 제공하는 것입니다. 이를 위해 데이터 과학이 제공하는 도구의 양과 편재성이 우리 조사에 가치가있을 것입니다.
@@ -65,7 +65,7 @@ II. 일으키다
 
 Generative Adversarial Neural Networks 또는 GANs가 우리의 선택의 무기입니다. 인공 지능 분야에서 뉴럴 네트워크는 주요 조사 분야입니다. 그러한 모델의 창의력은 Generative Adversarial Neural Networks의 출현을 통해 최근에 입증되었습니다. 어떤 기계 학습 모델처럼 GAN은 제시된 데이터 중에서 통계적으로 중요한 현상을 학습합니다. 그러나 GAN은 Generator와 Discriminator의 두 가지 핵심 모델로 구성되어있어 두 모델간에 피드백 루프를 활용하여 관련 이미지를 생성하는 기능을 개선합니다. Discriminator는 일련의 데이터에서 이미지를 인식하도록 훈련되었습니다. 제대로 훈련 된이 모델은 데이터 세트에서 가져온 실제 예제와 외부의 "가짜"이미지를 구분할 수 있습니다. 그러나 Generator는 동일한 데이터 세트의 이미지와 유사한 이미지를 생성하도록 교육되었습니다. Generator가 이미지를 생성 할 때 Discriminator는 출력물의 품질에 대한 피드백을 제공합니다. 이에 따라 Generator는 더욱 사실적인 이미지를 생성하기 위해 적응합니다. 이 피드백 루프를 통해 GAN은 관찰 된 데이터에서 발견되는 현상을 고려하여 관련 합성 이미지를 만드는 능력을 천천히 구축합니다.
 
-![Generative_Adversarial_Neural_Network’s_Architecture](./image/Generative_Adversarial_Neural_Network’s_Architecture.jpeg)
+![Generative_Adversarial_Neural_Network’s_Architecture](../image/Generative_Adversarial_Neural_Network’s_Architecture.jpeg)
 <Generative_Adversarial_Neural_Network’s_Architecture>
 
 ### 표현 및 학습
@@ -74,8 +74,8 @@ GAN이 우리에게 엄청난 기회를 제공한다면, 무엇을 보여줄지 
 
 아래에서는 전형적인 교육 과정을 설명합니다.이 과정은 교육 과정의 절반과 절반 동안 실현되며, GAN 모델 중 하나가 방을 배치하는 방법과 주택 단위에 대한 fenestration을 점진적으로 학습하는 방법을 보여줍니다.
 
-![Training_Sequence](./image/Training_Sequence.jpeg)
-![Training_Sequence](./image/Training_Sequence.gif)
+![Training_Sequence](../image/Training_Sequence.jpeg)
+![Training_Sequence](../image/Training_Sequence.gif)
 <Training_Sequence>
 
 초기 시도는 부정확하고 혼동 스럽지만 250 회 반복 한 후에 기계는 직관의 형태를 구축합니다.
@@ -92,17 +92,17 @@ GAN이 우리에게 엄청난 기회를 제공한다면, 무엇을 보여줄지 
 
 A. 스타일 전송
 
-![Modern-to-Baroque_Floor_Plan_Translation](./image/Modern-to-Baroque_Floor_Plan_Translation.jpeg)
+![Modern-to-Baroque_Floor_Plan_Translation](../image/Modern-to-Baroque_Floor_Plan_Translation.jpeg)
 <Modern-to-Baroque_Floor_Plan_Translation>
 
 평면도 내에서 "스타일"은 벽의 형상과 그림 평면을 연구하여 관찰 할 수 있습니다. 전형적인 바로크 양식의 교회는 여러 개의 둥근 들여 쓰기가있는 부피가 큰 기둥을 표시합니다. Mies van der Rohe의 현대식 빌라는 얇은 평면 벽을 보여줍니다. 벽면의이 "껍질 벗기기"는 GAN이 인식 할 수있는 기능입니다. 한 쌍의 이미지가 계획의 세그먼트 화 된 버전이고 다른 이미지가 원래 벽의 구조 인 한 쌍의 이미지를 보여줌으로써 건축 스타일과 관련하여 일정한 기계 직감을 구축 할 수 있습니다.
 
 이 섹션에서는 바로크 스타일을 배우기 위해 훈련 된 모델의 결과를 보여줍니다. 그러면 주어진 평면도가 수동으로 분할되어 (A) 새로운 벽면 스타일로 다시 옷을 입은 스타일 이전으로 진행됩니다 (B).
 
-![Style_Transfer_Results--Apartment_Units_Modern-to-Baroque_Style_Transfer](./image/Style_Transfer_Results--Apartment_Units_Modern-to-Baroque_Style_Transfer.jpeg)
+![Style_Transfer_Results--Apartment_Units_Modern-to-Baroque_Style_Transfer](../image/Style_Transfer_Results--Apartment_Units_Modern-to-Baroque_Style_Transfer.jpeg)
 <Style_Transfer_Results--Apartment_Units_Modern-to-Baroque_Style_Transfer>
 
-![Layout_Assistant-_a_Step_by_Step_Pipeline](./image/Layout_Assistant-_a_Step_by_Step_Pipeline.png)
+![Layout_Assistant-_a_Step_by_Step_Pipeline](../image/Layout_Assistant-_a_Step_by_Step_Pipeline.png)
 <Layout_Assistant-\_a_Step_by_Step_Pipeline>
 
 이 섹션에서는 다중 단계 파이프 라인을 제공하여 평면도를 그리는 데 필요한 모든 단계를 통합합니다. 스케일을 뛰어 넘어서, 아키텍트가 취한 프로세스를 에뮬레이션하고 각 단계를 하나의 특정 모델로 캡슐화하고 주어진 작업을 수행하도록 교육합니다. 소포에서 건물 풋 프린트 (I)까지, 발자국에서부터 벽 및 창 (II)으로 분할 된 방, 창성한 바닥 계획에서 가구 한 (III)까지 각 단계가 신중하게 설계되고, 훈련되고 테스트되었습니다.
