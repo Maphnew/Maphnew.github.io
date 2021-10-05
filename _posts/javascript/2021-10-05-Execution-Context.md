@@ -181,9 +181,11 @@ foo(20); // 42
   - console 식별자를 스코프 체인에서 검색한다. bar 함수 렉시컬 환경에서 검색 -> foo 함수 렉시컬 환경에서 검색 -> 전역 렉시컬 환경에서 검색 -> 전역 렉시컬 환경의 객체 환경 레코드의 BindingObject를 통해 전역 객체에서 찾을 수 있음.
 2. log 메서드 검색
   - console 객체에서 log 메서드를 검색한다. 이때 console 객체의 프로토타입 체인을 통해 메서드를 검색한다. log 메서드는 상속된 프로퍼티가 아니라 console 객체가 직접 소유하는 프로퍼티다.
+
  ```js
  console.hasownProperty('log'); // true
  ```
+ 
 3. 표현식 a + b + x + y + z의 평가
   - a, b, x, y, z 식별자를 검색한다. a - foo 함수 렉시컬 환경, b - bar 함수 렉시컬 환경, x,y - foo 함수 헥시컬 환경, z - bar 함수 렉시컬 환경에서 검색된다.
 4. console.log 메서드 호출
