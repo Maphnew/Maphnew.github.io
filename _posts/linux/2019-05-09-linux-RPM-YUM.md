@@ -255,7 +255,7 @@ Done
 6 y를 입력하면 설치에 필요한 패키지 파일을 요청함
 7 설치할 패키지 파일을 다운로드해서 자동 설치
 
-![YUM작동순서](../image/YUM.jpg)
+![YUM](https://user-images.githubusercontent.com/33482265/135969646-a9629eec-67f5-4014-bb23-6202b368fcaa.jpg)
 
 > CentOS 7 패지키 저장소의 원본 패키지는 **etc/yum.reps.d/CentOS-Base.repo** 파일의 [base]부분에 적혀있다.
 

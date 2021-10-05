@@ -18,7 +18,7 @@ toc_sticky: true
 - 일반적으로 모터 보호용으로 사용되는 전자 과부하 계전기
 - 기존에는 열동형 계전기(Thermal Relay)가 사용 되었는데 EOCR로 대체되는 추세
 
-![EOCR](../image/EOCR.jpg)
+![EOCR](https://user-images.githubusercontent.com/33482265/135966951-7a821c76-b2fe-47cf-aa09-1ca0ebff10f2.jpg)
 
 - LOAD, D-TIME, O-TIME 3가지 기능
   > LOAD: 회로의 과전류 보호를 위해 설정하는 것으로 모터의 전격전류 혹은 정상운전전류를 기준으로 하여 과전류를 설정한다.
@@ -33,7 +33,7 @@ toc_sticky: true
 
 - 기존 EOCR에 보호, 계측, 진단에서 많은 기능이 추가된 제품
 
-![Smart EOCR](../image/smart-eocr.JPG)
+![smart-eocr](https://user-images.githubusercontent.com/33482265/135969147-5cedfb20-f104-4f22-9be4-45e9810a2536.JPG)
 
 > 계측요소
 >
@@ -56,11 +56,11 @@ toc_sticky: true
 
 - 41 word list
 
-![41 word list](../image/remap20170320.JPG)
+![remap20170320](https://user-images.githubusercontent.com/33482265/135969023-7d339ad9-e758-4d10-8309-38da9ecc7287.JPG)
 
 - 31 word list
 
-![31 word list](../image/remap20180912.JPG)
+![remap20180912](https://user-images.githubusercontent.com/33482265/135969038-eaf7e704-1815-4752-b78e-ca7161421951.JPG)
 
 - 제외된 10word
 

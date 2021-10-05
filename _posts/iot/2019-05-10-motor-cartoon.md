@@ -39,7 +39,7 @@
 > 모터가 발명된 18세기에는 전류를 흐르게 하기 위한 전원은 직류 전류를 공급하는 전지밖에 없었다. 그때, 모든 모터는 직류 모터였다. 그 후 교류 발전기가 발명되고 나서야 교류 모터도 사용되게 되었다. 그 후 당초부터 어떤 전원으로 사용되는 모터인가 하는 것이 문제가 되고, 직류 모터와 교류 모터로 분류하게 되었다.
 
 ##### 모터의 분류
-![모터의분류](../image/motor_classification.jpg)
+![motor_classification](https://user-images.githubusercontent.com/33482265/135968737-98e687dc-e77e-4568-a4b6-f877e50ce457.jpg)
 ### 2. 모터란 무엇인가?
 #### 2.1 모터란?
 > 전류를 흘려보내 모터를 회전시켜 전기 에너지를 운동 에너지로 변환하는 것이 모터
@@ -53,7 +53,8 @@
 - 전기 > 자기 > 운동
 
 #### 2.2 모터의 구조
-![모터의구조](../image/motor_structure.jpg)
+![motor_structure](https://user-images.githubusercontent.com/33482265/135968772-3762d8e3-bcdf-40b7-a472-07dafd31d539.jpg)
+
 - 스테이터와 로터
 > 스테이터는 움직이지 않는 부분, 로터는 회전하는 부분
 
@@ -68,7 +69,7 @@
 #### 2.3 모터가 돌아가는 원리
 - 전기와 자기의 관계
 > 전선에 전류가 흐르면 자석처럼 주위에 '자계'가 생기게 됨. '자장'이라고도 하는데 공간에 '자기'가 발생해 있다는 것.
-![자계magnetic field](../image/magnetic_field.jpg)
+![magnetic_field](https://user-images.githubusercontent.com/33482265/135968600-56c43814-ab8b-4ff9-8c95-da7b07c5ab35.jpg)
 > 자석의 외측에 N극에서 S극 방향으로 자력선이 향하기 때문에 쇳가루는 자력선을 따라 흩어짐.
 
 > 전류가 흘렀을 때 그 주위에 생기는 자계는 '오른나사의 방향'으로 발생
@@ -81,10 +82,10 @@
 
 > 솔레노이드에 전류를 보내면 각각의 전선을 흐르는 전류에 의한 자계가 '오른나사의 법칙'으로 발생하여, 자력선이 솔레노이드의 안에서 같은 방향으로 흘러감.
 
-![코일과 솔레노이드](../image/coil.jpg)
+![코일과 솔레노이드](https://user-images.githubusercontent.com/33482265/135966929-0fa9ffa8-1258-4264-ab9d-23d50f095119.jpg)
 
 > 그것들이 합성되어 솔레노이드 전체로는 외측에 아래와 같이 자계가 생김.
-![솔레노이드](../image/sol.png)
+![sol](https://user-images.githubusercontent.com/33482265/135969206-72f3c9a5-cfe7-42de-b030-54a798504339.png)
 
 > 코일에 전류를 흐르게 함으로써 원판형이나 원통형의 영구자석과 같은 자계가 발생하게 된다. - 이것을 '전자석'이라고 한다.
 
@@ -123,7 +124,7 @@
 
 > 코일에 쇄교하는 자속이 어떤 시간의 사이에 변화했을 때 전자유도에 의해 생겨난 유도기전력은 아래와 같은 식으로 나타낸다.
 
-![유도기전력 공식](../image/induced_electromotive_force.jpg)
+![induced_electromotive_force](https://user-images.githubusercontent.com/33482265/135968477-404e7c2a-4334-4df7-877d-a1bb347eb09b.jpg)
 
 > ...
 

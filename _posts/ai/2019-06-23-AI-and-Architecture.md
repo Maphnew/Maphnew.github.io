@@ -19,22 +19,22 @@ https://towardsdatascience.com/ai-architecture-f9d78c6958e0
 
 #### 실험적 관점
 
-![GAN-Generated Masterplan](../image/GAN-Generated_Masterplan.jpeg)
-<GAN-Generated Masterplan>
+![GAN-Generated_Masterplan](https://user-images.githubusercontent.com/33482265/135967328-f3615f49-c90e-4480-b361-d2cfd0c2bc09.jpeg)
+<small>GAN-Generated Masterplan</small>
 
 인공 지능은 한 분야로서 수많은 분야에 이미 침투 해 왔으며 산업 전반에 걸쳐 이전에 해결되지 않은 과제에 대한 수단과 방법을 제시했습니다. 이전 기사에서 설명한 AI의 출현은 아직 초기 단계지만 유망한 결과를 제공합니다. 단순한 기회 이상으로, 그러한 잠재력은 건축 분야를 재 형성하려는 주요 단계입니다.
 
 우리의 작업은 건축 환경에 적용될 때이 약속을 입증 할 것을 제안합니다. 특히, 우리는 평면도 분석 및 생성에 인공 지능을 적용 할 것을 제안합니다. 우리의 궁극적 인 목적은 (1) 바닥 계획을 생성하는 것, 즉 매우 다양하고 다양한 바닥 계획 설계의 생성을 최적화하는 것, (2) 바닥 계획을 수립하는 것, 즉 사용자를 허용하는 적절한 분류 방법론을 제공하는 것 (3) 생성 된 디자인 옵션을 "탐색"할 수 있습니다.
 
-우리의 방법론은 두 가지 주요 직관을 따른다. (1) 표준 최적화 기법을 포함하고 있지만, 건물 계획의 작성은 단순한 기술적 인 문제이며, (2) 공간 설계는 순차적 인 과정이므로 다른 규모 (도시 규모, 건물 규모, 단위 규모). 그런 다음이 두 가지 현실을 활용하기 위해 중첩 된 Generic Adversarial Neural Networks 또는 GAN을 선택했습니다. 이러한 모델을 통해 우리는 마주 치는 평면도에서 더 많은 복잡성을 포착하고 연속적인 단계를 통해 문제를 해결함으로써 복잡성을 줄일 수있었습니다. 이 특정 작업에 대해 특별히 훈련 된 주어진 모델에 해당하는 각 단계는 결국 사람과 기계 간의 앞뒤로 가능한 증거가 될 수 있습니다.
+우리의 방법론은 두 가지 주요 직관을 따른다. (1) 표준 최적화 기법을 포함하고 있지만, 건물 계획의 작성은 단순한 기술적 인 문제이며, (2) 공간 설계는 순차적 인 과정이므로 다른 규모 (도시 규모, 건물 규모, 단위 규모). 그런 다음이 두 가지 현실을 활용하기 위해 중첩 된 Generic Adversarial Neural Networks 또는 GAN을 선택했습니다. 이러한 모델을 통해 우리는 마주 치는 평면도에서 더 많은 복잡성을 포착하고 연속적인 단계를 통해 문제를 해결함으로써 복잡성을 줄일 수있었습니다. 이 특정 작업에 대해 특별히 훈련 된 주어진 모델에 해당하는 각 단계는 결국 사람과 기계 간의 앞뒤로 가능한 증거가 될 수 있습니다.  
 
-계획은 실제로 정량적 기술의 십자가에서의 고차원적인 문제이며,보다 질적 인 특성입니다. 건축 전례에 대한 연구는 분석 프로세스가 부족하면서 기존 자원의 풍부함을 부인하는 위험한 프로세스로 남는 경우가 많습니다. 현재의 데이터 과학 방법론에서 영감을 얻은 방법론은 적격 층 계획을 목표로합니다. 6 개의 측정 항목을 작성하여 구조적으로 관련성이 높은 평면도를 캡처하는 프레임 워크를 제안합니다. 한편, Footprint Shape, Orientation, Thickness & Texture는 주어진 평면도의 스타일의 본질을 포착하는 세 가지 측정 기준입니다. 반면, 프로그램, 연결성 및 유통은 모든 평면도 구성의 본질을 묘사하기위한 것입니다.
+계획은 실제로 정량적 기술의 십자가에서의 고차원적인 문제이며,보다 질적 인 특성입니다. 건축 전례에 대한 연구는 분석 프로세스가 부족하면서 기존 자원의 풍부함을 부인하는 위험한 프로세스로 남는 경우가 많습니다. 현재의 데이터 과학 방법론에서 영감을 얻은 방법론은 적격 층 계획을 목표로합니다. 6 개의 측정 항목을 작성하여 구조적으로 관련성이 높은 평면도를 캡처하는 프레임 워크를 제안합니다. 한편, Footprint Shape, Orientation, Thickness & Texture는 주어진 평면도의 스타일의 본질을 포착하는 세 가지 측정 기준입니다. 반면, 프로그램, 연결성 및 유통은 모든 평면도 구성의 본질을 묘사하기위한 것입니다.  
 
-요컨대, 일단 연필을 확장 한이 기계는 오늘날 건축 지식을 매핑하는 데 활용 될 수 있으며 실행 가능한 설계 옵션을 작성하는 데 도움을주기 위해 교육을 받았습니다.
+요컨대, 일단 연필을 확장 한이 기계는 오늘날 건축 지식을 매핑하는 데 활용 될 수 있으며 실행 가능한 설계 옵션을 작성하는 데 도움을주기 위해 교육을 받았습니다.  
 
 ## I. 프레임 워크
 
-우리의 연구는 건축과 인공 지능의 교차점에서 발견됩니다. 전자는 주제이고, 전자는 주제입니다. 둘 다 명확하고 실행 가능한 범주로 단순화되었습니다.
+우리의 연구는 건축과 인공 지능의 교차점에서 발견됩니다. 전자는 주제이고, 전자는 주제입니다. 둘 다 명확하고 실행 가능한 범주로 단순화되었습니다.  
 
 건축은 스타일과 조직의 교차점으로 이해됩니다. 한편으로는 건축물을 기하학, 분류학, 유형학 및 장식을 통해 특정 스타일로 표현하는 문화적 중요성의 매개체로 간주합니다. 바로크, 로마식, 고딕 양식, 현대식, 현대식 : 평면도를 면밀히 조사하여 찾을 수있는 많은 건축 스타일. 다른 한편, 건물은 공학과 과학의 산물이며, 우리가 평면도를 읽을 때 발견 할 수있는 엄격한 구조와 규칙 (건축 코드, 인간 공학, 에너지 효율, 출구, 프로그램 등)에 응답합니다. 이러한 조직적 요구는 아키텍처에 대한 정의를 완료하고 조사를 진행합니다.
 
@@ -42,8 +42,8 @@ https://towardsdatascience.com/ai-architecture-f9d78c6958e0
 
 우선, 우리는 Generation이라는 주제로 뛰어 들어갈 것입니다. GAN을 사용하여 우리는 AI 시스템을 건축 설계 교육을 제공합니다. 우리는 그 활용이 건축 분야의 관행을 향상시킬 수 있다고 가정합니다. 이 필드는 실험적이며 최근의 놀라운 결과에 달하는만큼 최근의 것입니다. 우리의 희망은 실제 건물 평면도를 그릴 수 있도록 훈련시키는 것입니다.
 
-![Framework Matrix | Source: Author](../image/framework_matrix.png)
-<Framework Matrix | Source: Author>
+![framework_matrix](https://user-images.githubusercontent.com/33482265/135967269-94f12ab4-f870-4def-bb87-ada33a0c1314.png)
+<small>Framework Matrix | Source: Author</small>
 
 그런 다음 생성 된 평면도를 검증하고 분류하기위한 견고한 분석 프레임 워크를 마련 할 것입니다. 궁극적으로 우리의 목표는 GAN의 결과를 구성하여 사용자가 다양한 디자인 옵션을 원활하게 탐색 할 수있는 가능성을 제공하는 것입니다. 이를 위해 데이터 과학이 제공하는 도구의 양과 편재성이 우리 조사에 가치가있을 것입니다.
 
@@ -65,8 +65,8 @@ II. 일으키다
 
 Generative Adversarial Neural Networks 또는 GANs가 우리의 선택의 무기입니다. 인공 지능 분야에서 뉴럴 네트워크는 주요 조사 분야입니다. 그러한 모델의 창의력은 Generative Adversarial Neural Networks의 출현을 통해 최근에 입증되었습니다. 어떤 기계 학습 모델처럼 GAN은 제시된 데이터 중에서 통계적으로 중요한 현상을 학습합니다. 그러나 GAN은 Generator와 Discriminator의 두 가지 핵심 모델로 구성되어있어 두 모델간에 피드백 루프를 활용하여 관련 이미지를 생성하는 기능을 개선합니다. Discriminator는 일련의 데이터에서 이미지를 인식하도록 훈련되었습니다. 제대로 훈련 된이 모델은 데이터 세트에서 가져온 실제 예제와 외부의 "가짜"이미지를 구분할 수 있습니다. 그러나 Generator는 동일한 데이터 세트의 이미지와 유사한 이미지를 생성하도록 교육되었습니다. Generator가 이미지를 생성 할 때 Discriminator는 출력물의 품질에 대한 피드백을 제공합니다. 이에 따라 Generator는 더욱 사실적인 이미지를 생성하기 위해 적응합니다. 이 피드백 루프를 통해 GAN은 관찰 된 데이터에서 발견되는 현상을 고려하여 관련 합성 이미지를 만드는 능력을 천천히 구축합니다.
 
-![Generative_Adversarial_Neural_Network’s_Architecture](../image/Generative_Adversarial_Neural_Network’s_Architecture.jpeg)
-<Generative_Adversarial_Neural_Network’s_Architecture>
+![Generative_Adversarial_Neural_Network’s_Architecture](https://user-images.githubusercontent.com/33482265/135968340-8b2e646f-4c86-49a8-9126-9834a925f321.jpeg)
+<small>Generative_Adversarial_Neural_Network’s_Architecture</small>
 
 ### 표현 및 학습
 
@@ -74,9 +74,9 @@ GAN이 우리에게 엄청난 기회를 제공한다면, 무엇을 보여줄지 
 
 아래에서는 전형적인 교육 과정을 설명합니다.이 과정은 교육 과정의 절반과 절반 동안 실현되며, GAN 모델 중 하나가 방을 배치하는 방법과 주택 단위에 대한 fenestration을 점진적으로 학습하는 방법을 보여줍니다.
 
-![Training_Sequence](../image/Training_Sequence.jpeg)
-![Training_Sequence](../image/Training_Sequence.gif)
-<Training_Sequence>
+![Training_Sequence](https://miro.medium.com/max/512/1*iGv9lzeuU2j0kB-GKMo5DQ.gif)
+![Training_Sequence](https://user-images.githubusercontent.com/33482265/135969377-de5b3292-d00b-43c8-b4f7-43669301eddf.jpeg)
+<small>Training_Sequence</small>
 
 초기 시도는 부정확하고 혼동 스럽지만 250 회 반복 한 후에 기계는 직관의 형태를 구축합니다.
 
@@ -92,23 +92,23 @@ GAN이 우리에게 엄청난 기회를 제공한다면, 무엇을 보여줄지 
 
 A. 스타일 전송
 
-![Modern-to-Baroque_Floor_Plan_Translation](../image/Modern-to-Baroque_Floor_Plan_Translation.jpeg)
-<Modern-to-Baroque_Floor_Plan_Translation>
+![Modern-to-Baroque_Floor_Plan_Translation](https://user-images.githubusercontent.com/33482265/135968681-a784df0d-d044-4915-92ce-1be0be3158df.jpeg)
+<small>Modern-to-Baroque_Floor_Plan_Translation</small>
 
 평면도 내에서 "스타일"은 벽의 형상과 그림 평면을 연구하여 관찰 할 수 있습니다. 전형적인 바로크 양식의 교회는 여러 개의 둥근 들여 쓰기가있는 부피가 큰 기둥을 표시합니다. Mies van der Rohe의 현대식 빌라는 얇은 평면 벽을 보여줍니다. 벽면의이 "껍질 벗기기"는 GAN이 인식 할 수있는 기능입니다. 한 쌍의 이미지가 계획의 세그먼트 화 된 버전이고 다른 이미지가 원래 벽의 구조 인 한 쌍의 이미지를 보여줌으로써 건축 스타일과 관련하여 일정한 기계 직감을 구축 할 수 있습니다.
 
 이 섹션에서는 바로크 스타일을 배우기 위해 훈련 된 모델의 결과를 보여줍니다. 그러면 주어진 평면도가 수동으로 분할되어 (A) 새로운 벽면 스타일로 다시 옷을 입은 스타일 이전으로 진행됩니다 (B).
 
-![Style_Transfer_Results--Apartment_Units_Modern-to-Baroque_Style_Transfer](../image/Style_Transfer_Results--Apartment_Units_Modern-to-Baroque_Style_Transfer.jpeg)
-<Style_Transfer_Results--Apartment_Units_Modern-to-Baroque_Style_Transfer>
+![Style_Transfer_Results--Apartment_Units_Modern-to-Baroque_Style_Transfer](https://user-images.githubusercontent.com/33482265/135969295-12c5c40e-3945-49f3-8991-12415e7b72aa.png)
+<small>Style_Transfer_Results--Apartment_Units_Modern-to-Baroque_Style_Transfer</small>
 
-![Layout_Assistant-_a_Step_by_Step_Pipeline](../image/Layout_Assistant-_a_Step_by_Step_Pipeline.png)
-<Layout_Assistant-\_a_Step_by_Step_Pipeline>
+![Layout_Assistant-_a_Step_by_Step_Pipeline](https://user-images.githubusercontent.com/33482265/135968570-d0561289-7d4d-4e2e-b73d-e5588af444d5.png)
+<small>Layout_Assistant-\_a_Step_by_Step_Pipeline</small>
 
 이 섹션에서는 다중 단계 파이프 라인을 제공하여 평면도를 그리는 데 필요한 모든 단계를 통합합니다. 스케일을 뛰어 넘어서, 아키텍트가 취한 프로세스를 에뮬레이션하고 각 단계를 하나의 특정 모델로 캡슐화하고 주어진 작업을 수행하도록 교육합니다. 소포에서 건물 풋 프린트 (I)까지, 발자국에서부터 벽 및 창 (II)으로 분할 된 방, 창성한 바닥 계획에서 가구 한 (III)까지 각 단계가 신중하게 설계되고, 훈련되고 테스트되었습니다.
 
-![Generation Pipeline (Models I to III)](<./image/Generation_Pipeline_(Models_I_to_III).png>)
-<Generation Pipeline (Models I to III)>
+![Generation_Pipeline_(Models_I_to_III)](https://user-images.githubusercontent.com/33482265/135967836-320499bc-badc-4c0a-90b2-d52892a631dd.png)
+<small>Generation Pipeline (Models I to III)</small>
 
 동시에 파이프 라인을 개별 단계로 나누어 사용자가 각 모델을 조정할 수 있습니다. 모델의 출력을 선택하고 편집하여 다음 모델에 제공하기 전에 사용자는 설계 프로세스를 제어합니다. 그 입력은 모델에 의해 내려진 결정을 형성하여 인간과 기계의 상호 작용을 기대합니다.
 

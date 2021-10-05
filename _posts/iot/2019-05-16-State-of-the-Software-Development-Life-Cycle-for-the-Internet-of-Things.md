@@ -97,7 +97,7 @@ Table 1. IoT Application Domains [Sundmaeker et al. 2010].
 Number of IoT Enterprise Projects per Segment
 
 > 세그먼트당 IoT Enterprise 프로젝트 수
-> ![Graph](../image/Number_of_IoT_Enterprise_PJT_per_Segment.JPG)
+> ![Number_of_IoT_Enterprise_PJT_per_Segment](https://user-images.githubusercontent.com/33482265/135968809-55e5318a-b5f9-4819-94c1-3e0cdd29d53e.JPG)
 
 Fig. 1. Statistics based upon 1600 public known enterprise IoT projects circa 2018 (not including consumer level IoT projects such as werables and smart homes) [Scully 2018].
 
@@ -112,9 +112,9 @@ IoT 엔터프라이즈 애플리케이션은 또한 (Buyya 및 Dastjerdi 2016) �
 소프트웨어 개발 라이프 사이클 (SDLC)은 소프트웨어 시스템을 구축하거나 유지 관리하는 프로세스입니다. 일반적으로 예비 개발 분석 (예 : 요구 사항, 아키텍처 설계)에서 개발 후 소프트웨어 테스트 및 평가 (예 : 검증 및 검증)에 이르는 다양한 단계가 포함됩니다 [Leau et al. 2012].
 ACM에 제출 된 원고
 
-![LifeCycle](../image/SoftwareDevelopmentLifeCycle.JPG)
+![SoftwareDevelopmentLifeCycle](https://user-images.githubusercontent.com/33482265/135969186-46e14c83-8d68-4a7a-8d9b-2bb7021ffd2c.JPG)
 
-![LifeCycle2](../image/SDLC.JPG)
+![SDLC](https://user-images.githubusercontent.com/33482265/135969100-12b9a87d-27f6-4387-b026-f8dba5c4ab1d.JPG)
 
 또한 SDLC는 개발 팀이 전체 개발 프로세스를 계획하고 제어하기위한 프레임 워크를 구성하는 소프트웨어 시스템을 개발하는 데 사용하는 모델과 방법을 포함합니다. 현재 SDLC 방법론 카테고리에는 전통적인 소프트웨어 개발 (예 : 폭포, Rational Unified Process)과 AGILE 소프트웨어 개발 (예 : SCRUM)의 두 가지 카테고리가 있습니다 [Leau et al. 2012]. 그림 2에는 SDLC에 대한 전체적인 견해가 나와 있습니다.
 
@@ -160,7 +160,7 @@ IoT 시스템을 개발할 때 매쉬업 기반 및 모델 기반 [Prehofer and 
 
 상호 운용성있는 인터넷 -to-Things를 보장하기 위해 서로 다른 기업들이 서로 다른 표준을 사용하고 있으며, 단순히 장치가 서로 다른 응용 프로그램간에 말할 수있는 공용 언어를 넣어 IoT 단편화를 줄입니다. 가장 잘 알려진 이니셔티브의 요약은 표 2에 나와 있으며 가장 널리 보급 된 내용은 다음 단락에서 분석됩니다.
 
-![Over view](../image/overview_of_the_IoT_Enabling_Models_and_API's.JPG)
+![overview_of_the_IoT_Enabling_Models_and_API's](https://user-images.githubusercontent.com/33482265/135968916-1158c612-9a6b-4b73-8fe9-c861366bd73e.JPG)
 
 Mozzilla의 Web Thing API [Francis 2017] Web of Things의 공통 데이터 모델 및 API에 대한 Mozilla 제안. Web Thing Description은 월드 와이드 웹에 연결된 실제 장치를 기본 JSON 인코딩으로 기계 가독 형식으로 설명하는 어휘를 제공합니다. Web Thing REST API 및 Web Thing WebSocket API를 사용하면 웹 클라이언트가 장치 속성에 액세스하고 작업 실행을 요청하고 상태 변경을 나타내는 이벤트에 가입 할 수 있습니다. 기본적인 웹 사이트 유형이 제공되며 JSON-LD를 사용하여 의미 론적 확장을 사용하여 추가 유형을 정의 할 수 있습니다. 또한이 제안에는 다양한 기존 IoT 프로토콜에 Web Thing API의 비 규범 적 바인딩을 제안하는 Web of Things Gateway Protocol Bindings 및 연결된 장치를 통합하기위한 다양한 디자인 패턴에 대한 조언을 제공하는 Web of Things 통합 패턴 세트가 포함되어 있습니다 Web of Things, 그리고 각 패턴이 가장 적절한 곳.
 
