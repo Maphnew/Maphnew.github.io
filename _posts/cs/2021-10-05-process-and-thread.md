@@ -15,7 +15,7 @@ toc_sticky: true
 
 # Process and Thread
 
-![Diagram](../image/Process_Thread.png)
+![Process_Thread](https://user-images.githubusercontent.com/33482265/135965893-26145a9d-4978-40dc-b4a9-fd4dbec7c2c6.png){: width="50%"}
 
 ## Process
 
