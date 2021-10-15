@@ -50,3 +50,32 @@ console.log(sum(1, 2));
 문제는 전역 스코프가 오염된다는 것
 
 ### 1.1 IIFE 방식의 모듈
+
+[IIFE( Immediately Invoked Function Expression )](https://developer.mozilla.org/ko/docs/Glossary/IIFE)은 정의되자마자 즉시 실행되는 Javascript Function을 말한다.
+
+```js
+(function () {
+  statement;
+})();
+```
+
+IIFE로 변경해보자
+
+```js
+// src/math.js
+var math = math || {};
+
+(function () {
+  function sum(a, b) {
+    return a + b;
+  }
+  math.sum = sum;
+})();
+```
+
+```js
+// src/app.js
+console.log(math.sum(1, 2));
+```
+
+### 1.2 다양한 모듈 스펙
