@@ -103,7 +103,9 @@ ES2015에서 표준 모듈 시스템을 내 놓았다. 지금은 바벨과 웹�
 
 ```js
 // src/math.js
-expor function sum(a,b){return a+b}
+export function sum(a, b) {
+  return a + b;
+}
 ```
 
 ```js
@@ -113,3 +115,15 @@ console.log(math.sum(1, 2)); // 3
 ```
 
 ### 1.3 브라우저의 모듈 지원
+
+크롬 브라우저에서 모듈을 사용하는 법
+
+```html
+<script type="module" src="src/app.js"></script>
+```
+
+CORS 오류가 난다면 lite-server 패키지를 설치해 실행해보자
+
+크롬에서는 작동하지만 모든 브라우저에서 모듈 시스템을 지원하지 않는다. 웹팩이 필요하다.
+
+## 2. 엔트리/아웃풋
