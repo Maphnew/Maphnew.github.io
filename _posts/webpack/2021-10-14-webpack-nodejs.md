@@ -86,7 +86,7 @@ npm install react
 }
 ```
 
-### 5.4 유의적 버전 Sementic Version
+### 5.4 유의적 버전 Semantic Version
 
 - 주 버전(Major Version): 기존 버전과 호환되지 않게 변경한 경우
 - 부 버전(Minor Version): 기존 버전과 호환되면서 기능이 추가된 경우
