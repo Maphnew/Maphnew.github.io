@@ -44,7 +44,7 @@ function sum(a, b) {
 
 ```js
 // src/app.js
-console.log(sum(1, 2));
+console.log(sum(1, 2)); // 3
 ```
 
 문제는 전역 스코프가 오염된다는 것
@@ -59,7 +59,7 @@ console.log(sum(1, 2));
 })();
 ```
 
-IIFE로 변경해보자
+IIFE로 변경해보자. 전역 스코프가 오염되지 않는다.
 
 ```js
 // src/math.js
@@ -75,7 +75,41 @@ var math = math || {};
 
 ```js
 // src/app.js
-console.log(math.sum(1, 2));
+console.log(math.sum(1, 2)); // 3
 ```
 
 ### 1.2 다양한 모듈 스펙
+
+AMD와 CommonJS가 모듈을 구현하는 대표적인 명세이다.
+
+CommonJS 대표적으로 Node.js에서 사용한다. exports 키워드로 모듈을 만들고 require() 함수로 불러들이는 방식이다.
+
+```js
+// src/math.js
+exports function sum(a,b){return a+b}
+```
+
+```js
+// src/app.js
+const sum = require("./math.js");
+console.log(sum(1, 2)); // 3
+```
+
+AMD(Asynchronous Module Definition)는 비동기로 로딩되는 환경에서 모듈을 사용하는 것이 목표이며 주로 브라우저 환경이다.
+
+UMD(Universial Module Definition)는 AMD기반으로 CommonJS 방식까지 지원하는 통합 형태이다.
+
+ES2015에서 표준 모듈 시스템을 내 놓았다. 지금은 바벨과 웹팩을 이용해 사용하는 것이 일반적이다.
+
+```js
+// src/math.js
+expor function sum(a,b){return a+b}
+```
+
+```js
+// src/app.js
+import * as math from "./math.js";
+console.log(math.sum(1, 2)); // 3
+```
+
+### 1.3 브라우저의 모듈 지원
