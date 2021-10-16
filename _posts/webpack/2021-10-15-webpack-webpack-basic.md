@@ -523,3 +523,116 @@ npm run build
 ```
 
 bg.png는 dist파일에 저장되고 nyancat.jpg는 url-loader가 처리하여 base64 인코딩되어 main.js에 들어간다.
+
+## 5. 플러그인
+
+### 5.1 플러그인의 역할
+
+로더가 파일 단위로 처리하는 반면 플러그인은 번들된 결과물을 처리한다. 번들된 자바스크립트를 난독화 한다거나 특정 텍스트를 추출하는 용도로 사용한다.
+
+### 5.2 커스텀 플러그인 만들기
+
+```js
+// my-webpack-plugin.js
+class MyWebpackPlugin {
+  apply(compiler) {
+    compiler.hooks.done.tap("My Plugin", (stats) => {
+      console.log("MyPlugin: done");
+    });
+  }
+}
+
+module.exports = MyWebpackPlugin;
+```
+
+```js
+// webpack.config.js
+plugins: [new MyWebpackPlugin()];
+```
+
+```
+npm run build
+```
+
+파일은 여러 개인데 로그가 찍힌걸 보면 한 번만 찍혔다.  
+로더가 파일 하나 혹은 여러 개에 대해 동작하는 반면 플러그인은 하나로 번들링된 결과물을 대상으로 동작한다.  
+예제에서 결과물이 main.js 하나이기 때문에 플러그인이 한 번만 동작한 것이라 추측된다.
+
+웹팩 내장 플러그인 BannerBlugin 코드를 참고하자.
+
+```js
+// my-webpack-plugin.js
+class MyWebpackPlugin {
+  apply(compiler) {
+    // compiler.hooks.done.tap('My Plugin', stats => {
+    //     console.log('MyPlugin: done')
+    // })
+    compiler.plugin("emit", (compilation, callback) => {
+      const source = compilation.assets["main.js"].source();
+      console.log(source);
+      // compilation.assets['main.js'].source = () => {
+      //     const banner = [
+      //         '/**',
+      //         ' * 이것은 BannerPlugin이 처리한 결과입니다.',
+      //         ' * Build Date: 2021-10-16',
+      //         ' */'
+      //     ].join('\n');
+      //     return banner + '\n\n' + source;
+      // }
+
+      callback();
+    });
+  }
+}
+
+module.exports = MyWebpackPlugin;
+```
+
+```
+npm run build
+```
+
+번들링된 main.js의 소스 내용이 출력되는 것을 볼 수 있다.  
+커스텀 플러그인을 수정해 번들된 결과에 후처리를 해보자
+
+```js
+// my-webpack-plugin.js
+class MyWebpackPlugin {
+  apply(compiler) {
+    // compiler.hooks.done.tap('My Plugin', stats => {
+    //     console.log('MyPlugin: done')
+    // })
+    compiler.plugin("emit", (compilation, callback) => {
+      const source = compilation.assets["main.js"].source();
+      compilation.assets["main.js"].source = () => {
+        const banner = [
+          "/**",
+          " * 이것은 BannerPlugin이 처리한 결과입니다.",
+          " * Build Date: 2021-10-16",
+          " */",
+        ].join("\n");
+        return banner + "\n\n" + source;
+      };
+
+      callback();
+    });
+  }
+}
+
+module.exports = MyWebpackPlugin;
+```
+
+```
+npm run build
+```
+
+```js
+// main.js
+/**
+ * 이것은 BannerPlugin이 처리한 결과입니다.
+ * Build Date: 2021-10-16
+ */
+
+/******/ (function(modules) { // webpackBootstrap
+// ...
+```
