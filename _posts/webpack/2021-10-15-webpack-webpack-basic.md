@@ -448,3 +448,78 @@ npm run build
 
 Data URI Scheme을 사용하는 것은 이미지를 여러 개 사용할 때 네트워크 리소스 부담을 줄이고 사이트 성능에 도움을 주는 방법이다.  
 Data URI Scheme을 사용하기 위해 url-loader가 필요하다.
+
+비교적 작은 크기의 파일을 추가해보자
+
+nyancat.jpg 파일을 다운로드하고 app.js에 추가한다.
+
+```js
+// app.js
+import "./app.css";
+import nyancat from "./nyancat.jpg";
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.innerHTML = `
+        <img src="${nyancat}" />
+    `;
+});
+```
+
+그리고 파일로더가 jpg 외의 파일 확장자를 읽을 수 있도록 설정한다.
+
+```js
+// webpack.config.js
+            {
+                test: /\.(png|jpg|gif|svg)/,
+                loader: 'file-loader',
+                options: {
+                    publicPath: './dist/',
+                    name: '[name].[ext]?[hash]'
+                }
+            }
+```
+
+```
+npm run build
+```
+
+dist 폴더에 nyancat.jpg 파일이 추가됐다.
+
+파일의 크기를 보면 nyancat.jpg는 비교적 작으므로 url-loader를 이용해 base64 인코딩해서 올린다.
+
+```
+$ ll src
+total 1223
+-rw-r--r-- 1 maphnew 197121      45 10월 16 18:46 app.css
+-rw-r--r-- 1 maphnew 197121     190 10월 16 19:05 app.js
+-rw-r--r-- 1 maphnew 197121 1227424 10월 16 18:45 bg.png
+-rw-r--r-- 1 maphnew 197121      38 10월 15 20:46 math.js
+-rw-r--r-- 1 maphnew 197121   18869 10월 16 19:04 nyancat.jpg
+```
+
+url-loader 설치한다.
+
+```
+npm install url-loader@3.0.0
+```
+
+아래와 같이 설정하면 20kb 미만일 경우 base64로 인코딩, 이상일 경우 file-loader가 실행된다.
+
+```js
+// webpack.config.js
+            {
+                test: /\.(png|jpg|gif|svg)/,
+                loader: 'url-loader',
+                options: {
+                    publicPath: './dist/',
+                    name: '[name].[ext]?[hash]',
+                    limit: 20000, // 20kb
+                }
+            }
+```
+
+```
+npm run build
+```
+
+bg.png는 dist파일에 저장되고 nyancat.jpg는 url-loader가 처리하여 base64 인코딩되어 main.js에 들어간다.
