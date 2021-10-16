@@ -315,3 +315,70 @@ module.exports = function myWebpackLoader(content) {
 console.log를 alert으로 변환하는 로더를 만들었다.
 
 ## 4. 자주 사용하는 로더
+
+### 4.1 css-loader
+
+css파일을 모듈로 변환하여 자바스크립트에서 불러와 사용할 수 있게 한다.
+
+```
+npm install -D css-loader@5.2.7
+```
+
+```js
+// app.js
+import "./app.css";
+```
+
+```css
+/* app.css */
+body {
+  background-color: green;
+}
+```
+
+```js
+// webpack.config.js
+module: {
+  rules: [
+    {
+      test: /\.css$/,
+      use: ["css-loader"],
+    },
+  ];
+}
+```
+
+```
+npm run build
+```
+
+dist/main.js 파일에 app.css 내용이 포함되었지만 실제 브라우저에는 배경 색이 바뀌지 않았다.  
+적용이 되려면 css를 html에서 직접 로드하거나 인라인 코드로 변환해야한다.
+
+### 4.2 style-loader
+
+자바스크립트로 변경된 스타일 코드를 html에 넣어주는 일을 하는 `style-loader`가 필요하다.
+style-loader는 자바스크립트로 변경된 스타일을 동적으로 DOM에 추가하는 로더이다.  
+css 번들링을 위해서 이 두 로더를 함께 사용한다.
+
+```
+npm install -D style-loader@2.0.0
+```
+
+```js
+// webpack.config.js
+module: {
+  rules: [
+    {
+      test: /\.css$/,
+      use: ["style-loader", "css-loader"],
+    },
+  ];
+}
+```
+
+```
+npm run build
+```
+
+### 4.3 file-loader
