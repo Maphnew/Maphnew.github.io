@@ -382,3 +382,69 @@ npm run build
 ```
 
 ### 4.3 file-loader
+
+bg.png 파일을 다운로드 받아 css에서 사용해보자
+
+```css
+body {
+  background-image: url(bg.png);
+}
+```
+
+그리고 빌드를 하면 파싱 오류가 뜬다.
+
+```
+npm run build
+```
+
+이제 file-loader가 필요하다.
+
+```
+npm install file-loader@5.1.0
+```
+
+```js
+// webpack.config.js
+module: {
+  rules: [
+    {
+      test: /\.css$/,
+      use: ["style-loader", "css-loader"],
+    },
+    {
+      test: /\.png/,
+      use: ["file-loader"],
+    },
+  ];
+}
+```
+
+```
+npm run build
+```
+
+dist 폴더에 이미지 파일이 생성되었다. 파일명은 해시값이다. 웹팩이 캐시를 사용할 때 생기는 문제를 예방하기 위해 해시값으로 파일명을 변경한다.
+
+이미지의 경로는 index.html을 기준으로 설정해준다.  
+publicPath는 파일로더가 처리하는 파일을 모듈로 사용할 때 경로 앞에 추가되는 문자열이다.  
+name은 로더가 파일을 아웃풋에 복사할 때 사용하는 파일 이름이다. 기본적으로 설정된 해쉬값을 쿼리스트링으로 옮겨서 'bg.png?5af0af42f49426cc73b0e7b3d7d2eb14'형식으로 파일을 요청하도록 변경했다. 매번 해시값이 달라져서 캐시 사용할 때 발생하는 문제를 예방할 수 있다.
+
+```js
+            {
+                test: /\.png/,
+                loader: 'file-loader',
+                options: {
+                    publicPath: './dist/',
+                    name: '[name].[ext]?[hash]'
+                }
+            }
+```
+
+```
+npm run build
+```
+
+### 4.4 url-loader
+
+Data URI Scheme을 사용하는 것은 이미지를 여러 개 사용할 때 네트워크 리소스 부담을 줄이고 사이트 성능에 도움을 주는 방법이다.  
+Data URI Scheme을 사용하기 위해 url-loader가 필요하다.
