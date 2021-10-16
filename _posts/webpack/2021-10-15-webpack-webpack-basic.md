@@ -282,3 +282,36 @@ Entrypoint main = main.js
 ```
 
 ## 3. 로더
+
+### 3.1 로더의 역할
+
+모든 것을 자바스크립트의 모듈로 만들어 사용할 수 있게 한다.  
+타입스크립트를 자바스크립트 문법으로 변환해 주거나 이미지를 data URL 형식의 문자열로 변환하고, CSS파일을 자바스크립트에서 직접 로딩할 수 있도록 한다.
+
+### 3.2 커스텀 로더 만들기
+
+```js
+// my-webpack-loader.js
+module.exports = function myWebpackLoader(content) {
+  // console.log('myWebpackLoader')
+  return content.replace("console.log(", "alert(");
+};
+```
+
+```js
+// webpack.config.js
+{
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: [path.resolve("./my-webpack-loader.js")],
+      },
+    ];
+  }
+}
+```
+
+console.log를 alert으로 변환하는 로더를 만들었다.
+
+## 4. 자주 사용하는 로더
