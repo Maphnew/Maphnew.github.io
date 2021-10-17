@@ -923,7 +923,7 @@ hash:ture 옵션으로 빌드할 때 생성하는 해시값을 정적파일 로�
 output 폴더를 삭제해주는 플러그인이다.
 
 ```
-npm install clean-webpack-plugin@3.0.0
+npm install -D clean-webpack-plugin@3.0.0
 ```
 
 ```js
@@ -944,3 +944,79 @@ npm run build
 ```
 
 ### 6.5 MiniCssExtractPlugin
+
+하나의 자바스크립트 파일이 비대해지면 성능에 있어 부담이다.  
+스타일시트가 많아지는 것이 원인일 경우가 있는데 이것을 분리해주는 플러그인이다.  
+여러 개의 작은 파일을 동시에 다운로드하는 것이 큰 파일 하나를 받는 것보다 더 빠르다.  
+개발 환경에서는 css를 하나의 모듈로 처리해도 되지만 프로덕션 환경에서는 분리하는 것이 효과적이다.
+
+```
+npm install -D mini-css-extract-plugin@1.6.2
+```
+
+```js
+// webpack.config.js
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+plugins: [
+  // ...
+  ...(process.env.NODE_ENV === "production"
+    ? [new MiniCssExtractPlugin({ filename: "[name].css" })]
+    : []),
+];
+```
+
+이 플러그인은 css 관련 로더 설정도 필요하다.
+
+```js
+// webpack.config.js
+            {
+                test: /\.css$/,
+                use: [
+                    process.env.NODE_ENV === 'production'
+                    ? MiniCssExtractPlugin.loader
+                    : 'style-loader',
+                    'css-loader'
+                ]
+            },
+```
+
+```
+NODE_ENV=production npm run build
+```
+
+dist폴더에 main.css가 만들어졌다.
+
+```css
+/* dist/main.css */
+/*!
+ * 
+ *                 Build Date: 2021. 10. 17. 오후 6:37:38
+ *                 Commit Version: 7bda1c0
+ * 
+ *                 Author: maphnew
+ * 
+ *             
+ */
+body {
+  background-image: url(bg.png?5af0af42f49426cc73b0e7b3d7d2eb14);
+}
+```
+
+dist/index.html에는 main.css를 로드한 것을 볼 수 있다.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Document</title>
+    <link href="main.css?c741a338b4f577ad5fa9" rel="stylesheet" />
+  </head>
+  <body>
+    <script src="main.js?c741a338b4f577ad5fa9"></script>
+  </body>
+</html>
+```
