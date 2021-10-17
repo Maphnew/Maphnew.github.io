@@ -919,3 +919,28 @@ new HtmlWebpackPlugin({
 hash:ture 옵션으로 빌드할 때 생성하는 해시값을 정적파일 로딩 주소의 쿼리 문자열로 붙여서 HTML을 생성한다.
 
 ### 6.4 CleanWebpackPlugin
+
+output 폴더를 삭제해주는 플러그인이다.
+
+```
+npm install clean-webpack-plugin@3.0.0
+```
+
+```js
+//webpack.config.js
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+
+plugins: [
+  // ...
+  new CleanWebpackPlugin(),
+];
+```
+
+default로 export 되어 있지 않으므로 위와 같이 import 한다.  
+dist 폴더에 임의의 파일을 생성하고 삭제되는지 확인해보자.
+
+```
+npm run build
+```
+
+### 6.5 MiniCssExtractPlugin
