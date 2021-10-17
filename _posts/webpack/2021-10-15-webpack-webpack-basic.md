@@ -558,7 +558,7 @@ npm run build
 로더가 파일 하나 혹은 여러 개에 대해 동작하는 반면 플러그인은 하나로 번들링된 결과물을 대상으로 동작한다.  
 예제에서 결과물이 main.js 하나이기 때문에 플러그인이 한 번만 동작한 것이라 추측된다.
 
-웹팩 내장 플러그인 BannerBlugin 코드를 참고하자.
+웹팩 내장 플러그인 BannerPlugin 코드를 참고하자.
 
 ```js
 // my-webpack-plugin.js
@@ -636,3 +636,70 @@ npm run build
 /******/ (function(modules) { // webpackBootstrap
 // ...
 ```
+
+## 6. 자주 사용하는 플러그인
+
+### 6.1 BannerPlugin
+
+```js
+// webpack.config.js
+const webpack = require("webpack");
+
+plugins: [
+  new webpack.BannerPlugin({
+    banner: "이거슨 배너입니다.",
+  }),
+];
+```
+
+```
+npm run build
+```
+
+```js
+// dist/main.js
+/*! 이거슨 배너입니다. */
+/******/ (function(modules) { // webpackBootstrap
+// ...
+```
+
+좀 더 자세한 정보를 넣어보자.
+
+```js
+// webpack.config.js
+const childProcess = require("child_process");
+
+plugins: [
+  new webpack.BannerPlugin({
+    banner: `
+                Build Date: ${new Date().toLocaleString()}
+                Commit Version: ${childProcess.execSync(
+                  "git rev-parse --short HEAD"
+                )}
+                Author: ${childProcess.execSync("git config user.name")}
+            `,
+  }),
+];
+```
+
+```
+npm run build
+```
+
+```js
+// main.js
+/*!
+ * 
+ *                 Build Date: 2021. 10. 17. 오후 3:28:49
+ *                 Commit Version: 7bda1c0
+ * 
+ *                 Author: maphnew
+ * 
+ *             
+ */
+/******/ (function(modules) { // webpackBootstrap
+```
+
+빌드하고 배포했을 때 정적파일들이 잘 배포됐는지 혹은 캐시에 의해 갱신되지 않는지 확인하기 쉽게 설정됐다.
+
+### 6.2 DefinePlugin
