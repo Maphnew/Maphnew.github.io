@@ -4,7 +4,7 @@ date: 2021-10-06 22:16:00
 categories:
   - Frontend
 tags:
-  - [Frontend, webpack]
+  - [Frontend, Webpack]
 toc: true
 toc_sticky: true
 ---
