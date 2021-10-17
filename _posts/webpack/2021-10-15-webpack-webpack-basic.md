@@ -400,7 +400,7 @@ npm run build
 이제 file-loader가 필요하다.
 
 ```
-npm install file-loader@5.1.0
+npm install -D file-loader@5.1.0
 ```
 
 ```js
@@ -500,7 +500,7 @@ total 1223
 url-loader 설치한다.
 
 ```
-npm install url-loader@3.0.0
+npm install -D url-loader@3.0.0
 ```
 
 아래와 같이 설정하면 20kb 미만일 경우 base64로 인코딩, 이상일 경우 file-loader가 실행된다.
@@ -689,13 +689,13 @@ npm run build
 ```js
 // main.js
 /*!
- * 
+ *
  *                 Build Date: 2021. 10. 17. 오후 3:28:49
  *                 Commit Version: 7bda1c0
- * 
+ *
  *                 Author: maphnew
- * 
- *             
+ *
+ *
  */
 /******/ (function(modules) { // webpackBootstrap
 ```
@@ -703,3 +703,219 @@ npm run build
 빌드하고 배포했을 때 정적파일들이 잘 배포됐는지 혹은 캐시에 의해 갱신되지 않는지 확인하기 쉽게 설정됐다.
 
 ### 6.2 DefinePlugin
+
+개발환경과 운영환경으로 나눠 운영할 때 환경변수가 다르다.  
+환경변수 정보를 소스가 아닌 곳에서 관리하기 위해 DefinePlugin을 제공한다.  
+테스트 해보자.
+
+```js
+// webpack.config.js
+plugins: [
+  new webpack.BannerPlugin({
+    banner: `
+                Build Date: ${new Date().toLocaleString()}
+                Commit Version: ${childProcess.execSync(
+                  "git rev-parse --short HEAD"
+                )}
+                Author: ${childProcess.execSync("git config user.name")}
+            `,
+  }),
+  new webpack.DefinePlugin({}),
+];
+```
+
+```js
+// app.js
+console.log(process.env.NODE_ENV); // "development"
+```
+
+process.env.NODE_ENV라는 노드 환경정보에는 웹팩 설정의 mode에 설정한 값이 여기에 들어간다.  
+이 외에도 직접 환경변수를 넣고 싶으면 아래와 같이 설정할 수 있다.
+
+```js
+// webpack.config.js
+  new webpack.DefinePlugin({
+    TWO: '1+1'
+  }),
+```
+
+```js
+// app.js
+console.log(TWO); // 2
+```
+
+```js
+// webpack.config.js
+  new webpack.DefinePlugin({
+    TWO: JSON.stringify('1+1')
+  }),
+```
+
+```js
+// app.js
+console.log(TWO); // "1+1"
+```
+
+```js
+// webpack.config.js
+  new webpack.DefinePlugin({
+    TWO: JSON.stringify('1+1'),
+    'api.domain': JSON.stringify('http://dev.api.domain.com')
+  }),
+```
+
+```js
+// app.js
+console.log(api.domain); // "http://dev.api.domain.com"
+```
+
+코드가 아닌 값을 넘길 경우 위와 같이 문자열화 한 뒤 넘긴다.
+
+### 6.3 HtmlTemplatePlugin
+
+HTML 파일을 처리하는데 사용된다.  
+html 파일을 웹팩 빌드 과정에 넣고 싶을 때 사용하면 된다.  
+빌드 타임의 값을 넣거나 코드를 압축할 수 있다.
+
+```
+npm install -D html-webpack-plugin@4.5.2
+```
+
+index.html을 src폴더로 옮겨서 소스로 관리하고 아래와 같이 main.js를 불러오는 script태그를 삭제하고 html-webpack-plugin 설정을 한다.
+
+```html
+<!-- src/index.html -->
+<!-- <script src="dist/main.js"></script> -->
+```
+
+```js
+// webpack.config.js
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+plugins: [
+  //...
+  new HtmlWebpackPlugin({
+    template: "./src/index.html",
+  }),
+];
+```
+
+```
+npm run build
+```
+
+dist 폴더에 index.html 파일이 생성 되었다.
+
+```html
+<!-- dist/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="main.js"></script>
+  </body>
+</html>
+```
+
+html 파일을 빌드과정에 포함시킴으로써 의존적이지 않은 html코드를 생성할 수 있다.  
+브라우저를 확인해보면 백그라운드이미지를 불러오지 못하는데, 로더 설정에서 publicPath를 확인해보자.  
+이전에는 index.html파일 기준으로 경로를 설정했지만 지금은 설정할 필요가 없어졌다.
+
+```js
+// webpack.config.js
+
+            {
+                test: /\.(png|jpg|gif|svg)/,
+                loader: 'url-loader',
+                options: {
+                    // publicPath: './dist/',
+                    name: '[name].[ext]?[hash]',
+                    limit: 20000, // 20kb
+                }
+            }
+```
+
+```
+npm run build
+```
+
+html파일에 변수를 주입시키거나 white space와 주석을 제거 할 수 있다.
+
+```js
+// webpack.config.js
+new HtmlWebpackPlugin({
+  template: "./src/index.html",
+  templateParameters: {
+    env: process.env.NODE_ENV === "development" ? "(개발용)" : "",
+  },
+  minify:
+    process.env.NODE_ENV === "production"
+      ? {
+          collapseWhitespace: true,
+          removeComments: true,
+        }
+      : false,
+});
+```
+
+```html
+<!-- src/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document<%= env %></title>
+    <!-- 이것은 주석입니다. -->
+  </head>
+  <body></body>
+</html>
+```
+
+```
+NODE_ENV=development npm run build
+```
+
+브라우저에서 타이틀이 변경된 것을 확인할 수 있다.
+
+```
+NODE_ENV=production npm run build
+```
+
+dist폴더의 index.html파일에 white space와 주석이 제거되었다.
+
+정적파일을 배포하면 즉각 브라우저에 반영되지 않는 경우가 있는데 브라우저 캐시가 원인일 때가 있다. 예방하기 위해 다음의 옵션을 설정한다.
+
+```js
+// webpack.config.js
+new HtmlWebpackPlugin({
+  hash: true, // 정적 파일을 불러올 때 쿼리문자열에 웹팩 해시값을 추가한다.
+});
+```
+
+```html
+<!-- dist/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="main.js?d5650e6c37936aebdebb"></script>
+  </body>
+</html>
+```
+
+hash:ture 옵션으로 빌드할 때 생성하는 해시값을 정적파일 로딩 주소의 쿼리 문자열로 붙여서 HTML을 생성한다.
+
+### 6.4 CleanWebpackPlugin
