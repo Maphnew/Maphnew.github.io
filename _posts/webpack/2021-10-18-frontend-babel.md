@@ -28,3 +28,32 @@ toc_sticky: true
 요즘은 이 둘을 구분하지 않고 사용하는 것 같다.
 
 ## 2. 바벨의 기본 동작
+
+바벨과 커맨드라인 도구를 설치해서 실행해보자
+
+```
+npm install -D @babel/core @babel/cli
+```
+
+```js
+// app.js
+const alert = (msg) => window.alert(msg);
+```
+
+```
+npx babel app.js
+const alert = msg => window.alert(msg);
+```
+
+변환되지 않았다.  
+바벨은 세 단계로 빌드를 진행한다.
+
+1. 파싱(Parsing)
+2. 변환(Transforming)
+3. 출력(Printing)
+
+여기서 변환 단계가 이루어지지 않았는데, 변환 단계를 수행하는 것이 플러그인이다.
+
+## 3. 플러그인
+
+### 3.1 커스텀 플러그인
