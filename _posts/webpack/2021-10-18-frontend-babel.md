@@ -238,3 +238,36 @@ var alert = function (msg) {
 ## 4. 프리셋
 
 필요한 플러그인을 일일이 설정하지 않고 미리 여러가지 플러그인을 세트롤 모아놓은 것을 "프리셋"이라고 한다.
+
+### 4.1 커스텀 프리셋
+
+프리셋을 만들어 사용해보자.
+
+```js
+// my-babel-preset.js
+module.exports = function myBabelPreset() {
+  return {
+    plugins: [
+      "@babel/plugin-transform-block-scoping",
+      "@babel/plugin-transform-arrow-functions",
+      "@babel/plugin-transform-strict-mode",
+    ],
+  };
+};
+```
+
+```js
+// babel.config.js
+module.exports = {
+  presets: ["./my-babel-preset.js"],
+};
+```
+
+```
+$ npx babel app.js
+"use strict";
+
+var alert = function (msg) {
+  return window.alert(msg);
+};
+```
