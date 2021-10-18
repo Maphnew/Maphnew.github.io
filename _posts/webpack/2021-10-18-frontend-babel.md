@@ -167,3 +167,74 @@ var alert = msg => window.alert(msg);
 const가 var로 변환되었다.
 
 ### 3.2 플러그인 사용하기
+
+위와 같은 결과를 만드는 것이 block-scoping 플러그인이다. const, let 처럼 블록 스코핑을 따르는 예약어를 함수 스코핑을 사용하는 var로 변경한다.
+
+```
+npm install -D @babel/plugin-transform-block-scoping
+```
+
+```
+$ npx babel app.js --plugins @babel/plugin-transform-block-scoping
+var alert = msg => window.alert(msg);
+```
+
+화살표 함수 플러그인을 사용해보자.
+
+```
+npm install -D @babel/plugin-transform-arrow-functions
+```
+
+```
+$ npx babel app.js --plugins @babel/plugin-transform-arrow-functions
+const alert = function (msg) {
+  return window.alert(msg);
+};
+```
+
+두가지를 동시해 적용해보자.
+
+```
+$ npx babel app.js --plugins @babel/plugin-transform-block-scoping --plugins @babel/plugin-transform-arrow-functions
+var alert = function (msg) {
+  return window.alert(msg);
+};
+```
+
+"use strict" 구문을 추가해주는 플러그인을 추가해보자.
+
+```
+$ npx babel app.js --plugins @babel/plugin-transform-block-scoping --plugins @babel/plugin-transform-arrow-functions --plugins @babel/plugin-tran
+sform-strict-mode
+"use strict";
+
+var alert = function (msg) {
+  return window.alert(msg);
+};
+```
+
+바벨 설정파일을 생성하여 길어지는 명령어를 정리해보자.
+
+```js
+// babel.config.js
+module.exports = {
+  plugins: [
+    "@babel/plugin-transform-block-scoping",
+    "@babel/plugin-transform-arrow-functions",
+    "@babel/plugin-transform-strict-mode",
+  ],
+};
+```
+
+```
+$ npx babel app.js
+"use strict";
+
+var alert = function (msg) {
+  return window.alert(msg);
+};
+```
+
+## 4. 프리셋
+
+필요한 플러그인을 일일이 설정하지 않고 미리 여러가지 플러그인을 세트롤 모아놓은 것을 "프리셋"이라고 한다.
