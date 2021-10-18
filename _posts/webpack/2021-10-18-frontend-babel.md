@@ -57,3 +57,113 @@ const alert = msg => window.alert(msg);
 ## 3. 플러그인
 
 ### 3.1 커스텀 플러그인
+
+```js
+// my-babel-plugin.js
+module.exports = function mypBabellugin() {
+  return {
+    visitor: {
+      Identifier(path) {
+        const name = path.node.name;
+
+        // 바벨이 만든 AST 노드를 출력한다
+        console.log("Identifier() name:", name);
+
+        // 변환작업: 코드 문자열을 역순으로 변환한다
+        // path.node.name = name.split("").reverse().join("")
+      },
+    },
+  };
+};
+```
+
+변환 작업없이 콘솔로그만 찍는 플러그인이다.
+
+바벨 헬프문서를 보고 어떻게 사용하는지 보자. --plugins 옵션을 사용하는 것 같다.
+
+```
+$ npx babel --help
+Usage: babel [options] <files ...>
+
+Options:
+  -f, --filename [filename]                   The filename to use when reading from stdin. This will be used in source-maps, errors etc.
+  --presets [list]                            A comma-separated list of preset names.
+  --plugins [list]                            A comma-separated list of plugin names.
+  --config-file [path]                        Path to a .babelrc file to use.
+  --env-name [name]                           The name of the 'env' to use when loading configs and plugins. Defaults to the value of BABEL_ENV,
+                                              or else NODE_ENV, or else 'development'.
+  --root-mode [mode]                          The project-root resolution mode. One of 'root' (the default), 'upward', or 'upward-optional'.
+  ...
+  ...
+```
+
+```
+$ npx babel app.js --plugins './my-babel-plugin.js'
+Identifier() name: alert
+Identifier() name: msg
+Identifier() name: window
+Identifier() name: alert
+Identifier() name: msg
+const alert = msg => window.alert(msg);
+```
+
+콘솔로그가 하나씩 찍히고 변환되지 않은채로 출력됐다.  
+변환작업을 추가해보자.
+
+```js
+// my-babel-plugin.js
+module.exports = function mypBabellugin() {
+  return {
+    visitor: {
+      Identifier(path) {
+        const name = path.node.name;
+
+        // 바벨이 만든 AST 노드를 출력한다
+        console.log("Identifier() name:", name);
+
+        // 변환작업: 코드 문자열을 역순으로 변환한다
+        path.node.name = name.split("").reverse().join("");
+      },
+    },
+  };
+};
+```
+
+```
+$ npx babel app.js --plugins './my-babel-plugin.js'
+Identifier() name: alert
+Identifier() name: msg
+Identifier() name: window
+Identifier() name: alert
+Identifier() name: msg
+const trela = gsm => wodniw.trela(gsm);
+```
+
+토큰들의 문자 순서가 뒤집혀졌다.  
+const 토큰을 var로 변환하는 메소드를 실행해보자.
+
+```js
+// my-babel-plugin.js
+module.exports = function mypBabellugin() {
+  return {
+    visitor: {
+      VariableDeclaration(path) {
+        console.log("VariableDeclaration() kind:", path.node.kind); // const
+        if (path.node.kind === "const") {
+          path.node.kind = "var";
+        }
+      },
+    },
+  };
+};
+```
+
+```
+$ npx babel app.js --plugins './my-babel-plugin.js'
+VariableDeclaration() kind: const
+var alert = msg => window.alert(msg);
+```
+
+const가 var로 변환되었다.
+
+### 3.2 플러그인 사용하기
