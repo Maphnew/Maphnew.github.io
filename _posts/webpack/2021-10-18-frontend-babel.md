@@ -367,3 +367,63 @@ var alert = function alert(msg) {
 var 키워드로 변환되었고 함수도 변환되었다.
 
 ### 5.2 폴리필
+
+promise를 변환해보자.
+
+```js
+// app.js
+
+new Promise();
+```
+
+```
+$ npx babel app.js
+"use strict";
+
+new Promise();
+```
+
+can i use에 확인하면 ie에서 오류가 난다.  
+플러그인이 프라미스를 ECMAScript5 버전으로 변환할 것으로 기대했지만 아니다.  
+바벨은 ECMAScript2015+를 ECMAScript5 버전으로 변환할 수 있는 것만 빌드한다. 그렇지 못한 것들은 "폴리필"이라고 부르는 코드조각을 추가해서 해결한다.
+
+화살표 함수, 블록 스코핑은 각각 일반 함수, 함수 스코핑으로 대체할 수 있지만 프라미스는 ECMAScript5 버전으로 대체할 수 없다. 다만 ECMAScript5 버전으로 구현할 수는 있다. core-js promose
+
+env 프리셋은 폴리필을 지정할 수 있는 옵션을 제공한다.
+
+```js
+// babel.config.js
+module.exports = {
+  presets: [
+    [
+      "@babel/preset-env",
+      {
+        targets: {
+          chrome: "79",
+          ie: "11",
+        },
+        useBuiltIns: "usage", // 'entry', false
+        corejs: {
+          version: 2, // 3
+        },
+      },
+    ],
+  ],
+};
+```
+
+```
+$ npx babel app.js
+"use strict";
+
+require("core-js/modules/es6.object.to-string.js");
+
+require("core-js/modules/es6.promise.js");
+
+new Promise();
+```
+
+core-js 패키지로부터 프라미스 모듈을 가져오는 임포트 구문이 추가되었다.  
+core-js가 설치되어있는 가정하에 변환된 소스가 제대로 기능할 것이다.
+
+## 6. 웹팩으로 통합
