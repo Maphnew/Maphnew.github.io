@@ -287,6 +287,13 @@ var alert = function (msg) {
 npm i @babel/preset-env
 ```
 
+```js
+// babel.config.js
+module.exports = {
+  presets: ["@babel/preset-env"],
+};
+```
+
 ```
 $ npx babel app.js
 "use strict";
@@ -297,3 +304,66 @@ var alert = function alert(msg) {
 ```
 
 ## 5. env 프리셋 설정과 폴리필
+
+### 5.1 타겟 브라우저
+
+타겟 옵션에 특정 브라우저를 지원해야된다고 설정해준다.
+
+```js
+// babel.config.js
+module.exports = {
+  presets: [
+    [
+      "@babel/preset-env",
+      {
+        targets: {
+          chrome: 79,
+        },
+      },
+    ],
+  ],
+};
+```
+
+```
+$ npx babel app.js
+"use strict";
+
+const alert = msg => window.alert(msg);
+```
+
+can i use에서 확인해보자.  
+const 키워드는 chrome 79버전 이상에서 사용할 수 있기 때문에 변환되지 않았다.  
+arrow 함수도 지원되기 때문에 변환되지 않았다.  
+IE는 arrow 함수를 지원하지 않고 const 키워드도 지원하지 않는다.  
+IE를 테스트 해보자.
+
+```js
+// babel.config.js
+module.exports = {
+  presets: [
+    [
+      "@babel/preset-env",
+      {
+        targets: {
+          chrome: "79",
+          ie: "11",
+        },
+      },
+    ],
+  ],
+};
+```
+
+```
+$ npx babel app.js
+"use strict";
+
+var alert = function alert(msg) {
+  return window.alert(msg);
+};
+```
+
+var 키워드로 변환되었고 함수도 변환되었다.
+
+### 5.2 폴리필
