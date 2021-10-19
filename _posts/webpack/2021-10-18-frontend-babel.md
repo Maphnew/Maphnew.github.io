@@ -427,3 +427,45 @@ core-js 패키지로부터 프라미스 모듈을 가져오는 임포트 구문�
 core-js가 설치되어있는 가정하에 변환된 소스가 제대로 기능할 것이다.
 
 ## 6. 웹팩으로 통합
+
+실무 환경에서 웹팩으로 통합해서 사용하는 것이 일반적이다.  
+로더의 형태로 사용한다.
+
+```
+npm i -D babel-loader
+```
+
+엔트리 구성과 js파일을 바벨 로더를 이용해 변환하도록 설정해 주었고, node_modules에 있는 것들은 제외 했다.
+
+```js
+// webpack.config.js
+    entry: {
+        main: './app.js'
+    },
+
+    // ...
+    rules: [
+      // ...
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                exclude: '/node_module/'
+            }
+        ]
+```
+
+```
+npm run build
+```
+
+빌드하면 core-js 모듈을 찾을 수 없다는 에러가 뜨는데 모듈을 설치해야 한다.
+
+```
+$ npm i core-js@2
+```
+
+다시 빌드 한다.
+
+```
+npm run build
+```
