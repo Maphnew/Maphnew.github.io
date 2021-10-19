@@ -271,3 +271,29 @@ var alert = function (msg) {
   return window.alert(msg);
 };
 ```
+
+### 4.2 프리셋 사용하기
+
+대표적인 프리셋은 다음과 같다.
+
+- preset-env
+- preset-flow
+- preset-react
+- preset-typescript
+
+설치해서 사용해보자.
+
+```
+npm i @babel/preset-env
+```
+
+```
+$ npx babel app.js
+"use strict";
+
+var alert = function alert(msg) {
+  return window.alert(msg);
+};
+```
+
+## 5. env 프리셋 설정과 폴리필
