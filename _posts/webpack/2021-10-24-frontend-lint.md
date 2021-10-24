@@ -290,3 +290,64 @@ npx eslint app.js --fix
 ```
 npm i eslint prettier eslint-config-prettier eslint-plugin-prettier
 ```
+
+## 4. 자동화
+
+깃 훅을 사용하는 방법과 에디터 확장 도구를 사용하는 방법이 있다.
+
+### 4.1 변경한 내용만 검사
+
+깃을 사용한다면 깃 훅을 이용하는 것이 좋다.
+
+```
+npm i -D husky
+```
+
+```json
+// package.json
+  "husky": {
+    "hooks": {
+      "pre-commit": "eslint app.js --fix"
+    }
+  }
+```
+
+변경된 파일만 검사하는 도구는 lint-statged 이다.
+
+```
+npm i -D lint-staged
+```
+
+```json
+// package.json
+// ...
+  "dependencies": {
+    "core-js": "^2.6.12",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.4.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix"
+  }
+```
+
+### 4.2 에디터 확장도구
+
+vscode에서 extension 검색을 한다.  
+eslint를 찾아서 설치한다.
+
+자동으로 변경시키기 위해 setting에서 아래와 같이 설정한다.
+
+```json
+// settings.json
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
+```
