@@ -178,3 +178,115 @@ module.exports = {
   rules: {},
 };
 ```
+
+## 3. Prettier
+
+ESLint 보다 코드를 더 예쁘게 만든다.
+
+### 3.1 설치 및 사용법
+
+```
+npm i prettier
+```
+
+```js
+// app.js
+console.log(); // 세미콜론 없이 작성
+```
+
+```
+$ npx prettier app.js
+console.log();
+```
+
+```js
+// app.js
+console.log(); // 세미콜론 여러개 -> 하나로 변경
+```
+
+```
+$ npx prettier app.js --write
+app.js 17ms
+```
+
+### 3.2 포매팅(더 예쁘게)
+
+규칙을 이용해 포매팅 품질을 좋게 만든다.
+
+### 3.3 통합방법
+
+```
+npm i eslint-config-prettier
+```
+
+```js
+// .eslintrc.js
+{
+    extends: [
+        "eslint:recommended",
+        "eslint-config-prettier"
+    ]
+}
+```
+
+```js
+// app.js
+
+var foo = "";
+
+console.log(); // 세미콜론 여러개
+```
+
+```
+$ npx eslint app.js --fix
+
+C:\workspaces\lectures\frontend\sample\app.js
+  1:5  error  'foo' is assigned a value but never used  no-unused-vars
+
+✖ 1 problem (1 error, 0 warnings)
+```
+
+```
+$ npx prettier app.js --write
+app.js 30ms
+```
+
+한편, eslint-plugin-prettier는 프리티어 규칙을 ESLint 규칙으로 추가하는 플러그인이다. 프리티어의 모든 규칙이 ESLint로 들어오기 때문에 ESLint만 실행하면 된다.
+
+```
+npm i -D eslint-plugin-prettier
+```
+
+```js
+// .eslintrc.js
+{
+  plugins: [
+    "prettier"
+  ],
+  rules: {
+    "prettier/prettier": "error"
+  },
+}
+```
+
+```
+npx eslint app.js --fix
+```
+
+프리티어는 이 두 패키지를 함께 사용하는 단순한 설정을 아래 설정과 같이 제공한다.
+
+```js
+// .eslintrc.js
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended"
+  ]
+}
+```
+
+결론은 아래와 같이 설치해주고 위와 같이 설정하면 된다.
+
+```
+npm i eslint prettier eslint-config-prettier eslint-plugin-prettier
+```
