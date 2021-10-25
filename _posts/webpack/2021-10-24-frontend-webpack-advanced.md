@@ -181,3 +181,41 @@ const model = {
 
 ### 3.1 배경
 
+전체 화면을 새로고침하지 않고 변경된 부분만 새로고침 된다.  
+
+### 3.2 설정
+
+```js
+// webpack.config.js:
+module.exports = {
+  devServer = {
+    hot: true,
+  },
+}
+```
+
+아래와 같이 디테일하게 컨트롤 할 수 있다.   
+
+```js
+// src/app.js
+
+if (module.hot) {
+  console.log("핫모듈 켜짐")
+
+  module.hot.accept("./result", () => {
+    console.log("result 모듈 변경됨")
+  })
+
+  module.hot.accept("./view", async () => {
+    view.render(await model.get(), controller.el) // 변경된 모듈로 교체
+  })
+}
+```
+
+
+### 3.3 핫로딩을 지원하는 로더
+
+HMR 인터페이스를 구현한 로더만이 핫 로딩을 지원하는데 style-loader가 그렇다.  
+react-hot-loader, file-loader 또한 핫 모듈 리플레이스먼트를 지원한다.  
+
+## 4. 최적화 
