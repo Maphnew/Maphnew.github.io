@@ -397,12 +397,14 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   plugins: [
-    new CopyPlugin([
-      {
-        from: "./node_modules/axios/dist/axios.min.js",
-        to: "./axios.min.js", // 목적지 파일에 들어간다
-      },
-    ]),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "./node_modules/axios/dist/axios.min.js",
+          to: "./axios.min.js", // 목적지 파일에 들어간다
+        },
+      ],
+    }),
   ],
 };
 ```
