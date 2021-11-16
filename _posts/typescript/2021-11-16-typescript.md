@@ -66,3 +66,48 @@ const person: {
 
 console.log(person);
 ```
+
+### 20. Woring with Enums
+
+```ts
+// app.ts
+enum Role {
+  ADMIN = 5,
+  READ_ONLY, // 6
+  AUTHOR, // 7
+}
+
+const person = {
+  name: "Maphanew",
+  age: 35,
+  hobbies: ["Sports", "Cooking"],
+  role: Role.ADMIN,
+};
+
+if (person.role === Role.ADMIN) {
+  console.log(person);
+}
+```
+
+```
+npx tsc app.ts
+```
+
+```js
+// app.js
+var Role;
+(function (Role) {
+  Role[(Role["ADMIN"] = 0)] = "ADMIN";
+  Role[(Role["READ_ONLY"] = 1)] = "READ_ONLY";
+  Role[(Role["AUTHOR"] = 2)] = "AUTHOR";
+})(Role || (Role = {}));
+var person = {
+  name: "Maphanew",
+  age: 35,
+  hobbies: ["Sports", "Cooking"],
+  role: Role.ADMIN,
+};
+if (person.role === Role.ADMIN) {
+  console.log(person);
+}
+```
