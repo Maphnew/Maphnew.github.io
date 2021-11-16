@@ -28,3 +28,41 @@ const person: {
 
 console.log(person.name);
 ```
+
+### 18. Arrays Types
+
+```ts
+const person = {
+  name: "Maphanew",
+  age: 35,
+  hobbies: ["Sports", "Cooking"],
+};
+
+let favoriteActivities: string[];
+favoriteActivities = ["Sports"];
+
+console.log(person.name);
+```
+
+### 19. Working with Tuples
+
+```ts
+const person: {
+  name: string;
+  age: number;
+  hobbies: string[];
+  role: [number, string];
+} = {
+  name: "Maphanew",
+  age: 35,
+  hobbies: ["Sports", "Cooking"],
+  role: [2, "author"],
+};
+
+// person.role.push('admin');
+// person.role[1] = 11; // error
+
+// person.role = [0, 'admin', 'user']; // error
+
+console.log(person);
+```
