@@ -72,7 +72,7 @@ const Counter = () => {
   };
 
   const increaseHandler = () => {
-    dispatch({ type: "increase", amount: 10 });
+    dispatch({ type: "increase", amount: 10 }); // { type: "increase", amount: 10 }
   };
 
   const decrementHandler = () => {
@@ -119,7 +119,7 @@ const counterSlice = createSlice({
       state.counter--;
     },
     increase(state, action) {
-      state.counter = state.counter + action.payload;
+      state.counter = state.counter + action.payload; // ** amount -> payload
     },
     toggleCounter(state) {
       state.showCounter = !state.showCounter;
