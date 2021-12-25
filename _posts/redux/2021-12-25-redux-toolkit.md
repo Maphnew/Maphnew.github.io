@@ -226,11 +226,56 @@ const authSlice = createSlice({
 });
 
 const store = configureStore({
-  reducer: { counter: counterSlice.reducer, auth: authSlice.reducer },
+  reducer: { counter: counterSlice.reducer, auth: authSlice.reducer }, // <---- 1. reducer changed
 });
 
 export const counterActions = counterSlice.actions;
 export const authActions = authSlice.actions;
 
 export default store;
+```
+
+```js
+// component/Counter.js
+import { useSelector, useDispatch } from "react-redux";
+
+import { counterActions } from "../store/index";
+import classes from "./Counter.module.css";
+
+const Counter = () => {
+  const dispatch = useDispatch();
+  const counter = useSelector((state) => state.counter.counter); // <---- 1. should be changed because reducer changed
+  const show = useSelector((state) => state.counter.showCounter); // <---- 1. should be changed because reducer changed
+
+  const incrementHandler = () => {
+    dispatch(counterActions.increment());
+  };
+
+  const increaseHandler = () => {
+    dispatch(counterActions.increase(10)); // { type: SOME_UNIQUE_IDENTIFIER, payload: 10 }
+  };
+
+  const decrementHandler = () => {
+    dispatch(counterActions.decrement());
+  };
+
+  const toggleCounterHandler = () => {
+    dispatch(counterActions.toggleCounter());
+  };
+
+  return (
+    <main className={classes.counter}>
+      <h1>Redux Counter</h1>
+      {show && <div className={classes.value}>{counter}</div>}
+      <div>
+        <button onClick={incrementHandler}>Increment</button>
+        <button onClick={increaseHandler}>Increase by 10</button>
+        <button onClick={decrementHandler}>Decrement</button>
+      </div>
+      <button onClick={toggleCounterHandler}>Toggle Counter</button>
+    </main>
+  );
+};
+
+export default Counter;
 ```
