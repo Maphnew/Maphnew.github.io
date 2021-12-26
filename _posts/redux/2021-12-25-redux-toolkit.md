@@ -11,7 +11,7 @@ toc_sticky: true
 
 # Redux Toolkit으로 전환하기
 
-- Before
+### Before
 
 ```js
 // store/index.js
@@ -100,7 +100,7 @@ const Counter = () => {
 export default Counter;
 ```
 
-- After
+### After
 
 ```js
 // store/index.js
@@ -181,7 +181,7 @@ const Counter = () => {
 export default Counter;
 ```
 
-- Multiple Slices
+### Multiple Slices
 
 ```js
 // store/index.js
@@ -280,7 +280,9 @@ const Counter = () => {
 export default Counter;
 ```
 
-- Split
+### Split
+
+#### Split files
 
 ```js
 // store/index.js
@@ -352,7 +354,7 @@ export const counterActions = counterSlice.actions;
 export default counterSlice.reducer;
 ```
 
-- And then, update all import statement
+#### And then, update all import statement
 
 ```js
 import { authActions } from "../store/auth";
