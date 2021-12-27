@@ -378,3 +378,182 @@ const CartItem = (props) => {
 
 export default CartItem;
 ```
+
+## Using useEffect for update data
+
+```js
+// src/App.js
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+
+import Cart from "./components/Cart/Cart";
+import Layout from "./components/Layout/Layout";
+import Products from "./components/Shop/Products";
+
+function App() {
+  const showCart = useSelector((state) => state.ui.cartIsVisible);
+  const cart = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    fetch("http://someAPI.com/cart.json", {
+      method: "PUT",
+      body: JSON.stringify(cart),
+    });
+  }, [cart]);
+  return (
+    <Layout>
+      {showCart && <Cart />}
+      <Products />
+    </Layout>
+  );
+}
+
+export default App;
+```
+
+## Problem using useEffect
+
+- 현재 우리가 사용하는 방식으로 useEffect를 사용할 때 한 가지 문제에 직면합니다: 앱이 시작될 때 그것이 실행된다는 것입니다.
+
+- 이것이 왜 문제일까요?
+
+- 이것은 초기(즉, 비어 있는) 카트를 백엔드로 보내고 거기에 저장된 모든 데이터를 덮어쓰기 때문에 문제입니다.
+
+## Stopping sending data on initial mount & Using action creator
+
+- Set up notification action
+
+```js
+// store/ui-slice.js
+import { createSlice } from "@reduxjs/toolkit";
+
+const uiSlice = createSlice({
+  name: "ui",
+  initialState: { cartIsVisible: false, notification: null },
+  reducers: {
+    toggle(state) {
+      state.cartIsVisible = !state.cartIsVisible;
+    },
+    showNotification(state, action) {
+      state.notification = {
+        status: action.payload.status,
+        title: action.payload.title,
+        message: action.payload.message,
+      };
+    },
+  },
+});
+
+export const uiActions = uiSlice.actions;
+
+export default uiSlice;
+```
+
+- using isInitial variable outside of component
+
+```js
+// src/App.js
+import { Fragment, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import Cart from "./components/Cart/Cart";
+import Layout from "./components/Layout/Layout";
+import Products from "./components/Shop/Products";
+import Notification from "./components/UI/Notification";
+import { sendCartData } from "./store/cart-slice";
+
+let isInitial = true;
+
+function App() {
+  const dispatch = useDispatch();
+  const showCart = useSelector((state) => state.ui.cartIsVisible);
+  const cart = useSelector((state) => state.cart);
+  const notification = useSelector((state) => state.ui.notification);
+
+  useEffect(() => {
+    if (isInitial) {
+      isInitial = false;
+      return;
+    }
+
+    dispatch(sendCartData(cart));
+  }, [cart, dispatch]);
+
+  return (
+    <Fragment>
+      {notification && (
+        <Notification
+          status={notification.status}
+          title={notification.title}
+          message={notification.message}
+        />
+      )}
+      <Layout>
+        {showCart && <Cart />}
+        <Products />
+      </Layout>
+    </Fragment>
+  );
+}
+
+export default App;
+```
+
+- Add action creator in cart-slice
+
+```js
+// src/store/cart-slice.js
+// ...
+import { uiActions } from "./ui-slice";
+// ...
+
+export const sendCartData = (cart) => {
+  return async (dispatch) => {
+    dispatch(
+      uiActions.showNotification({
+        status: "pending",
+        title: "Sending...",
+        message: "Sending cart data!",
+      })
+    );
+
+    const sendRequest = async () => {
+      const response = await fetch(
+        "https://react-http-6b4a6.firebaseio.com/cart.json",
+        {
+          method: "PUT",
+          body: JSON.stringify(cart),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Sending cart data failed.");
+      }
+    };
+
+    try {
+      await sendRequest();
+
+      dispatch(
+        uiActions.showNotification({
+          status: "success",
+          title: "Success!",
+          message: "Sent cart data successfully!",
+        })
+      );
+    } catch (error) {
+      dispatch(
+        uiActions.showNotification({
+          status: "error",
+          title: "Error!",
+          message: "Sending cart data failed!",
+        })
+      );
+    }
+  };
+};
+
+export const cartActions = cartSlice.actions;
+
+export default cartSlice;
+```
