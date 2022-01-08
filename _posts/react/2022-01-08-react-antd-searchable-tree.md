@@ -696,4 +696,6 @@ return (
 
 ![complete](https://user-images.githubusercontent.com/33482265/148647771-2d7cec54-cc71-4fbf-a653-1877646867e6.PNG)
 
+- 여기까지 코드는 3번 브랜치 [03-What-if-the-title-is-component](https://github.com/Maphnew/playground/tree/03-What-is-the-title-is-component)에 저장했다.
+
 - 이로써 Ant Design Searchable Tree를 따라해보고 응용해봤다. 끝.
