@@ -371,7 +371,7 @@ generateList(gData);
 - 하지만 그렇게 되면 컴포넌트에 있는 title의 css 변경에 대해 한번더 생각할 필요가 있다.
 - class를 컴포넌트에 주입하여 색상을 변경해보자.
 
-#### 2-2-1. title 컴포넌트로 변경
+#### 2-2-1. title 컴포넌트로 변경<a name="title"></a>
 
 - 컴포넌트로 변경 후 실행하니 loop함수의 item.title.indexOf 함수로부터 오류가 난다.
 - 먼저 프로퍼티를 추가하고 loop함수를 변경 후 컴포넌트로 변경해야 겠다.
@@ -427,7 +427,7 @@ const onChange = (e) => {
 };
 ```
 
-- 이제 3번으로 가서 검색된 노드의 색상 변경을 해보자.
+- 이제 [2-2-3번](#component)으로 가서 검색된 노드의 색상 변경을 해보자.
 
 #### 2-2-2. 프로퍼티 추가<a name="add-property"></a>
 
@@ -532,6 +532,7 @@ const gData = [
 - loop함수를 작동하도록 변경한다.
 - 검색당하는 프로퍼티를 unvisibleTitle로 변경하고 css도 unvisibleTitle에 먹여준다.
 - 그러면 unvisibleTitle을 title 컴포넌트에 바로 삽입해 주면 될 것 같은데?
+- 다시 [2-2-1번](#title)으로 가자.
 
 ```js
 const loop = (data) => {
@@ -567,7 +568,7 @@ const loop = (data) => {
 };
 ```
 
-#### 2-2-3. 컴포넌트에 class 적용 -> 컴포넌트에 unvisibleTitle 적용
+#### 2-2-3. 컴포넌트에 class 적용 -> 컴포넌트에 unvisibleTitle 적용<a name="component"></a>
 
 - title 컴포넌트 프로퍼티로 색상변경된 unvisibleTitle를 적용한다.
 
