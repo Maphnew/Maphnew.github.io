@@ -12,6 +12,8 @@ toc_sticky: true
 
 # 리팩터링
 
+출처: 리팩터링 2판, 마틴 파울러
+
 ## 01 리팩터링: 첫 번째 예시
 
 ## 02 리팩터링 원칙
@@ -397,6 +399,76 @@ at Context.<anonymous> (src/test.js:10:12)
 > 자주 테스트하라. 작성 중인 코드는 최소한 몇 분 간격으로 테스트하고, 적어도 하루에 한 번은 전체 테스트를 돌려보자.
 
 ### 4.4 테스트 추가하기
+
+page 143
+
+테스트는 위험 요인을 중심으로 작성해야 한다. 테스트의 목적은 어디까지나 현재 혹은 향후에 발생하는 버그를 찾는 데 있다.
+
+> 완벽하게 만드느라 테스트를 수행하지 못하느니, 불완전한 테스트라도 작성해 실행하는 게 낫다.
+
+총 수익이 제대로 계산되는지 간단히 검사하도록 작성해보자.
+
+```js
+describe('province', function() {
+  it('short', function() {
+    const asia = new Province(sampleProvinceData());
+    expect(asia.shortfall).equal(5);
+  })
+
+  if('profit', function() {
+    const asia = new Province(sampleProvinceData());
+    expect(asia.profit).equal(230);
+  })
+})
+```
+
+먼저 기댓값 자리에 임의의 값을 넣고 테스트를 수행한 다음, 프로그램이 내놓는 실제 값(230)으로 대체했다. 그리고 테스트가 제대로 작동한다고 확인되면, 총수익 계산 로직에 \* 2를 덧 붙여서 잘못된 값이 나오도록 수정한다. 일부러 주입한 이 오류를 테스트가 걸러내는 게 확인되면, 원래 코드로 되돌린다. 이 패턴은 기존 코드를 검사하는 테스트를 추가할 때 흔히 쓰는 방식이다.
+
+작성 된 두 테스트에 겹치는 부분이 있다. 중복을 제거해보자. 먼저 바깥 범위로 끌어내는 방법을 시도해보자.
+
+```js
+describe('province', function() {
+  const asia = new Province(sampleProvinceData()); // 이렇게 하면 안된다.
+  it('short', function() {
+    expect(asia.shortfall).equal(5);
+  })
+
+  if('profit', function() {
+    expect(asia.profit).equal(230);
+  })
+})
+```
+
+이렇게 하면 테스트 관련 버그 중 가장 지저분한 유형인 '테스트끼리 상호작용하게 하는 공유 픽스처'를 생성하는 원인이 된다.
+
+자바스크립트에서 const 키워드는 asia 객체의 '내용'이 아니라 asia를 가리키는 참조가 상수임을 뜻한다. 나중에 다른 테스튼에서 이 공유 객체의 값을 수정하면 이 픽스처를 사용하는 또 다른 테스트가 실패할 수 있다. 즉, 테스트를 실행하는 순서에 따라 결과가 달라질 수 있다.
+
+그래서 다음 방식이 선호된다.
+
+```js
+describe("province", function () {
+  let asia;
+  beforeEach(function () {
+    asia = new Province(sampleProvinceData());
+  });
+  it("shortfall", function () {
+    expect(asia.shorfall).equal(5);
+  });
+  it("profit", function () {
+    expect(asia.profit).equal(230);
+  });
+});
+```
+
+beforeEach 구문은 각각의 테스트 바로 저에 실행되어 asia를 초기화하기 때문에 모든 테스트가 자신만의 새로운 asia를 사용하게 된다.
+
+beforeEach 블록의 등장은 표준 픽스처를 사용한다는 사실을 알려준다. 그러면 코드를 읽는 이들은 해당 describe 블록 안의 모든 테스트가 똑같은 기준 데이터로부터 시작한다는 사실을 쉽게 알 수 있다.
+
+### 4.5 픽스처 수정하기
+
+### 4.6 경계 조건 검사하기
+
+### 4.7 끝나지 않은 여정
 
 ## 05 리팩터링 카탈로그 보는 법
 
