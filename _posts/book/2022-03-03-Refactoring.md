@@ -489,6 +489,107 @@ beforeEach 블록에서 '설정'한 표준 픽스처를 취해서, 테스트를 
 
 ### 4.6 경계 조건 검사하기
 
+범위를 벗어나는 경계 지점에서 문제가 생기면 어떤 일이 벌어지는지 확인하는 테스트도 함께 작성하면 좋다.
+
+```js
+describe("no producers", function () {
+  // 생산자가 없다.
+  let noProducers;
+  beforeEach(function () {
+    const data = {
+      name: "No producers",
+      producers: [],
+      demand: 30,
+      price: 20,
+    };
+    noProducers = new Province(data);
+  });
+  it("shortfall", function () {
+    expect(noProducers.shortfall).equal(30);
+  });
+  it("profit", function () {
+    expect(noProducers.profit).equal(0);
+  });
+});
+```
+
+숫자형이라면 0일 때를 검사해본다.
+
+```js
+describe("no producers", function () {
+  // ...
+
+  it("zero demand", function () {
+    // 수요가 없다.
+    asia.demand = 0;
+    expect(asia.shortfall).equal(-25);
+    expect(asia.profit).equal(0);
+  });
+});
+```
+
+음수도 넣어보면 좋다.
+
+```js
+describe("no producers", function () {
+  // ...
+
+  it("negative demand", function () {
+    // 수요가 마이너스다.
+    asia.demand = -1;
+    expect(asia.shortfall).equal(-26);
+    expect(asia.profit).equal(-10);
+  });
+});
+```
+
+수요의 최솟값은 0이어야 한다는 생각을 할 수 있다. 그리고 예외 처리를 해야 된다.
+
+> 문제가 생길 가능성이 있는 경계 조건을 생각해보고 그 부분을 집중적으로 테스트하자.
+
+이 프로그램의 세터들은 의미상 숫자만 입력받아야 하지만 UI로부터 문자열을 취하고 있다.
+
+```js
+describe("province", function () {
+  // ...
+
+  it("empty string demand", function () {
+    // 수요 입력란이 비어 있다.
+    asia.demand = "";
+    expect(asia.shortfall).Nan;
+    expect(asia.profit).Nan;
+  });
+});
+```
+
+의식적으로 프로그램을 망가뜨리는 방법을 모색하는데, 이런 마음 자세가 생산성과 재미를 끌어올려준다. 내 마음 속에 잠재하는 사악한 욕구를 충족시켜주기 때문인 것 같다.
+
+```js
+describe("string for producers", function () {
+  // 생산자 수 필드에 문자열을 대입한다.
+  // ...
+
+  it("", function () {
+    const data = {
+      name: "String producers",
+      producers: "",
+      demand: 30,
+      price: 20,
+    };
+    const prov = new Province(data);
+    expect(prov.shortfall).equal(0);
+  });
+});
+```
+
+이 테스트는 TypeError 오류, 실패로 처리한다.
+
+이런 오류로 인해 프로그램 내부에 잘못된 데이터가 흘러서 디버깅하기 어려운 문제가 발생한다면 어서션 추가하기를 적요앻서 오류가 최대한 빨리 드러나게 하자. 어서션도 일종의 테스트로 볼 수 있으니 테스트 코드를 따로 작성할 필요는 없다.
+
+> 어차피 모든 버그를 잡아낼 수는 없다고 생각하여 테스트를 작성하지 않는다면 대다수의 버그를 잡을 수 있는 기회를 날리는 셈이다.
+
+테스트는 위험한 부분에 집중하느 게 좋다. 처리 과정이 복잡한 부분, 오류가 생길만한 부분을 찾아보자.
+
 ### 4.7 끝나지 않은 여정
 
 ## 05 리팩터링 카탈로그 보는 법
