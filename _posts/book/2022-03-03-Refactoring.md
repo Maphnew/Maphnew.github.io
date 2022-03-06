@@ -347,6 +347,57 @@ UI는 생산자별로 제품을 모두 판매했을 때 얻을 수 있는 수익
 
 ### 4.3 첫 번째 테스트
 
+먼저 테스트 프레임워크를 마련해야 한다.
+
+여기서는 모카`Mocah`를 사용한다.
+
+다음은 생산 부족분을 제대로 계산하는지 확인하는 테스트다.
+
+```js
+describe("province", function () {
+  it("shortfall", function () {
+    const asia = new Province(sampleProvince()); // 1. fixture 설정
+    assert.equal(asia.shortfall, 5); // 2. 검증
+  });
+});
+```
+
+1. 테스트에 필요한 데이터와 객체를 뜻하는 픽스쳐`fixture, 고정장치`를 설정한다. 이 예시에서는 샘플 지역 정보로부터 생성한 Province 객체를 픽스처로 설정했다.
+2. 픽스처 속성들을 검증하는데, 여기서는 주어진 초깃값에 기초하여 생산 부족분을 정확히 계산했는지 확인한다.
+
+결과
+
+```
+1 passing (51ms)
+```
+
+> 실패해야 할 상황에서는 반드시 실패하게 만들자.
+
+테스트가 실패하는지 확인할 필요가 있다. 이를 위해 일시적으로 코드에 오류를 주입한다.
+
+```js
+get shortfall() {
+  return this._demand - this.totalProduction * 2; // <-- 오류 주입
+}
+```
+
+결과
+
+```
+!
+
+0 passing(72ms)
+1 failing
+
+1) province shortfall:
+AssertinError: expected -20 to equal 5
+at Context.<anonymous> (src/test.js:10:12)
+```
+
+> 자주 테스트하라. 작성 중인 코드는 최소한 몇 분 간격으로 테스트하고, 적어도 하루에 한 번은 전체 테스트를 돌려보자.
+
+### 4.4 테스트 추가하기
+
 ## 05 리팩터링 카탈로그 보는 법
 
 ## 06 기본적인 리팩터링
