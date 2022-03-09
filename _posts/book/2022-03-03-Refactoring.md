@@ -651,10 +651,11 @@ function printOwing(invoice) {
 }
 ```
 
-배경
+#### 배경
+
 함수 추출하기는 코드 조각을 찾아 무슨 일을 하는지 파악한 다음, 독립된 함수로 추출하고 목적에 맞는 이름을 붙인다.
 
-절차
+#### 절차
 
 1. 함수를 새로 만들고 목적을 잘 드러내는 이름을 붙인다('어떻게'가 아닌 '무엇을' 하는지가 드러나야 한다).
 2. 추출할 코드를 원본 함수에서 복사하여 새 함수를 붙여넣는다.
@@ -664,7 +665,7 @@ function printOwing(invoice) {
 6. 테스트한다.
 7. 다른 코드에 방금 추출한 것과 똑같거나 비슷한 코드가 없는지 살핀다. 있다면 방금 추출한 새 함수를 호출하도록 바꿀지 검토한다(인라인 코드를 함수 호출로 바꾸기).
 
-예시: 유효범위를 벗어나는 변수가 없을 때
+#### 예시: 유효범위를 벗어나는 변수가 없을 때
 
 ```js
 function printOwing(invoice) {
@@ -694,7 +695,7 @@ function printOwing(invoice) {
 }
 ```
 
-예시: 지역 변수를 사용할 때
+#### 예시: 지역 변수를 사용할 때
 
 ```js
 function printOwing(invoice) {
@@ -722,7 +723,7 @@ function printOwing(invoice) {
 }
 ```
 
-예시: 지역 변수의 값을 변경할 때
+#### 예시: 지역 변수의 값을 변경할 때
 
 ```js
 function printOwing(invoice) {
@@ -740,7 +741,7 @@ function printOwing(invoice) {
 }
 ```
 
-결과
+#### 결과
 
 ```js
 function printOwing(invoice) {
@@ -758,6 +759,59 @@ function printOwing(invoice) {
   }
 }
 ```
+
+### 6.2 함수 인라인하기
+
+Inline Function
+
+- 반대 리팩터링: 함수 추출하기
+- 1판에서의 이름: 메서드 내용 직접 삽입
+
+```js
+// before
+function getRating(driver) {
+  return moreThanFiveLateDeliveries(driver) ? 2 : 1;
+}
+function moreThanFiveLateDeliveries(driver) {
+  return driver.numberOfLateDeliveries > 5;
+}
+```
+
+```js
+// after
+function getRating(driver) {
+  return driver.numberOfLateDeliveries > 5 ? 2 : 1;
+}
+```
+
+#### 배경
+
+함수 본문이 이름만큼 명확한 경우, 함수 본문 코드를 이름만큼 깔끔하게 리팩터링할 때는 그 함수를 제거한다.
+쓸데없는 간접 호출은 거슬릴 뿐이다.
+
+#### 절차
+
+1. 다형 메서드인지 확인한다.
+2. 인라인할 함수를 호출하는 곳을 모두 찾는다.
+3. 각 호출문을 함수 본문으로 교체한다.
+4. 하나씩 교체할 때마다 테스트한다.
+5. 함수 정의(원래 함수)를 삭제한다.
+
+#### 예시
+
+```js
+function rating(aDriver) {
+  return moreThanFiveLateDeliveries(driver) ? 2 : 1;
+}
+
+function moreThanFiveLateDeliveries(aDriver) {
+  return aDriver.numberOfLateDeliveries > 5;
+}
+```
+
+### 6.3 변수 추출하기
+
+Extract Variable
 
 ## 07 캡슐화
 
