@@ -813,6 +813,24 @@ function moreThanFiveLateDeliveries(aDriver) {
 
 Extract Variable
 
+page 173
+
+- 반대 리팩터링: 변수 인라인하기
+- 1판에서의 이름: 직관적 임시변수 사용
+
+```js
+// before
+return (
+  order.quantity * order.itemPrice -
+  Math.max(0, order.quantity - 500) * order.itemPrice * 0.05 +
+  Math.min(order.quantity * order.itemPrice * 0.1, 100)
+);
+```
+
+```js
+// after
+```
+
 ## 07 캡슐화
 
 ## 08 기능 이동
