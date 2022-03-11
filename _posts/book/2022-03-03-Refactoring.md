@@ -922,6 +922,49 @@ function circumference(radius) {...}
 6. 이름을 임시로 붙여뒀다면 함수 선언 바꾸기를 한 번 더 적용해서 원래 이름으로 되돌린다.
 7. 테스트한다.
 
+### 6.6 변수 캡슐화하기
+
+Encapsulate Variable
+
+- 1판에서의 이름: 필드 자체 캡슐화, 필드 캡슐화
+
+```js
+// before
+let defaultOwner = { firstName: "마틴", lastName: "파울러" };
+```
+
+```js
+// after
+let defaultOwnerData = { firstName: "마틴", lastName: "파울러" };
+export function defaultOwner() {
+  return defaultOwnerData;
+}
+export function setDefaultOwner(arg) {
+  defaultOwnerData = arg;
+}
+```
+
+#### 배경
+
+데이터는 함수보다 다루기가 까다롭다. 유효범위가 넓어질수록 다루기 어려워진다. 전역 데이터가 골칫거리다.
+
+접근할 수 있는 범위가 넓은 데이터를 옮길 때는 먼저 그 데이터로의 접근을 독점하는 함수를 만드는 식으로 캡슐화하는 것이 가장 좋은 방법일 때가 많다. 데이터 재구성이라는 작업을 함수 재구성이라는 더 단순한 작업으로 변환하는 것이다.
+
+데이터를 변경하고 사용하는 코드를 감시할 수 있는 확실한 통로가 되어준다.
+
+#### 절차
+
+1. 변수로의 접근과 갱신을 전담하는 캡슐화 함수들을 만든다.
+2. 정적 검사를 수행한다.
+3. 변수를 직접 참조하던 부분을 모두 적절한 캡슐화 함수 호출로 바꾼다. 하나씩 바꿀 떄마다 테스트한다.
+4. 변수의 접근 범위를 제한한다.
+5. 테스트한다.
+6. 변수 값이 레코드라면 레코드 캡슐화하기를 적용할지 고려해본다.
+
+### 6.7 변수 이름 바꾸기
+
+Rename Variable
+
 ## 07 캡슐화
 
 ## 08 기능 이동
