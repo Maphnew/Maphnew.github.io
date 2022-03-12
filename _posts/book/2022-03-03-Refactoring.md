@@ -965,6 +965,83 @@ export function setDefaultOwner(arg) {
 
 Rename Variable
 
+page 194
+
+```js
+// before
+let a = height * width;
+```
+
+```js
+// after
+let area = height * width;
+```
+
+#### 배경
+
+명확한 프로그래밍의 핵심은 이름짓기다.
+
+#### 절차
+
+1. 폭넓게 쓰이는 변수라면 변수 캡슐화하기를 고려한다.
+2. 이름을 바꿀 변수를 참조하는 곳을 모두 찾아서, 하나씩 변경한다.
+3. 테스트한다.
+
+#### 예시
+
+- 가장 간단한 예는 유효범위가 함수 하나로 국한된 변수이다.
+
+```js
+let tpHd = "untitled";
+```
+
+```js
+result += `<h1>${tpHd}</h1>`;
+```
+
+```js
+tpHd = obj["articleTitle"];
+```
+
+1. 변수 캡슐화하기
+
+```js
+result += `<h1>${title()}</h1>`;
+
+setTitle(obj["articleTitle"]);
+
+function title() {
+  return tpHd;
+}
+function setTitle(arg) {
+  tpHd = arg;
+}
+```
+
+캡슐화 후 변수 이름 바꿔도 된다.
+
+```js
+let _title = "untitled";
+
+function title() {
+  return _title;
+}
+function setTitle(arg) {
+  _title = arg;
+}
+```
+
+#### 예시: 상수 이름 바꾸기
+
+```js
+const cpyNm = "애크미 구스베리";
+```
+
+```js
+const companyName = "애크미 구스베리";
+const cpyNam = companyName;
+```
+
 ## 07 캡슐화
 
 ## 08 기능 이동
