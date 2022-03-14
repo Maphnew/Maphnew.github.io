@@ -1141,6 +1141,195 @@ function enrichReading(argReading) {
 
 ### 6.11 단계 쪼개기
 
+Split Phase
+
+```js
+// before
+const orderData = orderString.split(/\s+/);
+const productPrice = priceList[orderData[0].split("-")[1]];
+const orderPrice = parseInt(orderData[1]) * productPrice;
+```
+
+```js
+// after
+const orderRecord = parseOrder(order);
+const orderPrice = price(orderRecord, priceList);
+
+function parseOrder(aString) {
+  const values = aString.split(/\s+/);
+  return {
+    productID: values[0].split("-")[1],
+    quantity: parseInt(calues[1]),
+  };
+}
+
+function price(order, priceList) {
+  return order.quantity * priceList[order.productID];
+}
+```
+
+#### 배경
+
+서로 다른 두 대상을 한꺼번에 다루는 코드는 각각을 별개 모듈로 나눈다.
+모듈이 잘 분리되어 있다면 다른 모듈의 상세 내용은 전혀 기억하지 못해도 원하는 대로 수정을 끝마칠 수도 있다.
+
+#### 절차
+
+1. 두 번째 단계에 해당하는 코드를 독립 함수로 추출한다.
+2. 테스트한다.
+3. 중간 데이터 구조를 만들어서 앞에서 추출한 함수의 인수로 추가한다.
+4. 테스트한다.
+5. 추출한 두 번째 단계 함수의 매개변수를 하나씩 검토한다. 그중 첫번째 단계에서 사용되는 것은 중간 데이터 구조로 옮긴다. 하나씩 옮길 때마다 테스트한다.
+6. 첫 번째 단계 코드를 함수로 추출하면서 중간 데이터 구조를 반환하도록 만든다.
+
+#### 예시
+
+```js
+function priceOrder(product, quantity, shippingMethod) {
+  const basePrice = product.basePrice * quantity;
+  const discount =
+    Math.max(quantity - product.discountThreshold, 0) *
+    product.basePrice *
+    product.discountRate;
+  const shippingCost = quantity * shippingPerCase;
+  const price = basePrice - discount + shippingCost;
+  return price;
+}
+```
+
+```js
+function priceOrder(product, quantity, shippingMethod) {
+  const basePrice = product.basePrice * quantity;
+  const discount =
+    Math.max(quantity - product.discountThreshold, 0) *
+    product.basePrice *
+    product.discountRate;
+  const price = applyShipping(basePrice, shippingMethod, quantity, discount);
+  return price;
+}
+
+function applyShipping(basePrice, shippingMethod, quantity, discount) {
+  const shippingPerCase =
+    basePrice > shippingMethod.discountThreshold
+      ? shippingMethod.discountedFee
+      : shippingMethod.feePerCase;
+  const shippingCost = quantity * shippingPerCase;
+  const price = basePrice - discount + shippingCost;
+  return price;
+}
+```
+
+```js
+function priceOrder(product, quantity, shippingMethod) {
+  const basePrice = product.basePrice * quantity;
+  const discount =
+    Math.max(quantity - product.discountThreshold, 0) *
+    product.basePrice *
+    product.discountRate;
+  const priceData = {}; // 중간 데이터 구조
+  const price = applyShipping(
+    priceData,
+    basePrice,
+    shippingMethod,
+    quantity,
+    discount
+  );
+  return price;
+}
+
+function applyShipping(
+  priceData,
+  basePrice,
+  shippingMethod,
+  quantity,
+  discount
+) {
+  const shippingPerCase =
+    basePrice > shippingMethod.discountThreshold
+      ? shippingMethod.discountedFee
+      : shippingMethod.feePerCase;
+  const shippingCost = quantity * shippingPerCase;
+  const price = basePrice - discount + shippingCost;
+  return price;
+}
+```
+
+```js
+function priceOrder(product, quantity, shippingMethod) {
+  const basePrice = product.basePrice * quantity;
+  const discount =
+    Math.max(quantity - product.discountThreshold, 0) *
+    product.basePrice *
+    product.discountRate;
+  const priceData = { basePrice: basePrice }; // 중간 데이터 구조
+  const price = applyShipping(priceData, shippingMethod, quantity, discount);
+  return price;
+}
+
+function applyShipping(priceData, shippingMethod, quantity, discount) {
+  const shippingPerCase =
+    priceData.basePrice > shippingMethod.discountThreshold
+      ? shippingMethod.discountedFee
+      : shippingMethod.feePerCase;
+  const shippingCost = quantity * shippingPerCase;
+  const price = priceData.basePrice - discount + shippingCost;
+  return price;
+}
+```
+
+```js
+function priceOrder(product, quantity, shippingMethod) {
+  const basePrice = product.basePrice * quantity;
+  const discount =
+    Math.max(quantity - product.discountThreshold, 0) *
+    product.basePrice *
+    product.discountRate;
+  const priceData = {
+    basePrice: basePrice,
+    quantity: quantity,
+    discount: discount,
+  }; // 중간 데이터 구조
+  const price = applyShipping(priceData, shippingMethod);
+  return price;
+}
+
+function applyShipping(priceData, shippingMethod) {
+  const shippingPerCase =
+    priceData.basePrice > shippingMethod.discountThreshold
+      ? shippingMethod.discountedFee
+      : shippingMethod.feePerCase;
+  const shippingCost = priceData.quantity * shippingPerCase;
+  const price = priceData.basePrice - priceData.discount + shippingCost;
+  return price;
+}
+```
+
+```js
+function priceOrder(product, quantity, shippingMethod) {
+  const priceData = calculatePricingData(priceData, shippingMethod);
+  const price = applyShipping(priceData, shippingMethod);
+  return price;
+}
+
+function calculatePricingData(product, quantity) {
+  const basePrice = product.basePrice * quantity;
+  const discount =
+    Math.max(quantity - product.discountThreshold, 0) *
+    product.basePrice *
+    product.discountRate;
+  return { basePrice: basePrice, quantity: quantity, discount: discount };
+}
+
+function applyShipping(priceData, shippingMethod) {
+  const shippingPerCase =
+    priceData.basePrice > shippingMethod.discountThreshold
+      ? shippingMethod.discountedFee
+      : shippingMethod.feePerCase;
+  const shippingCost = priceData.quantity * shippingPerCase;
+  return priceData.basePrice - priceData.discount + shippingCost;
+}
+```
+
 ## 07 캡슐화
 
 ### 7.1 레코드 캡슐화하기
