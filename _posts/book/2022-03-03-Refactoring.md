@@ -1444,6 +1444,45 @@ orders.filter((o) => o.priority.higherThan(new Priority("normal")));
 6. 테스트한다.
 7. 함수 이름을 바꾸면 원본 접근자의 동작을 더 잘 드러낼 수 있는지 검토한다.
 
+### 7.4 임시 변수를 질의 함수로 바꾸기
+
+Replace Temp with Query
+
+```js
+// before
+const basePrice = this._quantity * this._itemPrice;
+if (basePrice > 1000) {
+  return basePrice * 0.95;
+} else {
+  return basePrice * 0.98;
+}
+```
+
+```js
+// after
+get basePrice() {this._quantity * this._itemPrice;}
+//...
+if (this.basePrice > 1000) {
+  return this.basePrice * 0.95;
+} else {
+  return this.basePrice * 0.98;
+}
+```
+
+#### 배경
+
+임시 변수가 유용하지만 아예 함수로 만들어 사용하는 편이 나을 때가 많다.
+비슷한 계산을 수행하는 다른 함수에서도 사용할 수 있다 코드 중복이 줄어든다.
+
+#### 절차
+
+1. 변수가 사용되기 전에 값이 확실히 결정되는지, 변수를 사용할 때마다 계산 로직이 매번 다른 결과를 내지는 않는지 확인한다.
+2. 읽기전용으로 만들 수 있는 변수는 읽기전용으로 만든다.
+3. 테스트한다.
+4. 변수 대입문을 함수로 추출한다.
+5. 테스트한다.
+6. 변수 인라인하기로 임시 변수를 제거한다.
+
 ## 08 기능 이동
 
 ## 09 테이터 조직화
