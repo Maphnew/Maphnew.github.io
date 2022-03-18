@@ -1544,21 +1544,33 @@ Inline Class
 ```js
 // before
 class Person {
-  get officeAreaCode() {return this._telephoneNumber.areaCode;}
-  get officeNumber() {return this._telephoneNumber.number;}
+  get officeAreaCode() {
+    return this._telephoneNumber.areaCode;
+  }
+  get officeNumber() {
+    return this._telephoneNumber.number;
+  }
 }
 
 class TelephoneNumber {
-  get areaCode() {return this._areaCode;}
-  get number() {return this._number;}
+  get areaCode() {
+    return this._areaCode;
+  }
+  get number() {
+    return this._number;
+  }
 }
 ```
 
 ```js
 // after
 class Person {
-  get officeAreaCode() {return this._officeAreaCode;}
-  get officeNumber() {return this._officeNumber;}
+  get officeAreaCode() {
+    return this._officeAreaCode;
+  }
+  get officeNumber() {
+    return this._officeNumber;
+  }
 }
 ```
 
@@ -1567,10 +1579,45 @@ class Person {
 클래스 인라인하기는 클래스 추출하기를 거꾸로 돌리는 리팩터링이다. 더 이상 제역할을 못 해서 그대로 두면 안 되는 클래스를 인라인 한다. 두 클래스의 기능을 지금과 다르게 배분하고 싶을 때로 클래스를 인라인한다. 하나로 합친 다음 새로운 클래스를 추출하는 게 쉬울 수도 있기 때문이다.
 
 #### 절차
+
 1. 소스 클래스의 각 public 메서드에 대응하는 메서드들을 타깃 클래스에 생성한다. 이 메서드들은 단 순히 작업을 소스 클래스로 위임해야 한다.
 2. 소스 클래스의 메서드를 사용하는 코드를 모두 타깃 클래스의 위임 메서드를 사용하도록 바꾼다. 하나씩 바꿀 때마다 테스트한다.
 3. 소스 클래스의 메서드와 필드를 모두 타깃 클래스로 옮긴다. 하나씩 옮길 때마다 테스트한다.
 4. 소스 클래스를 삭제하고 조의를 표한다.
+
+### 7.7 위임 숨기기
+
+Hide Delegate
+
+- 반대 리팩터링: 중개자 제거하기
+
+```js
+//before
+manager = aPerson.department.manager;
+```
+
+```js
+// after
+manager = aPerson.manager;
+
+class Person {
+  get manager() {
+    return this.department.manager;
+  }
+}
+```
+
+#### 배경
+
+모듈화 설계를 제대로 하는 핵심은 캡슐화다.
+객체 지향을 처음 배울 때는 캡슐화한 필드를 숨기는 것이라고 배운다. 그러다 경험이 쌓이면서 캡슐화의 역할이 그보다 많다는 사실을 깨닫는다.
+
+#### 절차
+
+1. 위임 객체의 각 메서드에 해당하는 위임 메서드를 서버에 생성한다.
+2. 클라이언트가 위임 객체 대신 서버를 호출하도록 수정한다. 하나씩 바꿀 때마다 테스트한다.
+3. 모두 수정했다면, 서버로부터 위임 객체를 얻는 접근자를 제거한다.
+4. 테스트한다.
 
 ## 08 기능 이동
 
