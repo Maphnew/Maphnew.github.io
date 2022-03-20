@@ -1619,7 +1619,7 @@ class Person {
 3. 모두 수정했다면, 서버로부터 위임 객체를 얻는 접근자를 제거한다.
 4. 테스트한다.
 
-### 7.8 중개자 제거하기 
+### 7.8 중개자 제거하기
 
 Remove Middle Man
 
@@ -1629,7 +1629,9 @@ Remove Middle Man
 // before
 manager = aPerson.manager;
 class Person {
-  get manager() {return this.department.manager;}
+  get manager() {
+    return this.department.manager;
+  }
 }
 ```
 
@@ -1643,6 +1645,7 @@ manager = aPerson.department.manager;
 위임 숨기기를 하다 보면 단순히 전달만 하는 위임 메서드들이 점점 성가셔진다. 그러면 서버 클래스는 그저 중ㄱ개자 역하로전락하여, 차라리 클라이언트가 위임 객체를 직접 호출하는 게 나을 수 있다.
 
 #### 절차
+
 1. 위임 객체를 얻는 게터를 만든다.
 2. 위임 메서드를 호출하는 클라이언트가 모두 이 게터를 거치도록 수정한다. 하나씩 바꿀 때마다 테스트한다.
 3. 모두 수정했다면 위임 메서드를 삭제한다.
@@ -1650,6 +1653,44 @@ manager = aPerson.department.manager;
 ### 7.9 알고리즘 교체하기
 
 Substitute Algorithm
+
+```js
+//before
+function foundPerson(people) {
+  for (let i = 0; i < people.length; i++) {
+    if (people[i] === "Don") {
+      return "Don";
+    }
+    if (people[i] === "John") {
+      return "John";
+    }
+    if (people[i] === "Kent") {
+      return "Kent";
+    }
+  }
+  return "";
+}
+```
+
+```js
+//after
+function foundPerson(people) {
+  const candidates = ["Don", "John", "Kent"];
+  return people.find((p) => candidates.includes(p)) || "";
+}
+```
+
+#### 배경
+
+더 간명한 알고리즘으로 고친다.
+
+#### 절차
+
+1. 교체할 코드를 함수 하나에 모은다.
+2. 이 함수만을 이용해 동작을 검증하는 테스트를 마련한다.
+3. 대체할 알고리즘을 준비한다.
+4. 정적 검사를 수행한다.
+5. 기존 알고리즘과 새 알고리즘의 결과를 비교하는 테스트를 수행한다. 두 결과가 같다면 리팩터링이 끝난다. 그렇지 않다면 기존 알고리즘을 참고해서 새 알고리즘을 테스트하고 디버깅한다.
 
 ## 08 기능 이동
 
