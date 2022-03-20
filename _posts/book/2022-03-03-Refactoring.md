@@ -1619,6 +1619,38 @@ class Person {
 3. 모두 수정했다면, 서버로부터 위임 객체를 얻는 접근자를 제거한다.
 4. 테스트한다.
 
+### 7.8 중개자 제거하기
+
+Remove Middle Man
+
+- 반대 리팩터링: 위임 숨기기
+
+```js
+// before
+manager = aPerson.manager;
+class Person {
+  get manager() {return this.department.manager;}
+}
+```
+
+```js
+// after
+manager = aPerson.department.manager;
+```
+
+#### 배경
+
+위임 숨기기를 하다 보면 단순히 전달만 하는 위임 메서드들이 점점 성가셔진다. 그러면 서버 클래스는 그저 중ㄱ개자 역하로전락하여, 차라리 클라이언트가 위임 객체를 직접 호출하는 게 나을 수 있다.
+
+#### 절차
+1. 위임 객체를 얻는 게터를 만든다.
+2. 위임 메서드를 호출하는 클라이언트가 모두 이 게터를 거치도록 수정한다. 하나씩 바꿀 때마다 테스트한다.
+3. 모두 수정했다면 위임 메서드를 삭제한다.
+
+### 7.9 알고리즘 교체하기
+
+Substitute Algorithm
+
 ## 08 기능 이동
 
 ## 09 테이터 조직화
