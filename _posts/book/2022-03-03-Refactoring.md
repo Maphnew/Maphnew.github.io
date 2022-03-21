@@ -1703,13 +1703,13 @@ Move Function
 ```js
 // before
 class Account {
-  get overdraftCharge() {...}
+  get overdraftCharge() {....}
 }
 ```
 
 ```js
 class AccountType {
-  get overdraftCharge() {...}
+  get overdraftCharge() {....}
 }
 ```
 
