@@ -1730,6 +1730,165 @@ class AccountType {
 7. 테스트한다.
 8. 소스 함수를 인라인할지 고민해본다.
 
+### 8.2 필드 옮기기
+
+Move Field
+
+```js
+// before
+class Customer {
+  get plan() {
+    return this._plan;
+  }
+  get discountRate() {
+    return this._discountRate;
+  }
+}
+```
+
+```js
+// after
+class Customer {
+  get plan() {
+    return this._plan;
+  }
+  get discountRate() {
+    return this.plan.discountRate;
+  }
+}
+```
+
+#### 배경
+
+프로그램의 진짜 힘은 데이터 구조에서 나온다. 주어진 문제에 적합한 데이터 구조를 활용하면 동작 코드는 자연스럽게 단순하고 직관적으로 짜여진다.
+
+가장 적합한 데이터 구조를 알아내려면, 경험과 도메인 주도 설계 같은 기술이 필요하다. 하지만 그럼에도 불구하고 초기 설게에서는 실수가 빈번하다.
+
+#### 절차
+
+1. 소스 필드가 캡슐화되어 있지 않다면 캡슐화한다.
+2. 테스트한다.
+3. 타깃 객체에 필드(와 접근자 메서드들)를 생성한다.
+4. 정적 검사를 수행한다.
+5. 소스 객체에서 타깃 객체를 참조할 수 있는지 확인한다.
+6. 접근자들이 타깃 필드를 사용하도록 수정한다.
+7. 테스트한다.
+8. 소스 필드를 제거한다.
+9. 테스트한다.
+
+#### 예제
+
+```js
+// 예제
+class Customer {
+  constructor(name, discountRate) {
+    this._name = name;
+    this._discountRate = discountRate;
+    this._contract = new CustomerContract(dateToday());
+  }
+
+  get discountRate() {
+    return this._discountRate;
+  }
+  becomePreferred() {
+    this._discountRate += 0.03;
+  }
+
+  applyDiscount(amount) {
+    return amount.substract(amout.multiply(this._discountRate));
+  }
+}
+
+class CustomerContract {
+  constructor(startDate) {
+    this._startDate = startDate;
+  }
+}
+```
+
+1. 필드 캡슐화
+
+```js
+class Customer {
+  constructor(name, discountRate) {
+    this._name = name;
+    this._setDiscountRate(discountRate); // <--
+    this._contract = new CustomerContract(dateToday());
+  }
+
+  get discountRate() {
+    return this._discountRate;
+  }
+  _setDiscountRate(aNumber) {
+    this._discountRate = aNumber;
+  } // <--
+  becomePreferred() {
+    this._discountRate += 0.03;
+  }
+
+  applyDiscount(amount) {
+    return amount.substract(amout.multiply(this._discountRate));
+  }
+}
+
+class CustomerContract {
+  constructor(startDate) {
+    this._startDate = startDate;
+  }
+}
+```
+
+3. CunstomerContract 클래스에 필드 하나와 접근자들을 추가
+
+```js
+class CustomerContract {
+  constructor(startDate, discountRate) {
+    this._startDate = startDate;
+    this._discountRate = discountRate;
+  }
+
+  get discountRate() {
+    return this._discountRate;
+  }
+  set discountRate(arg) {
+    this._discountRate = arg;
+  }
+}
+```
+
+6. Customer의 접근자들이 새로운 필드를 사용하도록 수정한다. 다 수정하고 나면 "Cannot set property 'discountRate' of undefined"라는 오류가 날 것이다. 생성자에서 Contract 객체를 생성하기도 전에 \_setDiscountRate()를 호출하기 때문이다. 이 오류를 고치려면 먼저 기존 상태로 되돌린 다음, 문자 슬라이드하기를 적용해 \_setDiscountRate() 호출을 계약 생성 뒤로 옮겨야 한다.
+
+```js
+class Customer {
+  constructor(name, discountRate) {
+    this._name = name;
+    this._contract = new CustomerContract(dateToday());
+    this._setDiscountRate(discountRate);
+  }
+
+  get discountRate() {
+    return this._discountRate;
+  }
+  _setDiscountRate(aNumber) {
+    // <--
+    this._contract.discountRate = aNumber;
+  }
+  becomePreferred() {
+    this._discountRate += 0.03;
+  }
+
+  applyDiscount(amount) {
+    return amount.substract(amout.multiply(this._discountRate));
+  }
+}
+```
+
+8. 자바스크립트를 사용하고 있으므로 소스 필드를 미리 선언할 필요는 없었다. 그래서 제거해야 할 것도 없다.
+
+### 8.3 문장을 함수로 옮기기
+
+Move Statements into Function
+
 ## 09 테이터 조직화
 
 ## 10 조건부 로직 간소화
