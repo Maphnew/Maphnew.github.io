@@ -1934,6 +1934,39 @@ function photoData(aPhoto) {
 
 Move Statement to Callers
 
+- 반대 리팩터링: 문장을 함수로 옮기기
+
+```js
+// before
+emitPhotoData(outStream, person.photo);
+
+function emitPhotoData(outStream, photo) {
+  outStream.write(`<p>제목: ${photo.title}</p>\n`);
+  outStream.write(`<p>위치: ${photo.location}</p>\n`);
+}
+```
+
+```js
+// after
+emitPhotoData(outStream, person.photo);
+outStream.write(`<p>위치: ${person.photo.location}</p>\n`);
+
+function emitPhotoData(outStream, photo) {
+  outStream.write(`<p>제목: ${photo.title}</p>\n`);
+}
+```
+
+#### 배경
+
+함수는 프로그래머가 쌓아 올리는 추상화의 기본 빌딩 블록이다. 함수 관점에서 기능 범위가 달라지면 추상화의 경계도 움직인다.
+
+#### 절차
+
+1. 호출자가 한두개 뿐이고 피호출 함수도 간단한 단순한 상황이면, 피호출 함수의 처음(혹은 마지막) 줄(들)을 잘라내어 호출자(들)로 복사해 넣는다(필요하면 적당히 수정한다). 테스트만 통과하면 이번 리팩터링은 여기서 끝이다.
+2. 더 복잡한 상황에서는, 이동하지 '않길' 원하는 모든 문장을 함수로 추출한 다음 검색하기 쉬운 임시 이름을 지어준다.
+3. 원래 함수를 인라인한다.
+4. 추출된 함수의 이름을 원래 함수의 이름으로 변경한다(함수 이름 바꾸기).
+
 ## 09 테이터 조직화
 
 ## 10 조건부 로직 간소화
