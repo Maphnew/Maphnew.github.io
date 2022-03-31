@@ -1995,6 +1995,42 @@ appliesToMass = states.includes("MA");
 
 - 인라인 코드를 대체할 함수가 이미 존재한다면 인라인 코드를 함수 호출로 바꾸기를 적용하면 된다.
 
+### 8.6 문장 슬라이드하기
+
+Slide Statements
+
+- 1판에서의 이름: 조건문의 공통 실행 코드 빼내기
+
+```js
+// before
+const pricingPlan = retrievePricingPlan();
+const order = retrieveOrder();
+let charge;
+const chargePerUnit = pricingPlan.unit;
+```
+
+```js
+// after
+const pricingPlan = retrievePricingPlan();
+const chargePerUnit = pricingPlan.unit;
+const order = retrieveOrder();
+let charge;
+```
+
+#### 배경
+
+관련된 코드들이 가까이 모여 있다면 이해하기가 더 쉽다.
+
+#### 절차
+
+1. 코드 조각을 이동할 목표 위치를 찾는다. 코드 조각의 원래 위치와 목표 위치 사이의 코드들을 훑어보면서, 조각을 모으고 나면 동작이 달라지는 코드가 있는지 살핀다. 다음은 같은 간섭이 있다면 이 리팩터링을 포기한다.
+2. 코드 조각을 원래 위치에서 잘라내어 목표 위치에 붙여 넣는다.
+3. 테스트한다.
+
+### 8.7 반복문 쪼개기
+
+Split Loop
+
 ## 09 테이터 조직화
 
 ## 10 조건부 로직 간소화
