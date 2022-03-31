@@ -1967,6 +1967,34 @@ function emitPhotoData(outStream, photo) {
 3. 원래 함수를 인라인한다.
 4. 추출된 함수의 이름을 원래 함수의 이름으로 변경한다(함수 이름 바꾸기).
 
+### 8.5 인라인 코드를 함수 호출로 바꾸기
+
+Replace Inline Code with Function Call
+
+```js
+// before
+let appliesToMass = false;
+for (const s of states) {
+  if (s === "MA") appliesToMass = true;
+}
+```
+
+```js
+// after
+appliesToMass = states.includes("MA");
+```
+
+#### 배경
+
+함수는 여러 동작을 하나로 묶어준다. 함수 이름이 목적을 말해주기 때문에 이해하기 쉬워진다. 중복을 없애는 데도 효과적이다.
+
+#### 절차
+
+1. 인라인 코드를 함수 호출로 대체한다.
+2. 테스트한다.
+
+- 인라인 코드를 대체할 함수가 이미 존재한다면 인라인 코드를 함수 호출로 바꾸기를 적용하면 된다.
+
 ## 09 테이터 조직화
 
 ## 10 조건부 로직 간소화
