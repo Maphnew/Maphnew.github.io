@@ -2031,6 +2031,42 @@ let charge;
 
 Split Loop
 
+```js
+// before
+let averageAge = 0;
+let totalSalary = 0;
+for (const p of people) {
+  averageAge += p.age;
+  totalSalary += p.salary;
+}
+averageAge = averageAge / people.length;
+```
+
+```js
+// after
+let totalSalary = 0;
+for (const p of people) {
+  totalSalary += p.salary;
+}
+
+let averageAge = 0;
+for (const p of people) {
+  averageAge += p.age;
+}
+averageAge = averageAge / people.length;
+```
+
+#### 배경
+
+반복문 하나에서 두 가지 일을 수행하면 수정해야 할 때마다 두 가지 일 모두를 잘 이해하고 진행해야 한다. 반대로 각각의 반복문으로 분리해두면 수정할 동작 하나만 이해하면 된다.
+
+#### 절차
+
+1. 반복문을 복제해 두 개로 만든다.
+2. 반복문이 중복되어 생기는 부수효과를 파악해서 제기한다.
+3. 테스트한다.
+4. 완료됐으면, 각 반복문을 함수로 추출할지 고민해본다.
+
 ## 09 테이터 조직화
 
 ## 10 조건부 로직 간소화
