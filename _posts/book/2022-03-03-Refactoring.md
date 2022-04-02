@@ -2067,6 +2067,35 @@ averageAge = averageAge / people.length;
 3. 테스트한다.
 4. 완료됐으면, 각 반복문을 함수로 추출할지 고민해본다.
 
+### 8.8 반복문을 파이프라인으로 바꾸기
+
+Replace Loop with Pipeline
+
+```js
+// before
+const names = [];
+for (const i of input) {
+  if (i.job === "programmer") {
+    names.push(i.name);
+  }
+}
+```
+
+```js
+//after
+const names = input.filter((i) => i.job === "programmer").map((i) => i.name);
+```
+
+#### 배경
+
+컬렉션 파이프라인`Collection Pipeline`을 이용하면 처리 과정을 일련의 연산으로 표현할 수 있다.
+
+#### 절차
+
+1. 반복문에서 사용하는 컬렉션을 가리키는 변수를 하나 만든다.
+2. 반복문의 첫 줄부터 시작해서, 각각의 단위 행위를 적절한 컬렉션 파이프라인 연산으로 대체한다. 이 때 컬렉션 파이프라인 연산은 1에서 만든 반복문 컬렉션 변수에서 시작하여, 이전 연산의 결과를 기초로 연쇄적으로 수행된다. 하나를 대체할 때마다 테스트한다.
+3. 반복문의 모든 동작을 대체했다면 반복문 자체를 지운다.
+
 ## 09 테이터 조직화
 
 ## 10 조건부 로직 간소화
