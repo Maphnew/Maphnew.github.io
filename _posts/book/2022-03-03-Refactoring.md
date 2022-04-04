@@ -2226,6 +2226,40 @@ set discountedTotal() {this._discount = aNumber}
 6. 테스트한다.
 7. 변수를 선언하고 갱신하는 코드를 죽은 코드 제거하기로 없앤다.
 
+### 9.4 참조를 값으로 바꾸기
+
+Change Reference to Value
+
+- 반대 리팩터링: 값을 참조로 바꾸기
+
+```js
+// before
+class Product {
+  applyDiscount(arg) {
+    this._price.amount -= arg;
+  }
+}
+```
+
+```js
+// after
+class Product {
+  applyDiscount(arg) {
+    this._price = new Money(this._price.amount - arg, this.price.currency);
+  }
+}
+```
+
+#### 배경
+
+필드를 값으로 다룬다면 내부 객체의 클래스를 수정하여 값 객체`Value object`로 만들 수 있다. 값 객체는 대체로 자유롭게 활용하기 좋은데, 특히 불변이기 때문이다. 값 객체는 분산 시스템과 동시성 시스템에서 특히 유용하다.
+
+#### 절차
+
+1. 후보 클래스가 불변인지, 혹은 불변이 될 수 있는지 확인한다.
+2. 각각의 세터를 하나씩 제거한다.
+3. 이 값 객체의 필드들을 사용하는 동치성 비교 메서드를 만든다.
+
 ## 10 조건부 로직 간소화
 
 ## 11 API 리팩터링
