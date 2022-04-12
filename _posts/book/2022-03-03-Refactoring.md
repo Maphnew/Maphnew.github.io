@@ -2318,6 +2318,38 @@ if (summer()) {
 
 1. 조건식과 그 조건식에 딸린 조건절 각각을 함수로 추출한다.
 
+### 10.2 조건식 통합하기
+
+Consolidate Conditional Expression
+
+```js
+// before
+if (anEmployee.seniority < 2) return 0;
+if (anEmployee.monthsDisabled > 12) return 0;
+if (anEmployee.isPartTime) return 0;
+```
+
+```js
+// after
+if (isNotEligibleForDisability()) return 0;
+
+function isNotEligibleForDisability() {
+  return ((anEmployee.seniority < 2) || (anEmployee.monthsDisabled > 12) || (anEmployee.isPartTime)));
+}
+```
+
+#### 배경
+
+비교하는 조건은 다르지만 동작은 똑같은 코드들이 더러 있는데, 같은 일을 할 거면 조건 검사를 하나로 통합하는 게 낫다.
+
+#### 절차
+
+1. 해당 조건식들 모두에 부수효과가 없는지 확인한다.
+2. 조건문 두 개를 선택하여 두 조건문의 조건식들을 논리 연산자로 결합한다.
+3. 테스트한다.
+4. 조건이 하나만 남을 때까지 2~3 과정을 반복한다.
+5. 하나로 합쳐진 조건식을 함수로 추출할지 고려해본다.
+
 ## 11 API 리팩터링
 
 ## 12 상속 다루기
