@@ -2286,6 +2286,35 @@ let customer = customerRepository.get(customerData.id);
 2. 생성자에서 이 부류의 객체들 중 특정 객체를 정확히 찾아내는 방법이 있는지 확인한다.
 3. 호스트 객체의 생성자들을 수정하여 필요한 객체를 이 저장소에서 찾도록 한다. 하나 수정할 때마다 테스트한다.
 
+### 9.6 매직 리터럴 바꾸기
+
+Replace Magic Literal
+
+- 1판에서의 이름: 마법 숫자를 기호 상수로 전환
+
+```js
+function potentialEnergy(mass, height) {
+  return mass * 9.81 * height;
+}
+```
+
+```js
+const STANDARD_GRAVITY = 9.81;
+function potentialEnergy(mass, height) {
+  return mass * STANDARD_GRAVITY * height;
+}
+```
+
+#### 배경
+
+코드 자체가 뜻을 분명하게 드러내는 게 좋다. 상수를 정의하고 숫자 대신 상수를 사용하도록 바꾸면 된다.
+
+#### 방법
+
+1. 상수를 선언하고 매직 리터럴을 대입한다.
+2. 해당 리터럴이 사용되는 곳을 모두 찾는다.
+3. 찾은 곳 각각에서 리터럴이 새 상수와 똑같은 의미로 쓰였는지 확인하여, 같은 의미라면 상수로 대체한 후 테스트한다.
+
 ## 10 조건부 로직 간소화
 
 ### 10.1 조건문 분해하기
