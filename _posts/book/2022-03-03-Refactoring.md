@@ -2777,4 +2777,37 @@ if (aPlan.withinRange(aRoom.daysTempRange));
 5. 호출자를 모두 수정했다면 원래 함수를 인라인한다.
 6. 새 함수의 이름을 적절히 수정하고 모든 호출자에 반영한다.
 
+### 11.5 매개변수를 질의 함수로 바꾸기
+
+Replace Parameter with Query
+
+- 반대 리팩터링: 질의 함수를 매개변수로 바꾸기
+- 1판에서의 이름: 매개변수 세트를 메서드로 전환
+
+```js
+// before
+availableVacation(anEmployee, anEmployee.grade);
+
+function availableVaction(anEmployee, grade) {}
+```
+
+```js
+// after
+availableVacation(anEmployee);
+
+function availableVacation(anEmployee) {
+  const grade = anEmployee.grade;
+}
+```
+
+#### 배경
+
+매개변수 목록은 함수의 변동 요인을 모아놓은 곳이다. 즉, 함수의 동작에 변화를 줄 수 있는 일차적인 수단이다. 다른 코드와 마찬가지로 이 목록에서도 중복은 피하는 게 좋으며 짧을수록 이해하기 쉽다.
+
+#### 절차
+
+1. 필요하다면 대상 매개변수의 값을 계산하는 코드를 별도 함수로 추출해놓는다.
+2. 함수 본문에서 대상 매개변수로의 참조를 모두 찾아서 그 매개변수의 값을 만들어주는 표현식을 참조하도록 바꾼다. 하나 수정할 때마다 테스트한다.
+3. 함수 선언 바꾸기로 대상 매개변수를 없앤다.
+
 ## 12 상속 다루기
