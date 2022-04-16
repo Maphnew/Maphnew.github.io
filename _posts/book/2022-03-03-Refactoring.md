@@ -2810,4 +2810,38 @@ function availableVacation(anEmployee) {
 2. 함수 본문에서 대상 매개변수로의 참조를 모두 찾아서 그 매개변수의 값을 만들어주는 표현식을 참조하도록 바꾼다. 하나 수정할 때마다 테스트한다.
 3. 함수 선언 바꾸기로 대상 매개변수를 없앤다.
 
+### 11.6 질의 함수를 매개변수로 바꾸기
+
+Replace Query with Parameter
+
+- 반대 리팩터링: 매개변수를 질의 함수로 바꾸기
+
+```js
+// before
+targetTemperature(aPlan);
+
+function targetTemperature(aPlan) {
+  currentTemperature = thermostat.currentTemperature;
+}
+```
+
+```js
+// after
+targetTemperature(aPlan, thermostat.currentTemperature);
+
+function targetTemperature(aPlan, currentTemperature) {}
+```
+
+#### 배경
+
+함수 안에 두기엔 거북한 참조가 있다. 전역 변수나 제거하길 원하는 원소를 참조하는 경우다. 이 문제는 해당 참조를 매개변수로 바꿔 해결할 수 있다. 참조를 풀어내는 책임을 호출자로 옮기는 것이다.
+
+#### 절차
+
+1. 변수 추출하기로 질의 코드를 함수 본문의 나머지 코드와 분리한다.
+2. 함수 본문 중 해당 질의를 호출하지 않는 코드들을 별도 함수로 추출한다.
+3. 방금 만든 변수를 인라인하여 제거한다.
+4. 원래 함수도 인라인한다.
+5. 새 함수의 이름을 원래 함수의 이름으로 고쳐준다.
+
 ## 12 상속 다루기
