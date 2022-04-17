@@ -2959,4 +2959,45 @@ function createEngineer(name) {
 }
 ```
 
+### 11.9 함수를 명령으로 바꾸기
+
+Replace Function with Command
+
+- 반대 리팩터링: 명령을 함수로 바꾸기
+- 1판에서의 이름: 메서드를 메서드 객체로 전환
+
+```js
+// before
+function score(candidate, medicalExam, scoringGuide) {
+  let result = 0;
+  let healthLevel = 0;
+}
+```
+
+```js
+// after
+class Scorer {
+  constructor(candidate, medicalExam, scoringGuide) {
+    this._candidate = candidate;
+    this._medicalExam = medicalExam;
+    this._scoringGuide = scoringGuide;
+  }
+
+  execute() {
+    this._result = 0;
+    this._healthLevel = 0;
+  }
+}
+```
+
+#### 배경
+
+함수는 프로그래밍의 기본적인 빌딩 블록 중 하나다. 그런데 함수를 그 함수만을 위한 객체 안으로 캡슐화하면 더 유용해지는 상황이 있다. 이런 객체를 가리켜 '명령 객체' 혹은 단순히 '명령`command`'이라 한다. 명령 객체 대부분은 메서드 하나로 구성되며, 이 메서드를 요청해 실행하는 것이 이 객체의 목적이다.
+
+#### 절차
+
+1. 대상 함수의 기능을 옮길 빈 클래스를 만든다. 클래스 이름은 함수 이름에 기초해 짓는다.
+2. 방금 생성한 빈 클래스로 함수를 옮긴다.
+3. 함수의 인수들 각각은 명령의 필드로 만들어 생성자를 통해 설정할지 고민해본다.
+
 ## 12 상속 다루기
