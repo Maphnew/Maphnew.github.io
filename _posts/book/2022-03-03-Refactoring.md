@@ -2874,4 +2874,89 @@ class Person {
 3. 세터 메서드를 인라인한다. 가능하다면 해당 필드를 불변으로 만든다.
 4. 테스트한다.
 
+### 11.8 생성자를 팩터리 함수로 바꾸기
+
+Replace Constructor with Factory Function
+
+- 1판에서의 이름: 생성자를 팩토리 메서드로 전환
+
+```js
+// before
+leadEngineer = new Employee(document.leadEngineer, "E");
+```
+
+```js
+// after
+leadEngineer = createEngineer(dcoument.leadEngineer);
+```
+
+#### 배경
+
+많은 객체 지향 언어에서 제공하는 생성자는 객체를 초기화하는 특별한 용도의 함수다. 실제로 새로운 객체를 생성할 때면 주로 생성자를 호출한다. 하지만 생성자에는 일반 함수에는 없는 이상한 제역이 따라붙기도 한다. 가령 자바 생성자는 반드시 그 생성자를 정의한 클래스의 인스턴스를 반환해야 한다. 서브클래스의 인스턴스나 프락시를 반환할 수는 없다. 생성자의 이름도 고정되어, 기본 이름보다 더 적절한 이름이 있어도 사용할 수 없다. 생성자를 호출하려면 특별한 연산자(많은 언어에서 new를 쓴다)를 사용해야 해서 일반 함수가 오길 기대하는 자리에는 쓰기 어렵다.
+
+팩터리 함수에는 이런 제약이 없다. 팩터리 함수를 구현하는 과정에서 생성자를 호출할 수는 있지만, 다른 무언가로 대체할 수 있다.
+
+#### 절차
+
+1. 팩터리 함수를 만든다. 팩터리 함수의 본문에서는 원래의 생성자를 호출한다.
+2. 생성자를 호출하던 코드를 팩터리 함수 호출로 바꾼다.
+3. 하나씩 수정할 때마다 테스트한다.
+4. 생성자의 가시 범위가 최소가 되도록 제한한다.
+
+#### 예시
+
+```js
+class Employee {
+  constructor(name, typeCode) {
+    this._name = name;
+    this._typeCode = typeCode;
+  }
+
+  get name() {
+    return this._name;
+  }
+  get type() {
+    return Employee.legalTypeCodes[this._typeCode];
+  }
+  static get legalTypeCodes() {
+    return { E: "Engineer", M: "Manager", S: "Salesperson" };
+  }
+}
+
+// 호출자 예시 1
+candidate = new Employee(document.name, document.empType);
+
+// 호출자 예시 2
+const leadEngineer = new Employee(document.leadEngineer, "E");
+```
+
+1. 팩터리 함수 만들기. 팩터리 본문은 단순히 생성자에 위임하는 방식으로 구현한다.
+
+```js
+function createEmployee(name, typeCode) {
+  return new Employee(name, typeCode);
+}
+```
+
+2. 생성자를 호출하는 곳을 찾아 수정한다. 한 번에 하나씩, 생성자 대신 팩터리 함수를 사용하게 바꾼다.
+
+```js
+cadidate = createEmployee(document.name, document.empType);
+```
+
+```js
+const leadEngineer = createEmployee(document.leadEngineer, "E");
+```
+
+하지만 두 번째 코드는 권장되지 않는다(함수에 문자열 리터럴을 건네는 건 악취로 봐야 한다). 그 대신 직원 유형을 팩터리 함수의 이름에 녹이는 방식을 권한다.
+
+```js
+// 호출자
+const leadEngineer = createEngineer(document.leadEngineer);
+
+function createEngineer(name) {
+  return new Employee(name, "E");
+}
+```
+
 ## 12 상속 다루기
