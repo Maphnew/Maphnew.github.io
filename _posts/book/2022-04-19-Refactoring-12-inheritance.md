@@ -62,3 +62,45 @@ class Engineer extends Employee {}
 6. 서브클래스 중 하나의 메서드를 제거한다.
 7. 테스트한다.
 8. 모든 서브클래스의 메서드가 없어질 떄까지 다른 서브클래스의 메서드를 하나씩 제거한다.
+
+### 12.2 필드 올리기
+
+Pull Up Field
+
+- 반대 리팩터링: 필드 내리기
+
+```js
+// before
+class Employee {...} // 자바 코드
+
+class Salesperson extends Employee {
+  private String name;
+}
+
+class Engineer extends Employee {
+  private String name;
+}
+```
+
+```js
+// after
+class Employee {
+  protected String name;
+}
+
+class Salesperson extends Employee {}
+
+class Engineer extends Employee {}
+```
+
+#### 배경
+
+서브클래스들이 독립적으로 개발되었거나 뒤늦게 하나의 계층구조로 리팩터링된 경우라면 일부 기능이 중복되어 있을 때가 있다. 이런 필드들은 항상 이름이 비슷하지 않아 어떻게 이용되는지 분석해봐야 한다. 분석 결과 필드들이 비슷한 방식으로 쓰인다면 슈퍼클래스로 끌어올리자.
+
+#### 절차
+
+1. 후보 필드들을 사용하는 곳 모두가 그 필드들을 똑같은 방식으로 사용하는지 면밀히 살핀다.
+2. 필드들의 이름이 각기 다르다면 똑같은 이름으로 바꾼다(필드 이름 바꾸기).
+3. 슈퍼클래스에 새로운 필드를 생성한다.
+4. 서브클래스의 필드들을 제거한다.
+5. 테스트한다.
