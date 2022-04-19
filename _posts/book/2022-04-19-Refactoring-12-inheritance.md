@@ -1,0 +1,64 @@
+---
+title: "[Book] Refactoring: 12 상속 다루기"
+date: 2022-04-17 23:25:00
+categories:
+  - Book
+tags:
+  - [Book, Refactoring]
+
+toc: true
+toc_sticky: true
+---
+
+# 리팩터링
+
+출처: 리팩터링 2판, 마틴 파울러
+
+## 12 상속 다루기
+
+객체 지향 프로그래밍에서 가장 유명한 특성인 상속`inheritance`을 다룬다. 다른 강력한 메커니즘처럼 이 역시 아주 유용한 동시에 오용하기 쉽다. 더욱이 상속은 발등에 불이 떨어져서야 비로소 잘못 사용했음을 알아차리는 경우가 많다.
+
+### 12.1 메서드 올리기
+
+Pull Up Method
+
+- 반대 리팩터링: 메서드 내리기
+
+```js
+// before
+class Employee {...}
+
+class Salesperson extends Employee {
+  get name() {...}
+}
+
+class Engineer extends Employee {
+  get name() {...}
+}
+```
+
+```js
+// after
+class Employee {
+  get name() {...}
+}
+
+class Salesperson extends Employee {}
+
+class Engineer extends Employee {}
+```
+
+#### 배경
+
+중복 코드 제거는 중요하다. 한쪽의 변경이 다른 쪽에는 반영되지 않을 수 있다는 위험을 항상 수반한다.
+
+#### 절차
+
+1. 똑같이 동작하는 매서드인지 면밀히 살펴본다.
+2. 메서드 안에서 호출하는 다른 메서드와 참조하는 필드들을 슈퍼클래스에서도 호출하고 참조할 수 있는지 확인한다.
+3. 메서드 시그니처가 다르다면 함수 선언 바꾸기로 슈퍼클래스에서 사용하고 싶은 형태로 통일한다.
+4. 슈퍼클래스에 새로운 메서드를 생성하고, 대상 메서드의 코드를 복사해넣는다.
+5. 정적 검사를 수행한다.
+6. 서브클래스 중 하나의 메서드를 제거한다.
+7. 테스트한다.
+8. 모든 서브클래스의 메서드가 없어질 떄까지 다른 서브클래스의 메서드를 하나씩 제거한다.

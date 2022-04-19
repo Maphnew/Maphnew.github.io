@@ -1,6 +1,6 @@
 ---
 title: "[Book] Refactoring: 11 API 리팩터링"
-date: 2022-04-14 23:25:00
+date: 2022-04-17 23:25:00
 categories:
   - Book
 tags:
