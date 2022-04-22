@@ -223,3 +223,91 @@ toc_sticky: true
 - resin: 송진, 합성수지
 
 > It's nothing more than a funnel with a valve at the small end and an unbelievably sticky resin on the wide end.
+
+- interfere: 간섭[개입/참견]하다
+
+> The idea is you have the valve open and stick the wid end ove a hole. The air can escape through the valve, so it doesn't interfere with the resin making a good seal. Then you close the valve, and you've sealed the breach.
+
+- wince: (통증, 당혹감으로 얼굴 표정이)움찔하고 놀라다[움찔하다]
+
+- dizzy: 어지러운
+
+- agony: 극도의 (육체적, 정신적) 고통[괴로움]
+
+> The tricky part was getting the antnna out of the way. I pulled it out as fast as I could, wincing as the sudden pressure drop dizzied me and made the wound in my side scream in agony.
+
+- readout: 컴퓨터 (정보의) 해독, 판독, 정보 읽기
+
+> Checking my arm readouts, I saw the suit was now at 85 percent oxygen. For reference, Earth's atmosphere is about 21 percent. I'd be okay, so long as I didn't spend too much time like that.
+
+- stumble: 발이 걸리다, 발을 헛디디다, 비틀[휘청]거리다
+
+> I stumbled up the hill back toward the Hab.
+
+- crest: 산마루, 물마루, 꼭대기[정상]에 이르다
+
+- intact: 온전한, 전혀 다치지 않은
+
+> As I crested the rise, I saw something that made me very happy and something that made me very sad: The Hab was intact (yay!) and the MAV was gone (boo!).
+
+- limp: 기운[활기]이 없는, 축 처진[늘어진], 흐느적거리는
+
+- fumble: (무엇을 하거나 찾느라고 손으로) 더듬거리다
+
+> I limped back to the Hab and fumbled my way into an airlock. As soon as it equalized, I thre
+
+- doff: 모자를 벗다[들어 올리다]
+
+> Once inside the Hab, I doffed the suit and got my first good look at the injury.
+
+- anesthetic: 마취의, 무감각한, 마취제
+
+- local anesthetic: 국소마취
+
+- irrigate: (땅에) 물을 대다, 관개하다, (상처 등을) 세척하다.
+
+> A quick shot of loacl anesthetic, irrigate the wound, none stitches, and I was done.
+
+- antibiotics: 항생제
+
+> I'd be taking antibiotics for a couple of weeks, but other than that I'd be fine.
+
+- array: 집합체[모음/무리]
+
+> I knew it was hopeless, but I tried firing up the communications array. No signal, of course.
+
+- tertiary: 제 3의, 3차의, 셋째의
+
+> The Hab had secondary and tertiary communications systems, but they were both just for talking to the MAV, which would use its much more powerful systems to relay to Hermes. Thing is, that only works if the MAV is still around.
+
+- rig up: (뭐든 있는 재료를 가지고)~을 급히 만들다
+
+> I could locate the dish out on the surface, but it would take weeks for me to rig up any repairs, and that would be too late.
+
+- orbital dynamics: 궤도 역학
+
+> The orbital dynamics made the trip safer and shorter the earlier you left, so why wait?
+
+- plow through: 뚫고 지나가다
+
+> Checking out my suit, I saw the antenna had plowed through my bio-monitor computer.
+
+- regulation: 규정
+
+> They may have even had a brief discussion about recovering my body, but regulations are clear. In the event a crewman dies on Mars, he stays on Mars.
+
+- disposible: 사용 후 버리게 되어 있는, 일회용의, 이용 가능한
+
+- thrust: 추진
+
+> That means more disposable fuel and a larger margin of error for the return thrust.
+
+- suffocate: 질식사 하다
+
+- reclaimer: 반환 요구자, 간척[개간]자, 환원기
+
+> If the oxygenator breaks down, I'll suffocate. If the water reclaimer breaks down, I'll die of thirst.
+
+# CHAPTER 2
+
+## LOG ENTRY: SOL 7
