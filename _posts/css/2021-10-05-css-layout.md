@@ -21,7 +21,7 @@ toc_sticky: true
 ### 보통 흐름(normal flow)
 
 - 페이지 레이아웃을 브라우저가 기본값으로 배치하는 방법
-- 소스 코드에 나타나는 순서 그래도 HTML 요소가 표시된다. 요소 집합이 상대 요소 바로 아래 나타나는 것을 block 요소라고 기술하고, inline 요소와 상반된다.
+- 소스 코드에 나타나는 순서 그대로 HTML 요소가 표시된다. 요소 집합이 상대 요소 바로 아래 나타나는 것을 block 요소라고 기술하고, inline 요소와 상반된다.
 - CSS에서 요소가 배치되는 방식을 변경시키는 메서드는 다음과 같다.
   - diplay 속성 --- `block`, `inline`, `inline-block`
     - ref - The box model: https://developer.mozilla.org/ko/docs/Learn/CSS/Building_blocks/The_box_model
@@ -35,13 +35,13 @@ toc_sticky: true
 
 - 보통 흐름(normal flow)상의 모든 요소는 한 가지 `display` 속성값을 갖고 있으며, 해당 요소의 기본 동작 방식을 지정하는 데 사용된다.
 - 우리는 이런 기본값 동작을 변경할 수 있다.
-- 레이아웃의 목적이 무엇인지 논할 때 가장 중요한 두 가지 속성값은 `display: flex` 와 `diplay: grid` 이다.
+- 레이아웃의 목적이 무엇인지 논할 때 가장 중요한 두 가지 속성값은 `display: flex` 와 `display: grid` 이다.
 
 ### flexbox: Flexible Box Layout
 
 - flexbox를 사용하려면 당신이 진열하길 원하는 모든 요소의 부모 요소에 `display: flex`를 적용하고 나면 모든 직계 자식이 플렉스 항목이 되고, column으로 배열된다.
 - 요소들이 flex 항목이 되었고, flexbox가 그들 요소에 부여한 일부 초기값을 사용했기 때문이다. 그들이 행으로 표시된 이유는 `flex-direction`의 초기값이 `row`이기 때문이다.
-- `align-items` 속성의 초기값 `stretch`에 다라 height는 가장 키가 큰 아이템의 높이로 연장된다.
+- `align-items` 속성의 초기값 `stretch`에 따라 height는 가장 키가 큰 아이템의 높이로 연장된다.
 - 아래는 flexbox 예시
 
 ```CSS
@@ -130,6 +130,46 @@ toc_sticky: true
 ```
 
 ### Floats
+
+Ref: https://developer.mozilla.org/ko/docs/Learn/CSS/CSS_layout/Introduction#floats
+
+요소를 float 시키면 요소는 왼쪽 또는 오른쪽으로 이동하고, 보통 흐름(normal flow)에서 벗어나게 된다.
+
+float 속성은 네 가지 값을 가질 수 있다.
+
+- left
+- right
+- none: default
+- inherit
+
+아래 예제에서는 <div> 를 왼쪽으로 띄우고 오른쪽에 margin을 주어 텍스트를 <div> 요소 자리에서 밀어 낸다. 이것은 텍스트가 그 상자를 감싸는 효과를 부여하며, 이는 현대 웹 디자인에서 사용되는 Floats에 대해 알아야할 내용의 대부분이다.
+
+```html
+<h1>간단한 부동 예제</h1>
+
+<div class="box">부동</div>
+
+<p>
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla luctus aliquam
+  dolor, eu lacinia lorem placerat vulputate. Duis felis orci, pulvinar id metus
+  ut, rutrum luctus orci. Cras porttitor imperdiet nunc, at ultricies tellus
+  laoreet sit amet. Sed auctor cursus massa at porta. Integer ligula ipsum,
+  tristique sit amet orci vel, viverra egestas ligula. Curabitur vehicula tellus
+  neque, ac ornare ex malesuada et. In vitae convallis lacus. Aliquam erat
+  volutpat. Suspendisse ac imperdiet turpis. Aenean finibus sollicitudin eros
+  pharetra congue. Duis ornare egestas augue ut luctus. Proin blandit quam nec
+  lacus varius commodo et a urna. Ut id ornare felis, eget fermentum sapien.
+</p>
+```
+
+```css
+.box {
+  float: left;
+  width: 150px;
+  height: 150px;
+  margin-right: 30px;
+}
+```
 
 ### 포지셔닝
 
