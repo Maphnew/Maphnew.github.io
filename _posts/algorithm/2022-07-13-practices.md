@@ -13,6 +13,8 @@ toc_sticky: true
 
 ## Practice
 
+<small><cite>ref: https://www.udemy.com/course/best-javascript-data-structures/</cite></small>
+
 ### Frequency Counter - sameFrequency
 
 Write a function called **sameFrequency**. Given two positive integers, find out if the two numbers have the same frequency of digits.

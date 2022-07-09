@@ -13,6 +13,8 @@ toc_sticky: true
 
 ## DIVIDE AND CONQUER
 
+<small><cite>ref: https://www.udemy.com/course/best-javascript-data-structures/</cite></small>
+
 This pattern involves dividing a data set into smaller chunks and then repeating a process with a subset of data
 
 This pattern can tremendously decrease **time complexity**

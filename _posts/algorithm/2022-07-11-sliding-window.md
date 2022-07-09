@@ -13,6 +13,8 @@ toc_sticky: true
 
 ## SLIDING WINDOW
 
+<small><cite>ref: https://www.udemy.com/course/best-javascript-data-structures/</cite></small>
+
 This pattern involves creating a window which can either be an array or number from one position to another
 
 Depending on a certain condition, the window either increases or closes (and a new window is created)
