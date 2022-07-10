@@ -191,8 +191,16 @@ const isSub4 = isSubsequence("abc", "acb"); // false (order matters)
 ```
 
 ```js
-function isSubsequence(a, b) {
-  //...
-  return true;
+function isSubsequence(str1, str2) {
+  var i = 0;
+  for (var j = 0; j < str2.length; j++) {
+    if (str1[i] === str2[j]) {
+      i++;
+    }
+    if (str1.length === i) {
+      return true;
+    }
+  }
+  return false;
 }
 ```
