@@ -15,7 +15,7 @@ toc_sticky: true
 
 <small><cite>ref: https://www.udemy.com/course/best-javascript-data-structures/</cite></small>
 
-<빈도수 세기 패턴>
+빈도수 세기 패턴
 
 - This pattern uses objects or sets to collect values/frequencies of values
 - This can often avoid the need for nested loops or O(N^2) operations with arrays/strings
