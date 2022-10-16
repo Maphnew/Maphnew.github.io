@@ -388,3 +388,110 @@ const accounting = AccountingDepartment.getInstance();
 - static property
 - abstract method, class
 - extends
+
+### 72. 첫 번째 인터페이스
+
+- 인터페이스는 객체의 구조를 설명한다.
+- 클래스처럼 청샂ㄴ으로 사용하지 않고 사용자 정의 타입으로 사용한다.
+
+```ts
+interface Person {
+  name: string;
+  age: number;
+  greeting(phrase: string): void;
+}
+let user1: Person;
+user1 = {
+  name: "Maph",
+  age: 36,
+  greet(phrase: string) {
+    console.log(phrase + " " + this.name);
+  },
+};
+user1.greet("Hi, I am"); // 'Hi, I am Maph'
+```
+
+### 73. 클래스와 인터페이스 사용하기
+
+- type, abstract class와 다르게 구조 설명만을 위해 사용한다.
+- 인터페이스는 구체적인 구현이 아닌 서로 다른 클래스간의 기능을 공유하기 위해 사용된다.
+- 추상 클래스와 차이점은 추상 클래스는 구체적 구현 부분을 혼합할 수 있다는 것이다.
+
+```ts
+interface Greetable {
+  name: string;
+  greet(phrase: string): void;
+}
+class Person implements Greetable {
+  // ...
+}
+```
+
+### 74. Why interface
+
+- 인터페이스는 구현된 객체 또는 클래스의 구조를 짐작할 수 있게 한다.
+- 같은 interface로 구현하는 다른 클래스가 있다면 해당 interface에 있는 메소드가 항상 그 클래스들에게 존재한다는 것을 알 수 있고 꼭 구현해야 하는 것을 알 수 있다.
+
+### 75. 읽기전용 인터페이스 속성
+
+- 읽기전용 속성은 한번만 정의할 수 있고 초기화되면 변경할 수 없다. 해당 인터페이스로 구현된 클래스에서도 적용이 된다.
+
+```ts
+interface Greetable {
+  readonly name: string;
+  greet(phrase: string): void;
+}
+```
+
+### 76. 인터페이스 확장하기
+
+- 인터페이스는 다수의 인터페이스로부터 상속 받을 수 있지만 클래스는 오직 하나의 부모 클래스로 부터 상속받을 수 있다.
+
+```ts
+interface Named {
+  readonly name: string;
+}
+interface Greetable extends Named {
+  // 상속받는 interface에서 다시 name을 정의할 필요 없다.
+  greet(phrase: string): void;
+}
+```
+
+### 77. 함수타입으로서의 인터페이스
+
+```ts
+interface AddFn {
+  (a: number, b: number): number;
+}
+let add: AddFn;
+add: (n1: number, n2: number) => {
+  return n1 + n2;
+};
+```
+
+- type으로 정의하면 아래와 같다.
+
+```ts
+type AddFn = (a: number, b: number) => number;
+```
+
+### 78. 선택적 매개변수 & 속성
+
+- 유연성을 제공하는 옵셔널 매개변수와 속성이 있다.
+
+```ts
+interface Named {
+  name?: string;
+  greet?(): void;
+}
+```
+
+```ts
+constructor(n?: string) {
+  // ...
+}
+```
+
+### 79. JS로 interface 컴파일
+
+- 컴파일 뒤엔 interface가 남아있지 않느다. 개발과 컴파일에만 사용된다.
