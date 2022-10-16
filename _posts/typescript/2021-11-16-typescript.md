@@ -495,3 +495,190 @@ constructor(n?: string) {
 ### 79. JS로 interface 컴파일
 
 - 컴파일 뒤엔 interface가 남아있지 않느다. 개발과 컴파일에만 사용된다.
+
+## Section6: 고급타입
+
+### 82. 모듈 콘텐트
+
+- Intersection types
+- Type guards
+- Discriminated unions
+- Type casting
+- Function overloads
+
+### 83. 인터섹션타입
+
+- 인터섹션 타입은 '&'을 이용하는데, 객체타입일 경우 속성의 조합, 유니언 타입은 공통부분만 가져간다.
+
+```ts
+type Admin = {
+  name: string;
+  privieges: string[];
+};
+type Employee = {
+  name: string;
+  startDate: Date;
+};
+type ElevatedEmployee = Admin & Employee;
+const e1: ElevatedEmployee = {
+  name: "Maph",
+  privileges: ["create-server"],
+  startDate: new Date(),
+};
+```
+
+```ts
+type Combinable = string | number;
+type Numeric = number | boolean;
+type Universal = Combinable & Numeric;
+// Universal: number;
+```
+
+### 84. 타입가드에 대한 추가정보
+
+- 타입가드는 특정속성이나 메소드를 사용하기 전에 그것이 존재하는지 확인하거나 타입을 사용하기 전에 이 타입으로 어떤 작업을 수행할 수 있는지를 확인하는 개념 또는 방식을 나타내는 용어이다.
+
+```ts
+function add(a: Combinable, b: Combinable) {
+  if (typeof a === "string" || typeof b === "string") {
+    return a.toString() + b.toString();
+  }
+  return a + b;
+}
+```
+
+```ts
+type UnknownEmployee = Employee | Admin;
+function printEmployeeInfo(emp: UnknownEmployee) {
+  console.log("Name: " + emp.name);
+  if ("privileges" in emp) {
+    console.log(emp.privileges);
+  }
+  if ("startDate" in emp) {
+    console.log(emp.startDate);
+  }
+}
+```
+
+```ts
+// object 또는 class일 경우
+if (vehicle instanceof Truck) {
+  vehicle.loadCargo(1000);
+}
+```
+
+### 85. 구별된 유니언
+
+- 구별된 유니언(Discriminated Union)은 타입가드를 쉽게 구현할 수 있도록 공통속성을 갖도록하는 패턴이다.
+
+```ts
+interface Bird {
+  type: 'bird';
+  flyingSpeed: number;
+}
+interface Horse {
+  type: 'horse';
+  runningSpeed: number;
+}
+type Animal = Bird | Horse;
+
+function moveAnimal(animal: Animal) {
+  let speed;
+  switch(animal.type) {
+    case 'bird':
+      speed = animal.flyingSpeed;
+      break;
+    case: 'horse':
+      speed = animal.runningSpeed;
+      break;
+  }
+  console.log('Moving at speed: ' + speed);
+}
+moveAnimal({type: 'bird', flyingSpeed: 10});
+```
+
+### 86. 타입 캐스팅(형 변환)
+
+- 타입스크립트는 DOM에서 element를 정의할 때 null일 가능성이 있다고 인식한다.
+- getElementById를 이용해 id로 정의할 떄는 어떤 종류인지 인식하지 못하고 HTMLElement인 것만 인식한다.
+- null이 아니라고 정의할 떄 '!'를 붙여주고, 타입 변환을 위해서는 'as HTMLInputElement'와 같이 타입을 명시해 준다.
+
+```ts
+const paragraph = document.querySelect("p"); // HTMLParagraphElement | null
+```
+
+```ts
+const paragraph = document.getElementById("message-output"); // HTMLElement | null
+```
+
+```ts
+// not null
+const userInput = document.getElementById("messages-output")!; // HTMLElement
+```
+
+```ts
+// type casting (React JSX구문과 충돌 가능성이 있음)
+const userInput = <HTMLInputElement>document.getElementById("messages-output")!; // HTMLInputElement
+```
+
+```ts
+// type casting
+const userInput = document.getElementById(
+  "messages-output"
+)! as HTMLInputElement; // HTMLInputElement
+```
+
+### 87. 인덱스 속성
+
+- 사용하고자 하는 속성의 이름과 필요한 속성의 개수를 미리 알지 못할 때 인덱스 속성을 이용해 유연한 타입을 만들 수 있다.
+
+```ts
+interface ErrorContainer {
+  [prop: string]: string;
+}
+
+const errorBag: ErrorContainer = {
+  email: "Not a vaild email",
+  userName: "Must start with ...",
+  // ...
+};
+```
+
+### 88. 함수 오버로드
+
+- 타입스크립트가 자체적으로 반환 타입을 정확인 추론하지 못할 때 명확히 하기위해 오버로드를 사용한다.
+
+```ts
+function add(a: number, b: number): number;
+function add(a: string, b: string): string;
+function add(a: string, b: number): string;
+function add(a: number, b: string): string;
+function add(a: Combinable, b: Combinable) {
+  if (typeof a === "string" || typeof b === "string") {
+    return a.toString() + b.toString();
+  }
+  return a + b;
+}
+
+const result = add("Maph", "Kim"); // string
+```
+
+### 89. Optional Chaining 선택적 체이닝
+
+- 데이터에 속성이 존재하는지 정확히 알지 못할 때 사용한다.
+
+```ts
+console.log(data?.job?.title);
+```
+
+### 90. Null 병합
+
+- null 또는 undefined를 걸러내기 위해 Null 병합을 사용한다.
+
+```ts
+const storedData = userInput ?? "Default";
+```
+
+### 91. 마무리
+
+- 고급 타입을 알아보았다.
