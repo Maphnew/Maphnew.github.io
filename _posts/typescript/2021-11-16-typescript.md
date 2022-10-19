@@ -682,3 +682,136 @@ const storedData = userInput ?? "Default";
 ### 91. 마무리
 
 - 고급 타입을 알아보았다.
+
+## Section 7: Generics
+
+### 93. 소개
+
+- What?
+- Generic Function & Classes
+- Constraints
+- Special Typescript Types
+
+### 94. 내장 제네릭
+
+- 내장 제네릭이 있다.
+
+```ts
+const names: string[] = [];
+const names: Array<string> = [];
+const names: Promise<string> = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("This is done!");
+  }, 2000);
+});
+```
+
+### 95. 제네릭 함수 생성하기
+
+- 제네릭 함수를 이용해 타입을 유연하게 구성할 수 있다.
+
+```ts
+function merge<T, U>(objA: T, objB: U) {
+  return Object.assign(objA, objB);
+}
+const mergedObj = merge({ name: "Max" }, { age: 30 });
+```
+
+### 96. 제약조건 작업하기
+
+- 제약 조건을 두면 범위를 좁혀 파라미터의 타입을 구성할 수 있다.
+
+```ts
+function merge<T extends object, U extends object>(objA: T, objB: U) {
+  return Object.assign(objA, objB);
+}
+```
+
+### 97. 다른 일반 함수
+
+- 제약 조건을 이용할 때, 특정 interface 또는 type의 구조를 따르는 파라미터를 받는 함수를 생성할 수 있다.
+
+```ts
+interface Lengthy {
+  length: number;
+}
+function countAndDescibe<T extends Lengthy>(element: T): [T, string] {
+  let descriptionText = "Got no value";
+  if (element.length === 1) {
+    descriptionText = "Got 1 element";
+  } else if (element.length > 1) {
+    descriptionText = `Got ${element.length} elements`;
+  }
+  return [element, descriptionText];
+}
+console.log(countAndDescibe("Hi there!"));
+```
+
+### 98. keyof 제약조건
+
+- keyof 제약조건으로 object의 key 타입을 적용할 수 있다.
+
+```ts
+function extractAndConvert<T extends object, U extends keyof T>(
+  obj: T,
+  key: U
+) {
+  return `Value: ${obj[key]}`;
+}
+extractAndConvert({ name: "maph" }, "name");
+```
+
+### 99. Generic class
+
+- 제네릭타입으로 유연하지만 안전성 높은 클래스를 생성할 수 있다.
+
+```ts
+class DataStorage<T extends string | number | boolean> {
+  private data: T[] = [];
+  addItem(item: T) {
+    this.data.push(item);
+  }
+  removeItem(item: T) {
+    this.data.splice(this.data.indexOf(item), 1);
+  }
+  getItems() {
+    return [...this.data];
+  }
+}
+
+const textStorage = new DataStorage<string>();
+textStorage.addItems('Papa');
+textStorage.addItems('Mama');
+textStorage.removeItems('Mama');
+console.log(.textStorage.getItems());
+```
+
+### 100. 요약
+
+- 전달하거나 사용되는 값을 타입을 유연하게 지정할 수 있고, 때에 따라 제약사항을 적용하면 범위를 좁힐 수 있다.
+
+### 101. 제네릭 유틸리티 타입
+
+- Partial, Readonly와 같은 유용한 유틸리티 타입이 많이 있다.
+
+```ts
+interface CourseGoal {
+  title: string;
+  desc: string;
+  complete: Date;
+}
+function createCourseGoal(title: string, desc: string, date: Date): CourseGoal {
+  let courseGoal: Partial<CourseGoal> = {}; // 일시적으로 속성들을 옵셔널로 만들고 싶을 때 사용
+  courseGoal.title = title;
+  courseGoal.desc = desc;
+  courseGoal.date = date;
+  return courseGoal as CourseGoal;
+}
+
+const names: ReadOnly<string[]> = ["Max", "Manu"];
+// names.push('Anna'); // error
+```
+
+### 102. 제네릭타입 vs 유니언타입
+
+- 두 타입의 차이를 잘 알고 사용하자
