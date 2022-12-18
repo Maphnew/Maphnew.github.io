@@ -1173,3 +1173,442 @@ courseForm.addEventListener("submit", (event) => {
 
 - ts class validator 검색하면 좋은 example들이 있다.
 - Angular, Nest.js에서 데코레이터를 많이 사용한다.
+
+## Section 9:Practice Time! Let's build a Drag & Drop Project
+
+0 / 20|2시간 41분
+
+### 120. Module Introduction
+
+1분
+
+- Practice Time!
+
+Using TypeScript in a project
+
+### 121. Getting Started
+
+5분
+
+- Ready to Start
+
+### 122. DOM Element Selection & OOP Rendering
+
+- `document.importNode`: 현재문서가 아닌 외부문서의 노드를 복사하여 현재의 문서에 넣을 수 있도록 해준다.
+
+- html template 태그는 기본적으로 `display: none` 이다.
+
+- `insertAdjacentElement(position, element)`: 엘리먼트 삽입 메서드
+
+12분
+
+```ts
+class ProjectInput {
+  templateElement: HTMLTemplateElement;
+  hostElement: HTMLDivElement;
+  element: HTMLFormElement;
+
+  constructor() {
+    this.templateElement = document.getElementById(
+      "project-input"
+    )! as HTMLTemplateElement;
+    this.hostElement = document.getElementById("app")! as HTMLDivElement;
+
+    const importedNode = document.importNode(
+      this.templateElement.content,
+      true
+    );
+    this.element = importedNode.firstElementChild as HTMLFormElement;
+    this.attach();
+  }
+
+  private attach() {
+    this.hostElement.insertAdjacentElement("afterbegin", this.element);
+  }
+}
+
+const prjInput = new ProjectInput();
+```
+
+### 123. Interacting with DOM Elements
+
+- `configure`메서드에서 `submitHandler`에 this를 바인딩 해주지 않으면 `this`는 form element가 된다.
+
+8분
+
+```ts
+class ProjectInput {
+  templateElement: HTMLTemplateElement;
+  hostElement: HTMLDivElement;
+  element: HTMLFormElement;
+  titleInputElement: HTMLInputElement;
+  descriptionInputElement: HTMLInputElement;
+  peopleInputElement: HTMLInputElement;
+
+  constructor() {
+    this.templateElement = document.getElementById(
+      "project-input"
+    )! as HTMLTemplateElement;
+    this.hostElement = document.getElementById("app")! as HTMLDivElement;
+
+    const importedNode = document.importNode(
+      this.templateElement.content,
+      true
+    );
+    this.element = importedNode.firstElementChild as HTMLFormElement;
+    this.element.id = "user-input";
+
+    this.titleInputElement = this.element.querySelector(
+      "#title"
+    ) as HTMLInputElement;
+    this.descriptionInputElement = this.element.querySelector(
+      "#description"
+    ) as HTMLInputElement;
+    this.peopleInputElement = this.element.querySelector(
+      "#people"
+    ) as HTMLInputElement;
+
+    this.configure();
+    this.attach();
+  }
+
+  private submitHandler(event: Event) {
+    event.preventDefault();
+    console.log(this.titleInputElement.value);
+  }
+
+  private configure() {
+    this.element.addEventListener("submit", this.submitHandler.bind(this));
+  }
+
+  private attach() {
+    this.hostElement.insertAdjacentElement("afterbegin", this.element);
+  }
+}
+
+const prjInput = new ProjectInput();
+```
+
+### 124. Creating & Using an "Autobind" Decorator
+
+5분
+
+### 125. Fetching User Input
+
+9분
+
+### 126. Creating a Re-Usable Validation Functionality
+
+14분
+
+### 127. Rendering Project Lists
+
+11분
+
+### 128. Managing Application State with Singletons
+
+16분
+
+### 129. More Classes & Custom Types
+
+7분
+
+### 130. Filtering Projects with Enums
+
+6분
+
+### 131. Adding Inheritance & Generics
+
+19분
+
+### 132. Rendering Project Items with a Class
+
+12분
+
+### 133. Using a Getter
+
+4분
+
+### 134. Utilizing Interfaces to Implement Drag & Drop
+
+10분
+
+### 135. Drag Events & Reflecting the Current State in the UI
+
+6분
+
+### 136. Adding a Droppable Area
+
+8분
+
+### 137. Finishing Drag & Drop
+
+7분
+
+### 138. Wrap Up
+
+1분
+
+### 139. Useful Resources & Links
+
+1분
+
+## Section 10:Modules & Namespaces
+
+0 / 11|50분
+
+### 140. Module Introduction
+
+1분
+
+### 141. Writing Module Code - Your Options
+
+4분
+
+### 142. Working with Namespaces
+
+11분
+
+### 143. Organizing Files & Folders
+
+9분
+
+### 144. A Problem with Namespace Imports
+
+3분
+
+### 145. Important: Use Chrome or Firefox
+
+1분
+
+### 146. Using ES Modules
+
+12분
+
+### 147. Understanding various Import & Export Syntaxes
+
+5분
+
+### 148. How Does Code In Modules Execute?
+
+2분
+
+### 149. Wrap Up
+
+3분
+
+### 150. Useful Resources & Links
+
+1분
+
+## Section 11:Using Webpack with TypeScript
+
+0 / 9|33분
+
+### 151. Module Introduction
+
+1분
+
+### 152. What is Webpack & Why do we need it?
+
+6분
+
+### 153. Installing Webpack & Important Dependencies
+
+4분
+
+### 154. Adding Entry & Output Configuration
+
+6분
+
+### 155. Adding TypeScript Support with the ts-loader Package
+
+7분
+
+### 156. Finishing the Setup & Adding webpack-dev-server
+
+4분
+
+### 157. Adding a Production Workflow
+
+4분
+
+### 158. Wrap Up
+
+2분
+
+### 159. Useful Resources & Links
+
+1분
+
+## Section 12:3rd Party Libraries & TypeScript
+
+0 / 7|30분
+
+### 160. Module Introduction
+
+1분
+
+### 161. Using JavaScript (!) Libraries with TypeScript
+
+9분
+
+### 162. Using "declare" as a "Last Resort"
+
+2분
+
+### 163. No Types Needed: class-transformer
+
+8분
+
+### 164. TypeScript-embracing: class-validator
+
+6분
+
+### 165. Wrap Up
+
+2분
+
+### 166. Useful Resources & Links
+
+1분
+
+## Section 13:Time to Practice! Let's build a "Select & Share a Place" App (incl. Google Maps)
+
+0 / 8|27분
+
+### 167. Module Introduction
+
+1분
+
+### 168. Project Setup
+
+4분
+
+### 169. Getting User Input
+
+3분
+
+### 170. Setting Up a Google API Key
+
+3분
+
+### 171. Using Axios to Fetch Coordinates for an Entered Address
+
+10분
+
+### 172. Rendering a Map with Google Maps (incl. Types!)
+
+7분
+
+### 173. Working with Maps without a Credit Card
+
+1분
+
+### 174. Useful Resources & Links
+
+1분
+
+## Section 14:React.js & TypeScript
+
+0 / 13|45분
+
+### 175. Module Introduction
+
+1분
+
+### 176. Setting Up a React + TypeScript Project
+
+5분
+
+### 177. How Do React + TypeScript Work Together?
+
+4분
+
+### 178. Working with Props and Types for Props
+
+7분
+
+### 179. Getting User Input with "refs"
+
+7분
+
+### 180. Cross-Component Communication
+
+4분
+
+### 181. Working with State & Types
+
+4분
+
+### 182. Managing State Better
+
+2분
+
+### 183. More Props & State Work
+
+4분
+
+### 184. Adding Styling
+
+1분
+
+### 185. Types for other React Features (e.g. Redux or Routing)
+
+4분
+
+### 186. Wrap Up
+
+2분
+
+### 187. Useful Resources & Links
+
+1분
+
+## Section 15:Node.js + Express & TypeScript
+
+0 / 9|43분
+
+### 188. Module Introduction
+
+1분
+
+### 189. Executing TypeScript Code with Node.js
+
+4분
+
+### 190. Setting up a Project
+
+4분
+
+### 191. Finished Setup & Working with Types (in Node + Express Apps)
+
+5분
+
+### 192. Adding Middleware & Types
+
+6분
+
+### 193. Working with Controllers & Parsing Request Bodies
+
+10분
+
+### 194. More CRUD Operations
+
+10분
+
+### 195. Wrap Up
+
+2분
+
+### 196. Useful Resources & Links
+
+1분
+
+## Section 16:Course Roundup
+
+0 / 1|3분
+
+### 197. Roundup
+
+3분
