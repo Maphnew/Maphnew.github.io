@@ -1,0 +1,20 @@
+* {
+    margin: 0px;
+}
+
+html, body {
+    background-color: gainsboro;
+    height: 100%;
+}
+
+.center-frame {
+    margin: 50px auto;
+    padding: 10px;
+    max-width: 400px; 
+    background-color: white;
+
+}
+
+#whatday {
+ border-style: none;
+}
