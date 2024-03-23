@@ -30,3 +30,8 @@ html, body {
     display: grid;
     grid-template-columns: 2fr 1fr 2fr 1fr;
 }
+
+.total {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
