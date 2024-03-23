@@ -12,13 +12,20 @@ export default function total({ $target, initialState }) {
 
     this.render = () => {
         const total = document.createElement('div')
+        total.className = 'left-total'
         total.innerHTML = `
-            <label for="cashTotal">현금 지출 금액</label>
-            <input type="text" id="cashTotal" name="cashTotal" />
-            <label for="cardTotal">카드 지출 금액</label>
-            <input type="text" id="cardTotal" name="cardTotal" />
-            <label for="total">총 지출 금액</label>
+            <div>
+            <label for="cashTotal">Cash Total</label>
+            <input type="text" id="cashTotal" name="cashTotal" style="width: 50%"/>
+            </div>
+            <div>
+            <label for="cardTotal">Card Total</label>
+            <input type="text" id="cardTotal" name="cardTotal" style="width: 50%"/>
+            </div>
+            <div>
+            <label for="total">Total</label>
             <input type="text" id="total" name="total" />
+            </div>
         `
         const note = document.createElement('div')
         note.innerHTML = `

@@ -10,8 +10,8 @@ html, body {
 .center-frame {
     margin: 50px auto;
     padding: 10px;
-    min-width: 400px; 
-    max-width: 600px; 
+    min-width: 300px; 
+    max-width: 500px; 
     background-color: white;
 
 }
@@ -28,10 +28,15 @@ html, body {
 
 .contents {
     display: grid;
-    grid-template-columns: 2fr 1fr 2fr 1fr;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .total {
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+
+.left-total {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
 }
