@@ -52,9 +52,17 @@ export default function contents({ $target, initialState }) {
         const payment = document.createElement('div')
         payment.innerText = '지불방법'
         const category = document.createElement('div')
-        category.innerText = '분류'
+        category.innerHTML = `분류 <i class="fa fa-gear"></i>`
         this.$element.prepend(list, price, payment, category)
 
+        const dialog = document.querySelector("dialog");
+        const btnClose = document.querySelector("#closeDialog");
+        document.querySelector('i').addEventListener('click', function(e) {
+            dialog.showModal()
+        })
+        btnClose.addEventListener('click', function() {
+            dialog.close()
+        })
     }
 
     this.render()

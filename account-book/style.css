@@ -47,3 +47,9 @@ html, body {
     display: grid;
     grid-template-rows: repeat(3, 1fr);
 }
+
+dialog {
+    position: fixed;
+    top: 100px;
+    left:100px;
+}
