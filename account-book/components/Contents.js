@@ -29,6 +29,12 @@ export default function contents({ $target, initialState }) {
                 <option value="baby" ${item.category === "baby" ? "selected" : ""}>육아비</option>
             </select>
         `).join("")
+        
+        document.querySelectorAll(`label[for*="cash-"]`).forEach(element => {
+            element.addEventListener('click', function(e) {
+                element.control.checked = true
+            })
+        });
     }
     
     this.render = () => {
