@@ -8,7 +8,6 @@ html, body {
 }
 
 .center-frame {
-    margin: 50px auto;
     padding: 10px;
     min-width: 300px; 
     max-width: 400px; 
