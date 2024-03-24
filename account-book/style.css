@@ -11,7 +11,7 @@ html, body {
     margin: 50px auto;
     padding: 10px;
     min-width: 300px; 
-    max-width: 500px; 
+    max-width: 400px; 
     background-color: white;
 
 }
@@ -24,11 +24,19 @@ html, body {
 .grid-container {
     display: grid;
     grid-template-rows: 1fr 1fr 10fr 3fr;
+    row-gap: 10px;
 }
 
 .contents {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: 5px;
+    row-gap: 5px;
+}
+
+.paymentMethod {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
 }
 
 .total {

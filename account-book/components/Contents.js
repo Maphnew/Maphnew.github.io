@@ -14,13 +14,15 @@ export default function contents({ $target, initialState }) {
         this.$element.innerHTML = items.map((item, index) => `
             <input type="text" value="${item.name}">
             <input type="number" value="${item.price}">
-            <div>
-                <input type="radio" id="cash-${index}" name="payment-${index}" value="cash" ${item.payment === "cash" ? "checked" : ""}>
+            <div class="paymentMethod">
+                <div>
+                    <input type="radio" id="cash-${index}" name="payment-${index}" value="cash" ${item.payment === "cash" ? "checked" : ""}/>
                     <label for="cash-${index}">현금</label>
-                </input>
-                <input type="radio" id="card-${index}" name="payment-${index}" value="card" ${item.payment === "card" ? "checked" : ""}>
+                </div>
+                <div>
+                    <input type="radio" id="card-${index}" name="payment-${index}" value="card" ${item.payment === "card" ? "checked" : ""}/>
                     <label for="card-${index}">카드</label>
-                </input>
+                </div>
             </div>
             <select>
                 <option value="eat" ${item.category === "eat" ? "selected" : ""}>식비</option>
