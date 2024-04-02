@@ -2,7 +2,8 @@ const getExpenseElement = expense => {
     const {
         text,
         cash,
-        price
+        price,
+        category
     } = expense
 
     return `
@@ -10,10 +11,11 @@ const getExpenseElement = expense => {
             <div class="item">
                 <div class="item-name">${text}</div>
                 <div class="item-price">${price}</div>
+                <div class="expense-type">
+                    ${cash ? '<i class="fa fa-money"></i>' : '<i class="fa fa-credit-card-alt"></i>'}
+                </div>
             </div>
-            <div class="expenses-type">
-                ${cash ? '<i class="fa fa-money"></i>' : '<i class="fa fa-credit-card-alt"></i>'}
-            </div>
+            <div class="expense-category">${category}</div>
         </li>
     `
 }

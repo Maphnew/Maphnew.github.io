@@ -69,6 +69,14 @@ h3 {
     text-align: left;
 }
 
+.expense-category {
+    border: 1px solid rgb(207, 207, 207);
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
 .item-name {
     font-size: 18px;
     font-weight: 600;

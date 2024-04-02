@@ -3,7 +3,16 @@ const { faker } = window
 const createElement = () => ({
     text: faker.commerce.product(),
     cash: faker.random.boolean(),
-    price: faker.commerce.price(1, 50, 0, '$')
+    price: faker.commerce.price(1, 50, 0, '$'),
+    category: faker.random.arrayElement([
+        '🍴 식비',
+        '📚 생활용품',
+        '👶🏻 육아비',
+        '👕 의류비',
+        '🏪 의료비',
+        '🚗 교통비',
+        '🎠 문화생활비'
+    ])
 })
 
 const repeat = (elementFactory, number) => {
