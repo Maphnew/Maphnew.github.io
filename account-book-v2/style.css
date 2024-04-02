@@ -1,0 +1,79 @@
+html, body {
+    margin: 0 auto;
+    background-color: rgb(236, 236, 236);
+}
+
+h3 {
+    padding: 0 10px;
+}
+
+.current-status, .expenses {
+    background-color: rgb(255, 255, 255);
+    padding: 14px;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
+.week-status {
+    display: flex;
+    flex-direction: column;
+    padding: 0 24px;
+}
+
+.weeknumber {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.amount {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.buttons {
+    display: flex;
+    padding: 0 10px;
+}
+
+.expense, .income {
+    background-color: rgb(49, 130, 246);
+    color: white;
+    border-radius: 16px;
+    border-style: hidden;
+    width: 50%;
+    margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.income {
+    color: black;
+    background-color: rgb(223, 223, 223);
+}
+
+.expenses-title {
+    font-size: small;
+    font-weight: 300;
+    padding: 0 10px;
+}
+
+.expenses-list {
+    padding: 0 24px;
+}
+
+.expenses-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+    text-align: left;
+}
+
+.item-name {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.fa {
+    font-size: 20px;
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Account Book v2</title>
+</head>
+<body>
+    <section class="app">
+        <section class="current-status">
+            <h3>오늘의 가계부</h3>
+            <div class="week-status">
+                <span class="weeknumber">4월 첫째주</span>
+                <span class="amount">278,000원</span>
+            </div>
+            <div class="buttons">
+                <button class="income">수입</button>
+                <button class="expense">지출</button>
+            </div>
+        </section>
+        <section class="expenses">
+            <span class="expenses-title">최근 지출 목록</span>
+            <ul class="expenses-list">
+                <li class="expenses-item">
+                    <div class="item">
+                        <div class="item-name">계란</div>
+                        <div class="item-price">3,500</div>
+                    </div>
+                    <div class="expenses-type">
+                        <i class="fa fa-money"></i>
+                    </div>
+                </li>
+                <li class="expenses-item">
+                    <div class="item">
+                        <div class="item-name">소주</div>
+                        <div class="item-price">2,500</div>
+                    </div>
+                    <div class="expenses-type">
+                        <i class="fa fa-credit-card-alt"></i>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </section>
+    <script type="module" src="index.js"></script>
+</body>
+</html>
