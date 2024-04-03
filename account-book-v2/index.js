@@ -1,5 +1,5 @@
 import getExpenses from "./getExpenses.js";
-import view from "./view.js";
+import appView from "./view/app.js";
 
 const state = {
     expenses: getExpenses()
@@ -8,6 +8,6 @@ const state = {
 const main = document.querySelector('.app')
 
 window.requestAnimationFrame(() => {
-    const newMain = view(main, state)
+    const newMain = appView(main, state)
     main.replaceWith(newMain)
 })
