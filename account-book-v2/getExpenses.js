@@ -3,7 +3,7 @@ const { faker } = window
 const createElement = () => ({
     text: faker.commerce.product(),
     cash: faker.random.boolean(),
-    price: faker.commerce.price(1, 50, 0, '$'),
+    price: parseInt(faker.commerce.price(1, 50, 0)) * 1000,
     category: faker.random.arrayElement([
         '🍴 식비',
         '📚 생활용품',
